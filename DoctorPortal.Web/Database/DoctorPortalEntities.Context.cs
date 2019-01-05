@@ -25,5 +25,6 @@ namespace DoctorPortal.Web.Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<UserMaster> UserMasters { get; set; }
     }
 }

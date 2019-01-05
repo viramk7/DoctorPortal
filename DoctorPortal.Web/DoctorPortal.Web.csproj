@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.0.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -134,7 +140,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Database\DoctorPortalEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -150,10 +158,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\DoctorPortalEntities_Ex.cs" />
+    <Compile Include="Database\Repositories\EfRepository.cs" />
+    <Compile Include="Database\Repositories\IDbContext.cs" />
+    <Compile Include="Database\Repositories\IRepository.cs" />
+    <Compile Include="Database\UserMaster.cs">
+      <DependentUpon>DoctorPortalEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EngineContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\ProjectSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDependencyRegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DoctorPortalDB.mdf" />
@@ -166,8 +185,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Database\DoctorPortalEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DoctorPortalEntities.Context.cs</LastGenOutput>
       <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
+      <LastGenOutput>DoctorPortalEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Database\DoctorPortalEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -187,6 +206,7 @@
     <Content Include="Database\DoctorPortalEntities.edmx.diagram">
       <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -212,10 +232,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
