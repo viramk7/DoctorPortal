@@ -1,5 +1,6 @@
 ﻿using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Database.Repositories;
+using DoctorPortal.Web.Models.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -16,7 +17,12 @@ namespace DoctorPortal.Web.Controllers
 
         public ActionResult Index()
         {
-            var users = _userRepo.Table.ToList();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(LoginViewModel loginViewModel)
+        {
             return View();
         }
     }

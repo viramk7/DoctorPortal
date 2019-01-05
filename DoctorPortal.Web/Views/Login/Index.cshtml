@@ -1,7 +1,44 @@
-﻿
+﻿@using DoctorPortal.Web.Models.ViewModels
+@model LoginViewModel
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <table>
+        <tr>
+            <td>Username</td>
+            <td>
+                @Html.TextBoxFor(m => m.UserNameOrEmail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserNameOrEmail)
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </td>
+        </tr>
+        <tr>
+            <td>Remember me</td>
+            <td>
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.RememberMe)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Login</button>
+            </td>
+        </tr>
+    </table>
+
+}
 
