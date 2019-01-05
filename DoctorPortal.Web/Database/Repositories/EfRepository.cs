@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DoctorPortal.Web.Database.Repositories
 {
@@ -42,6 +43,11 @@ namespace DoctorPortal.Web.Database.Repositories
         public virtual T GetById(object id)
         {
             return this.Entities.Find(id);
+        }
+
+        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            return Entities.Where(predicate).AsEnumerable();
         }
 
         public virtual void Insert(T entity)

@@ -175,6 +175,8 @@
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceDependencyRegister.cs" />
+    <Compile Include="Services\Login\ILoginService.cs" />
+    <Compile Include="Services\Login\LoginService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DoctorPortalDB.mdf" />

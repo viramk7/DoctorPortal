@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Database.Repositories;
+using DoctorPortal.Web.Services.Login;
 
 namespace DoctorPortal.Web
 {
@@ -10,6 +11,10 @@ namespace DoctorPortal.Web
         {
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerDependency();
             builder.RegisterType<DoctorPortalDBEntities>().As<IDbContext>().InstancePerDependency();
+
+            // Services
+            builder.RegisterType<LoginService>().As<ILoginService>().InstancePerDependency();
+            
         }
     }
 }

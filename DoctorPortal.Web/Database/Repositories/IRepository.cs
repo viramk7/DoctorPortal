@@ -1,12 +1,16 @@
 ﻿using DoctorPortal.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DoctorPortal.Web.Database.Repositories
 {
     public partial interface IRepository<T> where T : class
     {
         T GetById(object id);
+
+        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
 
         void Insert(T entity);
 
