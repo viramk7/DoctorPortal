@@ -1,0 +1,90 @@
+﻿@using DoctorPortal.Web.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="~/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="~/favicon-16x16.png" sizes="16x16" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/styles.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap_limitless.min.css" rel="stylesheet" />
+    <link href="~/Content/css/layout.min.css" rel="stylesheet" />
+    <link href="~/Content/css/components.min.css" rel="stylesheet" />
+    <link href="~/Content/css/colors.min.css" rel="stylesheet" />
+    <link href="~/Content/css/pnotify.custom.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Page content -->
+    <div class="page-content login-cover">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Content area -->
+            <div class="content d-flex justify-content-center align-items-center">
+                
+                @RenderBody()
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/JS/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/JS/uniform.min.js"></script>
+    <script src="~/Scripts/JS/app.js"></script>
+    @*<script src="~/Scripts/JS/login.js"></script>
+        <script src="~/Scripts/JS/login_validation.js"></script>*@
+    <script src="~/Scripts/JS/pnotify.custom.min.js"></script>
+
+    <script type="text/javascript">
+         $(document).ready(function () {
+            var rememberMe = $('#rememberMe').is(":checked");
+            $("#RememberMe").val(rememberMe);
+
+            var errormessage = '@TempData[NotifyType.Error]';
+            var successmessage = '@TempData[NotifyType.Success]';
+            if (errormessage !== "") {
+                ShowErrorMessage(errormessage);
+            }
+
+            if (successmessage !== "") {
+                SucessMessage(successmessage);
+            }
+        });
+
+        function ShowErrorMessage(msg) {
+            new PNotify({
+                text: msg,
+                type: 'error'
+            });
+        }
+
+
+        function SucessMessage(msg) {
+            new PNotify({
+                text: msg,
+                type: 'success'
+            });
+
+        }
+
+        function RememberMeChk() {
+            var rememberMe = $('#rememberMe').is(":checked");
+            $("#RememberMe").val(rememberMe);
+        }
+    </script>
+</body>
+</html>
