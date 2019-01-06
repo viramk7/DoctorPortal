@@ -56,10 +56,20 @@ namespace DoctorPortal.Web.Controllers
         [HttpPost]
         public ActionResult Index(LoginViewModel loginViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                TempData[NotifyType.Error] = Resources.InvalidUsernameOrPassword;
+                return View();
+            }
+                
+
             var isValidUser = _loginService.AuthenticateUser(loginViewModel);
 
             if (!isValidUser)
-                return RedirectToAction(nameof(Index));
+            {
+                TempData[NotifyType.Error] = Resources.InvalidUsernameOrPassword;
+                return View();
+            }
 
             if (!loginViewModel.RememberMe)
                 return RedirectToAction("Index", "Home");
@@ -92,6 +102,70 @@ namespace DoctorPortal.Web.Controllers
             Response.Cookies.Add(myCookie);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            try
+            {
+                _loginService.SendNewPasswordToEmail(model.Email);
+                TempData[NotifyType.Success] = Resources.NewPasswordSent;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData[NotifyType.Error] = ex.Message;
+                return View();
+            }
+        }
+
+        public ActionResult ResetPassword()
+        {
+            // User must be logged in in order to change pwd
+            if (ProjectSession.LoggedInUser == null)
+                return RedirectToAction(nameof(Index));
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData[NotifyType.Error] = Resources.InvalidData;
+                return View();
+            }
+
+            if (ProjectSession.LoggedInUser == null)
+            {
+                TempData[NotifyType.Error] = Resources.SessionExpired;
+                return View("Index");
+            }
+
+            try
+            {
+                var isSuccess = _loginService.ResetPassword(ProjectSession.LoggedInUser.Id, model);
+                if(isSuccess)
+                {
+                    TempData[NotifyType.Success] = Resources.PasswordResetSuccess;
+                    return Logout();
+                }
+
+                TempData[NotifyType.Error] = Resources.CouldNotResetPassword;
+                return View();
+            }
+            catch (Exception e)
+            {
+                TempData[NotifyType.Error] = e.Message;
+                return View();
+            }
         }
     }
 }

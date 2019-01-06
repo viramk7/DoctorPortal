@@ -15,9 +15,10 @@ namespace DoctorPortal.Web.Database
     public partial class UserMaster
     {
         public int Id { get; set; }
-        public string Full_Name { get; set; }
+        public string FullName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsSystemGeneratedPassword { get; set; }
     }
 }

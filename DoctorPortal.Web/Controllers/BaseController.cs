@@ -19,6 +19,12 @@ namespace DoctorPortal.Web.Controllers
             if(ProjectSession.LoggedInUser == null)
             {
                 filterContext.Result = new RedirectResult($"~/Login/Index?returnUrl={ctx.Request.Url}");
+                return;
+            }
+
+            if (ProjectSession.LoggedInUser.IsSystemGeneratedPassword)
+            {
+                filterContext.Result = new RedirectResult($"~/Login/ResetPassword");
             }
         }
     }
