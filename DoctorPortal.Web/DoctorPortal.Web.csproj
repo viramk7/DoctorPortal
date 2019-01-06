@@ -144,27 +144,27 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Database\DoctorPortalEntities.Context.cs">
+    <Compile Include="Database\DoctorPortalDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DoctorPortalEntities.Context.tt</DependentUpon>
+      <DependentUpon>DoctorPortalDBEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DoctorPortalEntities.cs">
+    <Compile Include="Database\DoctorPortalDBEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DoctorPortalEntities.tt</DependentUpon>
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\DoctorPortalEntities.Designer.cs">
+    <Compile Include="Database\DoctorPortalDBEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
+      <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\DoctorPortalEntities_Ex.cs" />
     <Compile Include="Database\Repositories\EfRepository.cs" />
     <Compile Include="Database\Repositories\IDbContext.cs" />
     <Compile Include="Database\Repositories\IRepository.cs" />
     <Compile Include="Database\UserMaster.cs">
-      <DependentUpon>DoctorPortalEntities.tt</DependentUpon>
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EngineContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,30 +187,47 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Database\DoctorPortalEntities.Context.tt">
+    <Content Include="Content\css\bootbox.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap_limitless.css" />
+    <Content Include="Content\css\bootstrap_limitless.min.css" />
+    <Content Include="Content\css\colors.css" />
+    <Content Include="Content\css\colors.min.css" />
+    <Content Include="Content\css\components.css" />
+    <Content Include="Content\css\components.min.css" />
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\layout.min.css" />
+    <Content Include="Content\css\pnotify.custom.min.css" />
+    <Content Include="Content\css\styles.css" />
+    <Content Include="Database\DoctorPortalDBEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
-      <LastGenOutput>DoctorPortalEntities.Context.cs</LastGenOutput>
+      <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
+      <LastGenOutput>DoctorPortalDBEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database\DoctorPortalEntities.tt">
+    <Content Include="Database\DoctorPortalDBEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
-      <LastGenOutput>DoctorPortalEntities.cs</LastGenOutput>
+      <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
+      <LastGenOutput>DoctorPortalDBEntities.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\icomoon.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Database\DoctorPortalEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DoctorPortalEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Database\DoctorPortalEntities.edmx.diagram">
-      <DependentUpon>DoctorPortalEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="libman.json" />
+    <Content Include="fonts\icomoon.eot" />
+    <Content Include="fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon.woff" />
+    <EntityDeploy Include="Database\DoctorPortalDBEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DoctorPortalDBEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Database\DoctorPortalDBEntities.edmx.diagram">
+      <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -221,6 +238,15 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JS\app.js" />
+    <Content Include="Scripts\JS\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\JS\custom.js" />
+    <Content Include="Scripts\JS\dashboard.js" />
+    <Content Include="Scripts\JS\form_layouts.js" />
+    <Content Include="Scripts\JS\jquery.min.js" />
+    <Content Include="Scripts\JS\login.js" />
+    <Content Include="Scripts\JS\login_validation.js" />
+    <Content Include="Scripts\JS\uniform.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

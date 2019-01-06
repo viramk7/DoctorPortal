@@ -7,7 +7,7 @@ namespace DoctorPortal.Web.Database.Repositories
 {
     public interface IDbContext
     {
-        DbContextConfiguration Configurationval { get; }
+        DbContextConfiguration ConfigurationVal { get; }
 
         System.Data.Entity.Database Db { get; }
 

@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace DoctorPortal.Web.Database.Repositories
 {
-    public partial class EfRepository<T> : IRepository<T> where T : class
+    public class EfRepository<T> : IRepository<T> where T : class
     {
         #region Fields
 
@@ -20,7 +20,7 @@ namespace DoctorPortal.Web.Database.Repositories
 
         public EfRepository(IDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         #endregion
@@ -42,7 +42,7 @@ namespace DoctorPortal.Web.Database.Repositories
 
         public virtual T GetById(object id)
         {
-            return this.Entities.Find(id);
+            return Entities.Find(id);
         }
 
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
@@ -57,9 +57,9 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
-                this.Entities.Add(entity);
+                Entities.Add(entity);
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -75,9 +75,9 @@ namespace DoctorPortal.Web.Database.Repositories
                     throw new ArgumentNullException("entities");
 
                 foreach (var entity in entities)
-                    this.Entities.Add(entity);
+                    Entities.Add(entity);
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -92,7 +92,7 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -107,7 +107,7 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entities == null)
                     throw new ArgumentNullException("entities");
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -122,9 +122,9 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
-                this.Entities.Remove(entity);
+                Entities.Remove(entity);
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -140,9 +140,9 @@ namespace DoctorPortal.Web.Database.Repositories
                     throw new ArgumentNullException("entities");
 
                 foreach (var entity in entities)
-                    this.Entities.Remove(entity);
+                    Entities.Remove(entity);
 
-                this._context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -158,7 +158,7 @@ namespace DoctorPortal.Web.Database.Repositories
         {
             get
             {
-                return this.Entities;
+                return Entities;
             }
         }
 
@@ -166,7 +166,7 @@ namespace DoctorPortal.Web.Database.Repositories
         {
             get
             {
-                return this.Entities.AsNoTracking();
+                return Entities.AsNoTracking();
             }
         }
 

@@ -14,13 +14,12 @@ namespace DoctorPortal.Web.Controllers
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            HttpContext ctx = HttpContext.Current;
+            var ctx = HttpContext.Current;
 
             if(ProjectSession.LoggedInUser == null)
             {
-                filterContext.Result = new RedirectResult("~/Login/Index?returnUrl=" + ctx.Request.Url);
+                filterContext.Result = new RedirectResult($"~/Login/Index?returnUrl={ctx.Request.Url}");
             }
-            return;
         }
     }
 }

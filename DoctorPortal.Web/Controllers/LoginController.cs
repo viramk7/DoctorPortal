@@ -22,22 +22,20 @@ namespace DoctorPortal.Web.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Index(string returnUrl)
         {
-            var loginViewModel = new LoginViewModel
-            {
-                ReturnUrl = returnUrl
-            };
-
-            HttpCookie authCookie = Request.Cookies["DoctorPortal"];
+            var authCookie = Request.Cookies["DoctorPortal"];
             if (authCookie != null)
             {
                 try
                 {
-                    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-                    loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(authTicket.UserData);
+                    var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                    if (authTicket != null)
+                    {
+                        var loginViewModel = JsonConvert.DeserializeObject<LoginViewModel>(authTicket.UserData);
 
-                    var isValidUser = _loginService.AuthenticateUser(loginViewModel);
-                    if(!isValidUser)
-                        return View(new LoginViewModel());
+                        var isValidUser = _loginService.AuthenticateUser(loginViewModel);
+                        if(!isValidUser)
+                            return View(new LoginViewModel());
+                    }
                 }
                 catch
                 {
@@ -45,15 +43,14 @@ namespace DoctorPortal.Web.Controllers
                 }
             }
 
-            if (ProjectSession.LoggedInUser != null)
-            {
-                if (string.IsNullOrEmpty(returnUrl))
-                    return RedirectToAction("Index", "Home");
-                else
-                    return new RedirectResult(returnUrl);
-            }
+            if (ProjectSession.LoggedInUser == null)
+                return View();
 
-            return View();
+            if (string.IsNullOrEmpty(returnUrl))
+                return RedirectToAction("Index", "Home");
+
+            return new RedirectResult(returnUrl);
+
         }
 
         [HttpPost]
@@ -64,22 +61,21 @@ namespace DoctorPortal.Web.Controllers
             if (!isValidUser)
                 return RedirectToAction(nameof(Index));
 
-            if (loginViewModel.RememberMe)
-            {
-                string userData = JsonConvert.SerializeObject(loginViewModel);
-                var authTicket = new FormsAuthenticationTicket(
-                    1,
-                    loginViewModel.UserNameOrEmail,
-                    DateTime.Now,
-                    DateTime.Now.AddDays(30),
-                    loginViewModel.RememberMe, // pass here true, if you want to implement remember me functionality
-                    userData);
+            if (!loginViewModel.RememberMe)
+                return RedirectToAction("Index", "Home");
 
-                var encTicket = FormsAuthentication.Encrypt(authTicket);
-                var facookie = new HttpCookie("DoctorPortal", encTicket);
-                facookie.Expires = DateTime.Now.AddDays(30);
-                Response.Cookies.Add(facookie);
-            }
+            var userData = JsonConvert.SerializeObject(loginViewModel);
+            var authTicket = new FormsAuthenticationTicket(
+                1,
+                loginViewModel.UserNameOrEmail,
+                DateTime.Now,
+                DateTime.Now.AddDays(30),
+                loginViewModel.RememberMe, // pass here true, if you want to implement remember me functionality
+                userData);
+
+            var encTicket = FormsAuthentication.Encrypt(authTicket);
+            var cookie = new HttpCookie("DoctorPortal", encTicket) {Expires = DateTime.Now.AddDays(30)};
+            Response.Cookies.Add(cookie);
 
             return RedirectToAction("Index", "Home");
         }
@@ -89,12 +85,11 @@ namespace DoctorPortal.Web.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
 
-            if (Request.Cookies["DoctorPortal"] != null)
-            {
-                var myCookie = new HttpCookie("DoctorPortal");
-                myCookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(myCookie);
-            }
+            if (Request.Cookies["DoctorPortal"] == null)
+                return RedirectToAction(nameof(Index));
+
+            var myCookie = new HttpCookie("DoctorPortal") {Expires = DateTime.Now.AddDays(-1d)};
+            Response.Cookies.Add(myCookie);
 
             return RedirectToAction(nameof(Index));
         }

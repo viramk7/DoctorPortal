@@ -9,23 +9,11 @@ using System.Linq;
 
 namespace DoctorPortal.Web.Database
 {
-    public partial class DoctorPortalDBEntities : DbContext, IDbContext
+    public partial class DoctorPortalDBEntities : IDbContext
     {
-        public System.Data.Entity.Database Db
-        {
-            get
-            {
-                return this.Database;
-            }
-        }
+        public System.Data.Entity.Database Db => Database;
 
-        public DbContextConfiguration Configurationval
-        {
-            get
-            {
-                return this.Configuration;
-            }
-        }
+        public DbContextConfiguration ConfigurationVal => Configuration;
 
         public new IDbSet<TEntity> Set<TEntity>() where TEntity : class
         {
@@ -56,12 +44,12 @@ namespace DoctorPortal.Web.Database
                 }
             }
 
-            return this.Database.SqlQuery<TEntity>(commandText, parameters).ToList();
+            return Database.SqlQuery<TEntity>(commandText, parameters).ToList();
         }
 
         public IEnumerable<TElement> SqlQuery<TElement>(string sql, params object[] parameters)
         {
-            return this.Database.SqlQuery<TElement>(sql, parameters);
+            return Database.SqlQuery<TElement>(sql, parameters);
         }
     }
 }

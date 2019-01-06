@@ -19,7 +19,7 @@ namespace DoctorPortal.Web.Services.Login
         {
             var user = _userRepo
                 .FindBy(m => m.Email.Equals(model.UserNameOrEmail, System.StringComparison.OrdinalIgnoreCase) ||
-                             m.UserName.Equals(model.UserNameOrEmail, System.StringComparison.OrdinalIgnoreCase))
+                                m.UserName.Equals(model.UserNameOrEmail, System.StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefault();
 
             if (user == null)
