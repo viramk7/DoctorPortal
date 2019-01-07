@@ -24,6 +24,8 @@ namespace DoctorPortal.Web.Database.Repositories
 
         void Delete(IEnumerable<T> entities);
 
+        IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters) where TEntity : class;
+
         IQueryable<T> Table { get; }
 
         IQueryable<T> TableNoTracking { get; }

@@ -20,5 +20,7 @@ namespace DoctorPortal.Web.Database
         public string Email { get; set; }
         public string Password { get; set; }
         public bool IsSystemGeneratedPassword { get; set; }
+        public int RoleId { get; set; }
+        public bool IsSuperAdmin { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using DoctorPortal.Web.Database.Repositories;
 using DoctorPortal.Web.Models;
 using DoctorPortal.Web.Models.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,10 +35,11 @@ namespace DoctorPortal.Web.Services.Login
                 return false;
 
             ProjectSession.LoggedInUser = user;
+            ProjectSession.UserAccessPermissions = GetUserPermissions(user.RoleId,user.IsSuperAdmin);
 
             return true;
         }
-
+        
         public bool SendNewPasswordToEmail(string email)
         {
             var user = _userRepo
@@ -96,6 +99,22 @@ namespace DoctorPortal.Web.Services.Login
         private static string GenerateNewPassword()
         {
             return Guid.NewGuid().ToString().Replace("-", "").Substring(0,8);
+        }
+
+        private List<UserAccessPermission> GetUserPermissions(int userRoleId, bool isAdmin)
+        {
+            object[] paramList =
+            {
+                new SqlParameter("RoleId", userRoleId),
+                new SqlParameter("IsSuperAdmin", isAdmin)
+            };
+
+            var permissions = 
+                _userRepo
+                    .ExecuteStoredProcedureList<UserAccessPermission>("Get_UserAccessPermissions", paramList)
+                    .ToList();
+
+            return permissions;
         }
     }
 }

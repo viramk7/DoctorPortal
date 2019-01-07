@@ -150,6 +150,12 @@ namespace DoctorPortal.Web.Database.Repositories
             }
         }
 
+        public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters) where TEntity : class
+        {
+            _context.Db.CommandTimeout = 300;
+            return _context.ExecuteStoredProcedureList<TEntity>(commandText, parameters);
+        }
+
         #endregion
 
         #region Properties
