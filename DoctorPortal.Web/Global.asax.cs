@@ -13,7 +13,7 @@ namespace DoctorPortal.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            log4net.Config.XmlConfigurator.Configure();
             ContainerBuilder builder = new ContainerBuilder();
             Bootstrapper.Resolve(builder);
         }

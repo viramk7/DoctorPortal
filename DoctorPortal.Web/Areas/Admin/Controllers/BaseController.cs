@@ -1,13 +1,20 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using DoctorPortal.Web.Areas.Admin.Models;
+using log4net;
 
 namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     [UserAuthorization]
     public class BaseController : Controller
     {
+        // ReSharper disable once InconsistentNaming
+        protected readonly ILog _logger;
 
+        public BaseController()
+        {
+            _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        }
     }
     
     public sealed class UserAuthorizationAttribute : ActionFilterAttribute
