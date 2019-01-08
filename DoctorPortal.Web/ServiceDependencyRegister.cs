@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using DoctorPortal.Web.Areas.Admin.Services.Login;
+using DoctorPortal.Web.Areas.Admin.Services.User;
 using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Database.Repositories;
 
@@ -14,7 +15,8 @@ namespace DoctorPortal.Web
 
             // Services
             builder.RegisterType<LoginService>().As<ILoginService>().InstancePerDependency();
-            
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerDependency();
+
         }
     }
 }
