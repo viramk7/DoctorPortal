@@ -1,6 +1,6 @@
 ﻿using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
 
-namespace DoctorPortal.Web.Services.Login
+namespace DoctorPortal.Web.Areas.Admin.Services.Login
 {
     public interface ILoginService
     {

@@ -190,8 +190,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ServiceDependencyRegister.cs" />
-    <Compile Include="Services\Login\ILoginService.cs" />
-    <Compile Include="Services\Login\LoginService.cs" />
+    <Compile Include="Areas\Admin\Services\Login\ILoginService.cs" />
+    <Compile Include="Areas\Admin\Services\Login\LoginService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DoctorPortalDB.mdf" />

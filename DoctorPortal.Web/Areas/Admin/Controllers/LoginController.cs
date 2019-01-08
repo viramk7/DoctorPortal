@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
-using DoctorPortal.Web.Services.Login;
+using DoctorPortal.Web.Areas.Admin.Services.Login;
 using Newtonsoft.Json;
 
 namespace DoctorPortal.Web.Areas.Admin.Controllers

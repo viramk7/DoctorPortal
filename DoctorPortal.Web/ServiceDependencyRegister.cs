@@ -1,7 +1,7 @@
 ﻿using Autofac;
+using DoctorPortal.Web.Areas.Admin.Services.Login;
 using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Database.Repositories;
-using DoctorPortal.Web.Services.Login;
 
 namespace DoctorPortal.Web
 {
