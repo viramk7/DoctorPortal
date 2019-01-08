@@ -1,8 +1,8 @@
-﻿using DoctorPortal.Web.Models;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
+using DoctorPortal.Web.Areas.Admin.Models;
 
-namespace DoctorPortal.Web.Controllers
+namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     [UserAuthorization]
     public class BaseController : Controller
@@ -18,13 +18,13 @@ namespace DoctorPortal.Web.Controllers
 
             if(ProjectSession.LoggedInUser == null)
             {
-                filterContext.Result = new RedirectResult($"~/Login/Index?returnUrl={ctx.Request.Url}");
+                filterContext.Result = new RedirectResult($"~/Admin/Login/Index?returnUrl={ctx.Request.Url}");
                 return;
             }
 
             if (ProjectSession.LoggedInUser.IsSystemGeneratedPassword)
             {
-                filterContext.Result = new RedirectResult($"~/Login/ResetPassword");
+                filterContext.Result = new RedirectResult($"~/Admin/Login/ResetPassword");
             }
         }
     }

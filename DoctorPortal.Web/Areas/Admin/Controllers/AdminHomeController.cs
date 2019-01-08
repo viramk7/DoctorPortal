@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 
-namespace DoctorPortal.Web.Controllers
+namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class AdminHomeController : BaseController
     {
         public ActionResult Index()
         {

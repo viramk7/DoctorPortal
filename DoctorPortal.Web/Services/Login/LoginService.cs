@@ -1,13 +1,13 @@
 ﻿using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Database.Repositories;
-using DoctorPortal.Web.Models;
-using DoctorPortal.Web.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
 using DoctorPortal.Web.Common;
 
 namespace DoctorPortal.Web.Services.Login

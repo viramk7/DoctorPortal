@@ -1,4 +1,4 @@
-﻿using DoctorPortal.Web.Models.ViewModels;
+﻿using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
 
 namespace DoctorPortal.Web.Services.Login
 {

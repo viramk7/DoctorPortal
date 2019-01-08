@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using DoctorPortal.Web.Models;
+using DoctorPortal.Web.Areas.Admin.Models;
+
 // ReSharper disable All
 
 namespace DoctorPortal.Web.Common

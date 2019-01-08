@@ -1,13 +1,13 @@
-﻿using DoctorPortal.Web.Models;
-using DoctorPortal.Web.Models.ViewModels;
-using DoctorPortal.Web.Services.Login;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
+using DoctorPortal.Web.Services.Login;
+using Newtonsoft.Json;
 
-namespace DoctorPortal.Web.Controllers
+namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
@@ -47,7 +47,7 @@ namespace DoctorPortal.Web.Controllers
                 return View();
 
             if (string.IsNullOrEmpty(returnUrl))
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "AdminHome");
 
             return new RedirectResult(returnUrl);
 
@@ -72,7 +72,7 @@ namespace DoctorPortal.Web.Controllers
             }
 
             if (!loginViewModel.RememberMe)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "AdminHome");
 
             var userData = JsonConvert.SerializeObject(loginViewModel);
             var authTicket = new FormsAuthenticationTicket(
@@ -87,7 +87,7 @@ namespace DoctorPortal.Web.Controllers
             var cookie = new HttpCookie("DoctorPortal", encTicket) {Expires = DateTime.Now.AddDays(30)};
             Response.Cookies.Add(cookie);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "AdminHome");
         }
 
         public ActionResult Logout()
