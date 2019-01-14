@@ -808,6 +808,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_TopBarArea.cshtml" />
+    <Content Include="Views\Shared\_HeaderArea.cshtml" />
+    <Content Include="Views\Shared\_HeaderSearch.cshtml" />
+    <Content Include="Views\Shared\_MainMenuArea.cshtml" />
+    <Content Include="Views\Shared\_FooterArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />
