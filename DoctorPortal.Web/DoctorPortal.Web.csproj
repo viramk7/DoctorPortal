@@ -194,6 +194,7 @@
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EngineContext.cs" />
+    <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

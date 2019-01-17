@@ -85,8 +85,18 @@
         public int PopupShowDelay => 1000 * (Convert.ToInt32(FormsAuthentication.Timeout.TotalSeconds) - 130);
     }
 
-    <script type="text/javascript">
-     var pathArray = '@ConfigItems.SiteRootPathUrl' + '/';
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(document).ajaxError(function (xhr, props) {
+            if (props.status === 401) {
+                bootbox.alert("Your session is timed out.", function () {
+                    location.reload();
+                });
+            }
+        });
+    });
+    var pathArray = '@ConfigItems.SiteRootPathUrl' + '/';
 
     var controllerName = '@ViewContext.RouteData.Values["Controller"].ToString()';
 
@@ -94,99 +104,99 @@
         kendo.culture('en-IN');
         setActiveMenulink();
 
-         var errormessage = '@TempData[NotifyType.Error]';
-            var successmessage = '@TempData[NotifyType.Success]';
-            if (errormessage !== "") {
-                ShowErrorMessage(errormessage);
-            }
+        var errormessage = '@TempData[NotifyType.Error]';
+        var successmessage = '@TempData[NotifyType.Success]';
+        if (errormessage !== "") {
+            ShowErrorMessage(errormessage);
+        }
 
-            if (successmessage !== "") {
-                SucessMessage(successmessage);
+        if (successmessage !== "") {
+            SucessMessage(successmessage);
         }
 
         SessionTimeout.schedulePopup();
     });
 
-        function ShowErrorMessage(msg) {
-            new PNotify({
-                text: msg,
-                type: 'error'
-            });
-        }
+    function ShowErrorMessage(msg) {
+        new PNotify({
+            text: msg,
+            type: 'error'
+        });
+    }
 
 
-        function SucessMessage(msg) {
-            new PNotify({
-                text: msg,
-                type: 'success'
-            });
+    function SucessMessage(msg) {
+        new PNotify({
+            text: msg,
+            type: 'success'
+        });
 
     }
 
 
     var loginUrl='@Url.Action("Index", "Login")';
-     @*var extendMethodUrl='@Url.Action("ExtendSession","AdminHome")';*@
-     var extendMethodUrl='';
+    @*var extendMethodUrl='@Url.Action("ExtendSession","AdminHome")';*@
+    var extendMethodUrl='';
 
     window.SessionTimeout = (function() {
-            var _timeLeft, _popupTimer, _countDownTimer;
-            var stopTimers = function() {
-                window.clearTimeout(_popupTimer);
-                window.clearTimeout(_countDownTimer);
-            };
-            var updateCountDown = function() {
-                var min = Math.floor(_timeLeft / 60);
-                var sec = _timeLeft % 60;
-                if(sec < 10)
-                    sec = "0" + sec;
+        var _timeLeft, _popupTimer, _countDownTimer;
+        var stopTimers = function() {
+            window.clearTimeout(_popupTimer);
+            window.clearTimeout(_countDownTimer);
+        };
+        var updateCountDown = function() {
+            var min = Math.floor(_timeLeft / 60);
+            var sec = _timeLeft % 60;
+            if(sec < 10)
+                sec = "0" + sec;
 
-                document.getElementById("CountDownHolder").innerHTML = min + ":" + sec;
+            document.getElementById("CountDownHolder").innerHTML = min + ":" + sec;
 
-                if(_timeLeft > 0) {
-                    _timeLeft--;
-                    _countDownTimer = window.setTimeout(updateCountDown, 1000);
-                } else  {
-                    document.location = loginUrl;
-                }
-            };
-            var showPopup = function() {
+            if(_timeLeft > 0) {
+                _timeLeft--;
+                _countDownTimer = window.setTimeout(updateCountDown, 1000);
+            } else  {
+                document.location = loginUrl;
+            }
+        };
+        var showPopup = function() {
             $("#divPopupTimeOut").show();
-                _timeLeft = 300;
-                updateCountDown();
-            };
-            var schedulePopup = function() {
+            _timeLeft = 300;
+            updateCountDown();
+        };
+        var schedulePopup = function() {
             $("#divPopupTimeOut").hide();
-                stopTimers();
-                _popupTimer = window.setTimeout(showPopup, @PopupShowDelay);
-            };
-            var hidePopup=function(){
+            stopTimers();
+            _popupTimer = window.setTimeout(showPopup, @PopupShowDelay);
+        };
+        var hidePopup=function(){
             $("#divPopupTimeOut").hide();
-            };
-            var sendKeepAlive = function() {
-                stopTimers();
-                $("#divPopupTimeOut").hide();
-                $.ajax({
-                    type: "GET",
-                    url: extendMethodUrl,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function successFunc(response) {
-                        SessionTimeout.schedulePopup();
-                    },
-                    error:function(){
-                    }
-                });
-            };
-            return {
-                schedulePopup: schedulePopup,
-                sendKeepAlive: sendKeepAlive,
-                hidePopup:hidePopup,
-                stopTimers:stopTimers,
-            };
+        };
+        var sendKeepAlive = function() {
+            stopTimers();
+            $("#divPopupTimeOut").hide();
+            $.ajax({
+                type: "GET",
+                url: extendMethodUrl,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+                    SessionTimeout.schedulePopup();
+                },
+                error:function(){
+                }
+            });
+        };
+        return {
+            schedulePopup: schedulePopup,
+            sendKeepAlive: sendKeepAlive,
+            hidePopup:hidePopup,
+            stopTimers:stopTimers,
+        };
 
-        })();
+    })();
 
-    </script>
+</script>
 
 </body>
 

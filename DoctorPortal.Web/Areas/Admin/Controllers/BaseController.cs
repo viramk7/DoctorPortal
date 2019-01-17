@@ -16,15 +16,21 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
     }
-    
+
     public sealed class UserAuthorizationAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var ctx = HttpContext.Current;
 
-            if(ProjectSession.LoggedInUser == null)
+            if (ProjectSession.LoggedInUser == null)
             {
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
+                {
+                    filterContext.HttpContext.Items["AjaxPermissionDenied"] = true;
+                    return;
+                }
+
                 filterContext.Result = new RedirectResult($"~/Admin/Login/Index?returnUrl={ctx.Request.Url}");
                 return;
             }
