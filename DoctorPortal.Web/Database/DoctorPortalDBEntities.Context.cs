@@ -25,6 +25,9 @@ namespace DoctorPortal.Web.Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<HospitalContact> HospitalContacts { get; set; }
+        public virtual DbSet<HospitalMaster> HospitalMasters { get; set; }
+        public virtual DbSet<HospitalWorkingDay> HospitalWorkingDays { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
     }
 }

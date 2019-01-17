@@ -1,4 +1,6 @@
-﻿<footer class="footer-area">
+﻿@model DoctorPortal.Web.Models.HospitalViewModel
+
+<footer class="footer-area">
     <div class="container">
         <div class="row">
             <!--Start single footer widget-->
@@ -56,7 +58,16 @@
                                 <span class="flaticon-pin"></span>
                             </div>
                             <div class="text-holder">
-                                <h5>Park Drive, Varick Str New York,<br> NY 10012, USA</h5>
+                                <h5>
+                                    @{
+                                        var address1 = string.IsNullOrEmpty(Model.AddressLine1) ? "" : Model.AddressLine1;
+                                        address1 += string.IsNullOrEmpty(Model.AddressLine2) ? "" : ",";
+                                    }
+                                    @address1
+
+                                    <br>
+                                    @(string.IsNullOrEmpty(Model.AddressLine2) ? "" : Model.AddressLine2)
+                                </h5>
                             </div>
                         </li>
                         <li>
@@ -64,7 +75,14 @@
                                 <span class="flaticon-interface"></span>
                             </div>
                             <div class="text-holder">
-                                <h5>Getwell@Hospitals.com</h5>
+                                @if (string.IsNullOrEmpty(Model.Email))
+                                {
+                                    <h5> - </h5>
+                                }
+                                else
+                                {
+                                    <h5>@Model.Email</h5>
+                                }
                             </div>
                         </li>
                         <li>
@@ -72,7 +90,15 @@
                                 <span class="flaticon-technology-1"></span>
                             </div>
                             <div class="text-holder">
-                                <h5>(123) 0200 12345 & 7890</h5>
+                                @if (string.IsNullOrEmpty(Model.ContactNo))
+                                {
+                                    <h5> - </h5>
+                                }
+                                else
+                                {
+                                    <h5>@Model.ContactNo.Replace(", ", " & ")</h5>
+                                }
+
                             </div>
                         </li>
                         <li>
@@ -80,7 +106,7 @@
                                 <span class="flaticon-clock"></span>
                             </div>
                             <div class="text-holder">
-                                <h5>Mon-Satday: 9am to 18pm</h5>
+                                <h5>@Model.WorkingDays : @Model.WorkingHours</h5>
                             </div>
                         </li>
                     </ul>

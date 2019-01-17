@@ -144,6 +144,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRepositories\Hospital\HospitalRepository.cs" />
+    <Compile Include="AdminRepositories\Hospital\IHospitalRepository.cs" />
+    <Compile Include="AdminServices\Hospital\HospitalService.cs" />
+    <Compile Include="AdminServices\Hospital\IHospitalService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -169,6 +173,7 @@
     <Compile Include="Common\EmailHelper.cs" />
     <Compile Include="Common\HtmlHelperExtensions.cs" />
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DoctorPortalDBEntities.Context.cs">
@@ -187,6 +192,15 @@
       <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\DoctorPortalEntities_Ex.cs" />
+    <Compile Include="Database\HospitalContact.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\HospitalMaster.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\HospitalWorkingDay.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Repositories\EfRepository.cs" />
     <Compile Include="Database\Repositories\IDbContext.cs" />
     <Compile Include="Database\Repositories\IRepository.cs" />
@@ -198,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HospitalViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -818,7 +833,6 @@
   <ItemGroup>
     <Folder Include="Content\images\about\" />
     <Folder Include="Content\images\footer\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\BaseAdmin\" />
   </ItemGroup>
   <ItemGroup>
@@ -855,7 +869,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63287</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/DoctorPortal.Web</IISUrl>
+          <IISUrl>http://localhost:1234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

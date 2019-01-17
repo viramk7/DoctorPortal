@@ -1,4 +1,6 @@
-﻿<section class="header-area">
+﻿@model DoctorPortal.Web.Models.HospitalViewModel
+
+<section class="header-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -17,7 +19,21 @@
                             </div>
                             <div class="text-holder">
                                 <h4>Call us now</h4>
-                                <span>+1-888-987-6543</span>
+                                @{
+                                    var contacts = Model.ContactNo.Split(',').ToList();
+                                }
+
+                                @if (contacts.Count == 0)
+                                {
+                                    <span> - </span>
+                                }
+                                else
+                                {
+                                    foreach (var contact in contacts)
+                                    {
+                                        <span> @contact </span><br />
+                                    }
+                                }
                             </div>
                         </li>
                         <li>
@@ -25,8 +41,19 @@
                                 <span class="flaticon-pin"></span>
                             </div>
                             <div class="text-holder">
-                                <h4>121 Park Drive</h4>
-                                <span>Varick St, Newyork 1006</span>
+                                <h4>@Model.AddressLine1</h4>
+                                @{
+                                    var addressLine2 = Model.AddressLine2.Split(',').ToList();
+                                }
+                                @{
+                                    var count = 0;
+
+                                    foreach (var address in addressLine2)
+                                    {
+                                        count++;
+                                        <span> @address@(addressLine2.Count == count ? "" : ",")</span><br />
+                                    }
+                                }
                             </div>
                         </li>
                         <li>
@@ -34,8 +61,8 @@
                                 <span class="flaticon-agenda"></span>
                             </div>
                             <div class="text-holder">
-                                <h4>Mon - Satday</h4>
-                                <span>09.00am to 18.00pm</span>
+                                <h4>@Model.WorkingDays</h4>
+                                <span>@Model.WorkingHours</span>
                             </div>
                         </li>
                     </ul>

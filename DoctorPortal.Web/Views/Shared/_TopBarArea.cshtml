@@ -1,10 +1,18 @@
-﻿<section class="top-bar-area">
+﻿@model DoctorPortal.Web.Models.HospitalViewModel
+
+<section class="top-bar-area">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
-                <div class="top-left">
-                    <p><span class="flaticon-phone"></span>24 hours emergency & ambulance Service: +321 789 01 2345</p>
-                </div>
+                @if (!string.IsNullOrEmpty(Model.EmergencyNo))
+                {
+
+                    <div class="top-left">
+                        <p><span class="flaticon-phone"></span>24 hours emergency & ambulance Service: @Model.EmergencyNo</p>
+                    </div>
+
+                }
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
                 <div class="top-right clearfix">

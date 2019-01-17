@@ -5,6 +5,35 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DoctorPortalDBEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HospitalContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IsEmergency" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WorkingHoursFrom" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="WorkingHoursTo" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalWorkingDays">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="Day" Type="tinyint" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,16 +47,95 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="IsSuperAdmin" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_HospitalContacts_HospitalMaster">
+          <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
+          <End Role="HospitalContacts" Type="Self.HospitalContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HospitalContacts">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalWorkingDays_HospitalMaster">
+          <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
+          <End Role="HospitalWorkingDays" Type="Self.HospitalWorkingDays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HospitalWorkingDays">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DoctorPortalDBEntitiesModelStoreContainer">
+          <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalMaster" EntityType="Self.HospitalMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalWorkingDays" EntityType="Self.HospitalWorkingDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HospitalContacts_HospitalMaster" Association="Self.FK_HospitalContacts_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMaster" />
+            <End Role="HospitalContacts" EntitySet="HospitalContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalWorkingDays_HospitalMaster" Association="Self.FK_HospitalWorkingDays_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMaster" />
+            <End Role="HospitalWorkingDays" EntitySet="HospitalWorkingDays" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DoctorPortalDBEntitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DoctorPortalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HospitalContacts" EntityType="DoctorPortalDBEntitiesModel.HospitalContact" />
+          <EntitySet Name="HospitalMasters" EntityType="DoctorPortalDBEntitiesModel.HospitalMaster" />
+          <EntitySet Name="HospitalWorkingDays" EntityType="DoctorPortalDBEntitiesModel.HospitalWorkingDay" />
           <EntitySet Name="UserMasters" EntityType="DoctorPortalDBEntitiesModel.UserMaster" />
+          <AssociationSet Name="FK_HospitalContacts_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
+            <End Role="HospitalContact" EntitySet="HospitalContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HospitalWorkingDays_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
+            <End Role="HospitalWorkingDay" EntitySet="HospitalWorkingDays" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="HospitalContact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmergency" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster" FromRole="HospitalContact" ToRole="HospitalMaster" />
+        </EntityType>
+        <EntityType Name="HospitalMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingHoursFrom" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingHoursTo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HospitalContacts" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalContact" />
+          <NavigationProperty Name="HospitalWorkingDays" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalWorkingDay" />
+        </EntityType>
+        <EntityType Name="HospitalWorkingDay">
+          <Key>
+            <PropertyRef Name="HospitalId" />
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" FromRole="HospitalWorkingDay" ToRole="HospitalMaster" />
+        </EntityType>
         <EntityType Name="UserMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -41,12 +149,67 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsSuperAdmin" Type="Boolean" Nullable="false" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_HospitalContacts_HospitalMaster">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.HospitalContact" Role="HospitalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HospitalContact">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HospitalWorkingDays_HospitalMaster">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.HospitalWorkingDay" Role="HospitalWorkingDay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HospitalWorkingDay">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DoctorPortalDBEntitiesModelStoreContainer" CdmEntityContainer="DoctorPortalDBEntities">
+          <EntitySetMapping Name="HospitalContacts">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.HospitalContact">
+              <MappingFragment StoreEntitySet="HospitalContacts">
+                <ScalarProperty Name="IsEmergency" ColumnName="IsEmergency" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalMasters">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.HospitalMaster">
+              <MappingFragment StoreEntitySet="HospitalMaster">
+                <ScalarProperty Name="WorkingHoursTo" ColumnName="WorkingHoursTo" />
+                <ScalarProperty Name="WorkingHoursFrom" ColumnName="WorkingHoursFrom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalWorkingDays">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.HospitalWorkingDay">
+              <MappingFragment StoreEntitySet="HospitalWorkingDays">
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserMasters">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.UserMaster">
               <MappingFragment StoreEntitySet="UserMaster">
