@@ -1,0 +1,32 @@
+﻿@model DoctorPortal.Web.Areas.Admin.Models.ViewModels.PageHeaderViewModel
+
+@if (Model != null)
+{
+    <div class="page-header page-header-light">
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <h4><i class="icon-arrow-left52 mr-2" onclick="goBack()"></i> <span class="font-weight-semibold">@Model.PageName</span></h4>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+        </div>
+        <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+            <div class="d-flex">
+                <div class="breadcrumb">
+                    <a href="@Url.Action("Index", "AdminHome")" class="breadcrumb-item">
+                        <i class="icon-home2 mr-2"></i>
+                        Home
+                    </a>
+                    <a href="#" class="breadcrumb-item">
+                         @Model.PageName
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

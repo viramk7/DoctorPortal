@@ -126,7 +126,7 @@ namespace DoctorPortal.Web.Common
             else
             {
                 aLink.MergeAttribute("id", controllerName);
-                aLink.MergeAttribute("href", ConfigItems.SiteRootPathUrl + "/" + controllerName + "/" + actionName);
+                aLink.MergeAttribute("href", ConfigItems.SiteRootPathUrl + "/Admin/" + controllerName + "/" + actionName);
             }
             return aLink;
         }

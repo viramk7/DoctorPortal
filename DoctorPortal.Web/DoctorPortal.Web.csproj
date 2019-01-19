@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Models\BaseEntity.cs" />
     <Compile Include="Areas\Admin\Models\ConfigItems.cs" />
@@ -161,8 +162,10 @@
     <Compile Include="Areas\Admin\Models\NotifyType.cs" />
     <Compile Include="Areas\Admin\Models\ProjectSession.cs" />
     <Compile Include="Areas\Admin\Models\UserAccessPermission.cs" />
+    <Compile Include="Areas\Admin\Models\ViewModels\ActionBarViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ViewModels\PageHeaderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Services\User\IUserService.cs" />
     <Compile Include="Areas\Admin\Services\User\UserService.cs" />
@@ -810,6 +813,10 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\images\favicon\manifest.json" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Hospital\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PageHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ActionBar.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />

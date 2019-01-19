@@ -1,0 +1,23 @@
+﻿@model DoctorPortal.Web.Areas.Admin.Models.ViewModels.ActionBarViewModel
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title"></h5>
+            <div class="col-lg-7 text-right">
+                @if (Model.DisplaySaveButton)
+                {
+                    <input type="submit" class="btn btn-outline-primary legitRipple" value="Save" name="create" tabindex="15" />
+                }
+
+                @if (Model.DisplaySaveAndContinueButton)
+                {
+                    <input type="submit" class="btn btn-outline-primary legitRipple" value="Save & Continue" name="create" tabindex="15" />
+                }
+
+                @if (Model.DisplayBackButton)
+                {
+                    <a href="@Url.Action(Model.BackButtonActionName, Model.BackButtonControllerName)" class="btn btn-outline-primary legitRipple" tabindex="18">Back</a>
+                }
+            </div>
+    </div>
+</div>
