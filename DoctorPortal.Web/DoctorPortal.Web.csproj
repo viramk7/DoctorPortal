@@ -175,6 +175,7 @@
     <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DoctorPortalDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -829,6 +830,7 @@
     <Content Include="Views\Shared\_HeaderSearch.cshtml" />
     <Content Include="Views\Shared\_MainMenuArea.cshtml" />
     <Content Include="Views\Shared\_FooterArea.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />

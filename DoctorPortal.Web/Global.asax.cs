@@ -21,19 +21,19 @@ namespace DoctorPortal.Web
             Bootstrapper.Resolve(new ContainerBuilder());
         }
 
-        protected void Application_Error(object sender, EventArgs e)
-        {
-            // Code that runs when an unhanded error occurs                        
-            // Get the exception object.
-            var exc = Server.GetLastError();
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    // Code that runs when an unhanded error occurs                        
+        //    // Get the exception object.
+        //    var exc = Server.GetLastError();
 
-            // Log the exception and notify system operators
-            var log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-            log.Error(HttpContext.Current.Request.Url, exc);
+        //    // Log the exception and notify system operators
+        //    var log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //    log.Error(HttpContext.Current.Request.Url, exc);
 
-            // Clear the error from the server
-            Server.ClearError();
-        }
+        //    // Clear the error from the server
+        //    Server.ClearError();
+        //}
 
         protected void Application_EndRequest(object sender, EventArgs e)
         {

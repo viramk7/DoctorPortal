@@ -42,7 +42,8 @@
                             </div>
                             <div class="text-holder">
                                 <h4>@Model.AddressLine1</h4>
-                                @{
+                                <span>@Model.AddressLine2</span>
+                                @*@{
                                     var addressLine2 = Model.AddressLine2.Split(',').ToList();
                                 }
                                 @{
@@ -53,7 +54,7 @@
                                         count++;
                                         <span> @address@(addressLine2.Count == count ? "" : ",")</span><br />
                                     }
-                                }
+                                }*@
                             </div>
                         </li>
                         <li>
