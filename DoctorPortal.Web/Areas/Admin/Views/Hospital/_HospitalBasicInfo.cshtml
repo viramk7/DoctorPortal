@@ -1,0 +1,120 @@
+﻿@using Kendo.Mvc.UI
+@model DoctorPortal.Web.Areas.Admin.Models.ViewModels.HospitalInfoViewModel
+
+<div class="row">
+
+    <div class="col-lg-6">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HospitalName, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextBoxFor(m => m.HospitalName, new { @class = "k-textbox", style = "width: 100%;" })
+                @Html.ValidationMessageFor(m => m.HospitalName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.AddressLine1, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextBoxFor(m => m.AddressLine1,new { @class = "k-textbox", style = "width: 100%;" })
+                @Html.ValidationMessageFor(m => m.AddressLine1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.AddressLine2, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextAreaFor(m => m.AddressLine2, new { @class="k-textbox", style = "width: 100%;" })
+                @Html.ValidationMessageFor(m => m.AddressLine2)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.ContactNo, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextBoxFor(m => m.ContactNo, new { @class = "k-textbox", style = "width: 100%;" })
+                <span class="text-muted">*Add multiple contacts separating them by comma(,).</span>
+                @Html.ValidationMessageFor(m => m.ContactNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmergencyContact, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextBoxFor(m => m.EmergencyContact, new { @class = "k-textbox", style = "width: 100%;" })
+                <span class="text-muted">*Add multiple contacts separating them by comma(,).</span>
+                @Html.ValidationMessageFor(m => m.EmergencyContact)
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9">
+                @Html.TextBoxFor(m => m.Email, new { @class = "k-textbox", style = "width: 100%;" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.WorkingHoursFrom, new { @class = "col-sm-6 col-lg-4 control-label" })
+            <div class="col-sm-6 col-lg-9 controls">
+                @(Html.Kendo().DropDownListFor(m => m.WorkingHoursFrom)
+                              .OptionLabel("--Select From --")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .HtmlAttributes(new { style = "width: 100%;" })
+                              .BindTo(Model.WorkingHoursList)
+                              .Events(e => e.Change("onChangeWorkingHour"))
+                )
+
+                @Html.ValidationMessageFor(m => m.WorkingHoursFrom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.WorkingHoursTo, new { @class = "col-sm-6 col-lg-4 control-label" })
+            <div class="col-sm-6 col-lg-9 controls">
+                @(Html.Kendo().DropDownListFor(m => m.WorkingHoursTo)
+                              .OptionLabel("--Select To --")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                             .HtmlAttributes(new { style = "width: 100%;" })
+                              .BindTo(Model.WorkingHoursList)
+                              .Events(e => e.Change("onChangeWorkingHour"))
+                )
+
+                @Html.ValidationMessageFor(m => m.WorkingHoursTo)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.Label("Working Days", new { @class = "col-sm-6 col-lg-4 col-form-label" })
+            <div class="col-sm-6 col-lg-9 controls">
+                @Html.Kendo().CheckBoxFor(m => m.IsMonWorking) Mon
+                @Html.Kendo().CheckBoxFor(m => m.IsTueWorking) Tue
+                @Html.Kendo().CheckBoxFor(m => m.IsWedWorking) Wed
+                @Html.Kendo().CheckBoxFor(m => m.IsThurWorking) Thur
+                @Html.Kendo().CheckBoxFor(m => m.IsFriWorking) Fri
+                @Html.Kendo().CheckBoxFor(m => m.IsSatWorking) Sat
+                @Html.Kendo().CheckBoxFor(m => m.IsSunWorking) Sun
+
+            </div>
+        </div>
+
+        </div>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+        $("form").kendoValidator();;
+    });
+
+    function onChangeWorkingHour(e) {
+
+    }
+</script>

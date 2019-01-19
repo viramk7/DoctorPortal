@@ -33,7 +33,8 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Login
             if (user.Password != model.Password)
                 return false;
 
-            ProjectSession.LoggedInUser = user;
+            var loggedInUserModel = new LoggedInUserModel(user);
+            ProjectSession.LoggedInUser = loggedInUserModel;
             ProjectSession.UserAccessPermissions = GetUserPermissions(user.RoleId,user.IsSuperAdmin);
 
             return true;

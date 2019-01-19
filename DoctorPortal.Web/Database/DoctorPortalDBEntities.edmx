@@ -46,6 +46,7 @@
           <Property Name="IsSystemGeneratedPassword" Type="bit" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="IsSuperAdmin" Type="bit" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_HospitalContacts_HospitalMaster">
           <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
@@ -71,6 +72,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DoctorPortalDBEntitiesModelStoreContainer">
           <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalMaster" EntityType="Self.HospitalMaster" Schema="dbo" store:Type="Tables" />
@@ -83,6 +96,10 @@
           <AssociationSet Name="FK_HospitalWorkingDays_HospitalMaster" Association="Self.FK_HospitalWorkingDays_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMaster" />
             <End Role="HospitalWorkingDays" EntitySet="HospitalWorkingDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="Self.FK_UserMaster_Role">
+            <End Role="HospitalMaster" EntitySet="HospitalMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -101,6 +118,10 @@
           <AssociationSet Name="FK_HospitalWorkingDays_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
             <End Role="HospitalWorkingDay" EntitySet="HospitalWorkingDays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_Role" Association="DoctorPortalDBEntitiesModel.FK_UserMaster_Role">
+            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HospitalContact">
@@ -126,6 +147,7 @@
           <Property Name="WorkingHoursTo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HospitalContacts" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalContact" />
           <NavigationProperty Name="HospitalWorkingDays" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalWorkingDay" />
+          <NavigationProperty Name="UserMasters" Relationship="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" FromRole="HospitalMaster" ToRole="UserMaster" />
         </EntityType>
         <EntityType Name="HospitalWorkingDay">
           <Key>
@@ -148,6 +170,8 @@
           <Property Name="IsSystemGeneratedPassword" Type="Boolean" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsSuperAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" FromRole="UserMaster" ToRole="HospitalMaster" />
         </EntityType>
         <Association Name="FK_HospitalContacts_HospitalMaster">
           <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
@@ -169,6 +193,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HospitalWorkingDay">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_Role">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.UserMaster" Role="UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMaster">
               <PropertyRef Name="HospitalId" />
             </Dependent>
           </ReferentialConstraint>
@@ -213,6 +249,7 @@
           <EntitySetMapping Name="UserMasters">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.UserMaster">
               <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="IsSuperAdmin" ColumnName="IsSuperAdmin" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="IsSystemGeneratedPassword" ColumnName="IsSystemGeneratedPassword" />

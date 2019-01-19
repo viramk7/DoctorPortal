@@ -2,6 +2,8 @@
 using DoctorPortal.Web.AdminRepositories.Hospital;
 using DoctorPortal.Web.AdminServices.Hospital;
 using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Repositories.Hospital;
+using DoctorPortal.Web.Areas.Admin.Services.HospitalInfo;
 using DoctorPortal.Web.Areas.Admin.Services.Login;
 using DoctorPortal.Web.Areas.Admin.Services.User;
 using DoctorPortal.Web.Caching;
@@ -20,11 +22,13 @@ namespace DoctorPortal.Web
 
             // Repos
             builder.RegisterType<HospitalRepository>().As<IHospitalRepository>().InstancePerDependency();
+            builder.RegisterType<HospitalInfoRepository>().As<IHospitalInfoRepository>().InstancePerDependency();
 
             // Services
             builder.RegisterType<LoginService>().As<ILoginService>().InstancePerDependency();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerDependency();
             builder.RegisterType<HospitalService>().As<IHospitalService>().InstancePerDependency();
+            builder.RegisterType<HospitalInfoService>().As<IHospitalInfoService>().InstancePerDependency();
 
         }
     }

@@ -7,7 +7,7 @@ namespace DoctorPortal.Web.Areas.Admin.Models
 {
     public class ProjectSession
     {
-        public static UserMaster LoggedInUser
+        public static LoggedInUserModel LoggedInUser
         {
             get
             {
@@ -17,7 +17,7 @@ namespace DoctorPortal.Web.Areas.Admin.Models
                 }
 
                 var userStr = Convert.ToString(HttpContext.Current.Session["User"]);
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<UserMaster>(userStr);
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<LoggedInUserModel>(userStr);
             }
 
             set => HttpContext.Current.Session["User"] = Newtonsoft.Json.JsonConvert.SerializeObject(value);

@@ -22,5 +22,8 @@ namespace DoctorPortal.Web.Database
         public bool IsSystemGeneratedPassword { get; set; }
         public int RoleId { get; set; }
         public bool IsSuperAdmin { get; set; }
+        public int HospitalId { get; set; }
+    
+        public virtual HospitalMaster HospitalMaster { get; set; }
     }
 }

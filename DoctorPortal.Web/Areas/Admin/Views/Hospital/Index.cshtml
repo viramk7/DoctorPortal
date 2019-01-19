@@ -1,4 +1,6 @@
 ﻿@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+
+
 @{
     ViewBag.Title = "Hospital";
 }
@@ -9,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            @using (Html.BeginForm(new { @class = "form form-horizontal", id="formHospitalInfo" }))
             {
                 @Html.ValidationSummary(true)
                 @Html.Partial("_ActionBar", new ActionBarViewModel("HospitalController"))
@@ -20,19 +22,7 @@
                     </div>
                     <hr />
                     <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-lg-6">
-
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-lg-6">
-
-                            </div>
-                        </div>
-
+                        @Html.Partial("_HospitalBasicInfo")
                     </div>
                 </div>
             }
