@@ -70,6 +70,7 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -570,6 +571,8 @@
     <Content Include="Content\images\favicon\favicon.ico" />
     <Content Include="Content\images\favicon\mstile-150x150.png" />
     <Content Include="Content\images\favicon\safari-pinned-tab.svg" />
+    <Content Include="Content\images\ic-error.png" />
+    <Content Include="Content\images\ic-success.png" />
     <Content Include="Content\images\icon\play-btn.png" />
     <Content Include="Content\images\icon\preloader.gif" />
     <Content Include="Content\images\icon\submenu-icon.png" />
@@ -825,6 +828,7 @@
     <Content Include="Areas\Admin\Views\Shared\_PageHeader.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_ActionBar.cshtml" />
     <Content Include="Areas\Admin\Views\Hospital\_HospitalBasicInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Notifications.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />

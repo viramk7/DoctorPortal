@@ -1,15 +1,17 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DoctorPortal.Web.Areas.Admin.Repositories.Hospital;
 using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
 using DoctorPortal.Web.Database.Repositories;
+using WebGrease.Css.Extensions;
 
 namespace DoctorPortal.Web.Areas.Admin.Services.HospitalInfo
 {
     public class HospitalInfoService : IHospitalInfoService
     {
         private readonly IHospitalInfoRepository _hospitalInfoRepository;
-        
+
         public HospitalInfoService(IHospitalInfoRepository hospitalInfoRepository)
         {
             _hospitalInfoRepository = hospitalInfoRepository;
@@ -32,7 +34,7 @@ namespace DoctorPortal.Web.Areas.Admin.Services.HospitalInfo
                 WorkingHoursFrom = hospitalMaster.WorkingHoursFrom,
                 WorkingHoursTo = hospitalMaster.WorkingHoursTo,
                 ContactNo = string.Join(", ", contacts),
-                EmergencyContact = string.Join(", ",emergencyContacts)
+                EmergencyContact = string.Join(", ", emergencyContacts)
             };
 
             hospitalInfoViewModel.SetWorkingDaysFromEntity(hospitalMaster.HospitalWorkingDays);
@@ -42,30 +44,7 @@ namespace DoctorPortal.Web.Areas.Admin.Services.HospitalInfo
 
         public void SaveHospitalInfo(HospitalInfoViewModel hospital)
         {
-            var hospitalContact = hospital.ContactNo.Split(',')
-                .Select(s => new HospitalContact { ContactNo = s, IsEmergency = false, HospitalId = hospital.HospitalId})
-                .ToList();
-
-            var emergencyContacts = hospital.EmergencyContact.Split(',')
-                .Select(s => new HospitalContact { ContactNo = s, IsEmergency = true, HospitalId = hospital.HospitalId })
-                .ToList();
-
-            hospitalContact.AddRange(emergencyContacts);
-            
-            var hospitalMaster = new HospitalMaster
-            {
-                Name = hospital.HospitalName,
-                Email = hospital.Email,
-                AddressLine1 = hospital.AddressLine1,
-                AddressLine2 = hospital.AddressLine2,
-                WorkingHoursFrom = hospital.WorkingHoursFrom,
-                WorkingHoursTo = hospital.WorkingHoursTo,
-                HospitalContacts = hospitalContact,
-                HospitalWorkingDays = hospital.GetHospitalWorkingDaysFromProperties()
-            };
-
-            _hospitalInfoRepository.Update(hospitalMaster);
-            
+            _hospitalInfoRepository.SaveHospitalInfo(hospital);
         }
     }
 }

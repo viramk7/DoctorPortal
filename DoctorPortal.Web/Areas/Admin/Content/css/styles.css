@@ -4628,3 +4628,7 @@
 .col-form-label {
     font-size: 14px !important;
 }
+
+.error-notification, .success-notification {
+    z-index:999999;
+}

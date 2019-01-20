@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using DoctorPortal.Web.Areas.Admin.Models;
 using log4net;
@@ -8,12 +10,51 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
     [UserAuthorization]
     public class BaseController : Controller
     {
-        // ReSharper disable once InconsistentNaming
-        protected readonly ILog _logger;
-
-        public BaseController()
+        private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
+        protected virtual void SuccessNotification(string message, bool persistForTheNextRequest = true, bool saveInSession = false)
         {
-            _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            AddNotification(Enums.NotifyType.Success, message, persistForTheNextRequest, saveInSession);
+        }
+
+        protected virtual void ErrorNotification(string message, bool persistForTheNextRequest = true, bool saveInSession = false)
+        {
+            AddNotification(Enums.NotifyType.Error, message, persistForTheNextRequest, saveInSession);
+        }
+
+        protected virtual void ErrorNotification(Exception exception, bool persistForTheNextRequest = true, bool logException = true)
+        {
+            AddNotification(Enums.NotifyType.Error, exception.Message, persistForTheNextRequest, false);
+        }
+
+        protected virtual void AddNotification(Enums.NotifyType type, string message, bool persistForTheNextRequest, bool saveInSession)
+        {
+            var dataKey = $"tmp.notifications.{type}";
+
+            if (!saveInSession)
+            {
+                if (persistForTheNextRequest)
+                {
+                    if (TempData[dataKey] == null)
+                        TempData[dataKey] = new List<string>();
+
+                    ((List<string>)TempData[dataKey]).Add(message);
+                }
+                else
+                {
+                    if (ViewData[dataKey] == null)
+                        ViewData[dataKey] = new List<string>();
+
+                    ((List<string>)ViewData[dataKey]).Add(message);
+                }
+            }
+            else
+            {
+                if (Session[dataKey] == null)
+                    Session[dataKey] = new List<string>();
+
+                ((List<string>)Session[dataKey]).Add(message);
+            }
         }
     }
 

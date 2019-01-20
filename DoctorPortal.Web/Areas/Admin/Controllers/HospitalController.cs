@@ -32,13 +32,15 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _hospitalInfoService.SaveHospitalInfo(model);
+                SuccessNotification("Record saved successfully");
             }
             catch (Exception e)
             {
                 Logger.log.Error($"Save Hospital: {e.Message}");
+                ErrorNotification(e);
             }
             
-            return View();
+            return RedirectToAction(nameof(Index),"Hospital");
         }
 
     }

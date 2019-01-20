@@ -92,7 +92,7 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entity == null)
                     throw new ArgumentNullException("entity");
 
-                _context.Entry(entity).State = EntityState.Modified;
+                //_context.Entry(entity).State = EntityState.Modified;
 
                 _context.SaveChanges();
             }
@@ -109,7 +109,7 @@ namespace DoctorPortal.Web.Database.Repositories
                 if (entities == null)
                     throw new ArgumentNullException("entities");
                 
-                _context.Entry(entities).State = EntityState.Modified;
+                //_context.Entry(entities).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)

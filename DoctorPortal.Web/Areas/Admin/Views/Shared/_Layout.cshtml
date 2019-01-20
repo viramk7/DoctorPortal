@@ -59,9 +59,8 @@
             @Html.Partial("_Sidebar")
         </div>
         <div class="content-wrapper">
-            
-                @RenderBody()
-            
+            @*@Html.Partial("_Notifications")*@
+            @RenderBody()
         </div>
     </div>
 
@@ -87,7 +86,7 @@
         public int PopupShowDelay => 1000 * (Convert.ToInt32(FormsAuthentication.Timeout.TotalSeconds) - 130);
     }
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
     $(document).ready(function () {
         $(document).ajaxError(function (xhr, props) {
@@ -198,7 +197,7 @@
 
     })();
 
-</script>
+    </script>
 
 </body>
 
