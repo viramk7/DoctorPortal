@@ -1,4 +1,4 @@
-﻿
+﻿@model DoctorPortal.Web.Models.HospitalViewModel
 
 
     <!--Start rev slider wrapper-->
@@ -587,137 +587,9 @@
     </section>
     <!--End fact counter area-->
     <!--Start testimonial area-->
-    <section class="testimonial-area">
-        <div class="container">
-            <div class="sec-title mar0auto text-center">
-                <h1>What Our Clients Say</h1>
-                <span class="border"></span>
-            </div>
-            <div class="row">
-                <!--Start single item-->
-                <div class="col-md-12">
-                    <div class="testimonial-carousel">
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/1.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>Mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Rossy Miranda</h3>
-                                <span>Newyork</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/2.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>The master-builder of human happiness one rejects, dislikes, or avoids pleasure itself, because it is pleasure pursue.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Peter Lawrence</h3>
-                                <span>California</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/1.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>Mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Rossy Miranda</h3>
-                                <span>Newyork</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/2.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>The master-builder of human happiness one rejects, dislikes, or avoids pleasure itself, because it is pleasure pursue.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Peter Lawrence</h3>
-                                <span>California</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/1.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>Mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Rossy Miranda</h3>
-                                <span>Newyork</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                        <!--Start single testimonial item-->
-                        <div class="single-testimonial-item text-center">
-                            <div class="img-box">
-                                <div class="img-holder">
-                                    <img src="~/Content/images/testimonial/2.png" alt="Awesome Image">
-                                </div>
-                                <div class="quote-box">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div class="text-holder">
-                                <p>The master-builder of human happiness one rejects, dislikes, or avoids pleasure itself, because it is pleasure pursue.</p>
-                            </div>
-                            <div class="name">
-                                <h3>Peter Lawrence</h3>
-                                <span>California</span>
-                            </div>
-                        </div>
-                        <!--End single testimonial item-->
-                    </div>
-                </div>
-                <!--End single item-->
 
-            </div>
-        </div>
-    </section>
+    @Html.Partial("_Testimonials", Model.Testimonials)
+
     <!--End testimonial area-->
     <!--Start latest blog area-->
     <section class="latest-blog-area">
@@ -1092,7 +964,3 @@
         </div>
     </section>
     <!--End brand area-->
-    
-
-
-

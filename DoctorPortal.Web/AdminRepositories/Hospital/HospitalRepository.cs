@@ -15,8 +15,8 @@ namespace DoctorPortal.Web.AdminRepositories.Hospital
         public HospitalMaster GetHospitalInfo()
         {
             var hospital = Entities
-                            .Include(i => i.HospitalContacts)
-                            .Include(i => i.HospitalWorkingDays)
+                            //.Include(i => i.HospitalContacts)
+                            //.Include(i => i.HospitalWorkingDays)
                             .FirstOrDefault();
 
             return hospital;

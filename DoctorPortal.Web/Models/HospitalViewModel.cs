@@ -9,8 +9,6 @@ namespace DoctorPortal.Web.Models
     {
         public HospitalViewModel()
         {
-            //WorkingDaysList = new ICollection<HospitalWorkingDay>();
-            //ContactList = new ICollection<HospitalContact>();
         }
 
         public HospitalViewModel(HospitalMaster hospital)
@@ -24,6 +22,7 @@ namespace DoctorPortal.Web.Models
             
             ContactList = hospital.HospitalContacts;
             WorkingDaysList = hospital.HospitalWorkingDays;
+            Testimonials = hospital.Testimonials.Select(s => new TestimonialViewModel(s)).ToList();
         }
 
         public int HospitalId { get; set; }
@@ -36,13 +35,10 @@ namespace DoctorPortal.Web.Models
         public string WorkingHours { get; private set; }
         public string WorkingDays { get; private set; }
 
-        // TODO: Make this dynamic
-        public string Slogan { get; set; } = "Making impossible, possible";
+        public IList<TestimonialViewModel> Testimonials { get; set; }
 
-        //private ICollection<HospitalWorkingDay> _workingDaysList;
         public ICollection<HospitalWorkingDay> WorkingDaysList
         {
-            //get => _workingDaysList;
             set
             {
                 var workingDaysList = value;

@@ -1,0 +1,93 @@
+﻿@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+@using DoctorPortal.Web.Common
+@using DoctorPortal.Web.Models
+@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Testimonials";
+}
+
+@Html.Partial("_PageHeader", new PageHeaderViewModel("Testimonials", "AdminHome", "Index"))
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            {
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Manage Testimonials</h5>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+
+                        @(Html.Kendo().Grid<TestimonialViewModel>()
+                                   .Name("gridTestimonials")
+                                   .Columns(columns =>
+                                   {
+                                       columns.Command(command =>
+                                       {
+                                           command.Edit().Text(" ").UpdateText("Save");
+                                           command.Destroy().Text(" ");
+                                       }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                         .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+
+                                       columns.Bound(d => d.Name);
+                                       columns.Bound(d => d.Location);
+                                       columns.Bound(d => d.Message);
+                                   })
+                                   .ToolBar(toolbar =>
+                                   {
+                                       toolbar.Create().Text("Add");
+                                   })
+                                   .Editable(editable =>
+                                   {
+                                       editable.Mode(GridEditMode.PopUp).TemplateName("ManageTestimonials");
+                                       editable.DisplayDeleteConfirmation("Are you sure you want to delete this testimonial?");
+                                       editable.Window(x => x.Title("Manage testimonials"));
+                                   })
+                                   .Pageable(x =>
+                                   {
+                                       x.Refresh(true);
+                                       x.PageSizes(WebHelper.PageSizes);
+                                   })
+                                   .Sortable(sortable => sortable.AllowUnsort(false))
+                                   .Filterable(filter => filter.Enabled(false))
+                                   .NoRecords()
+                                   .Events(grid => grid.Edit("edit"))
+                                   .DataSource(dataSource => dataSource
+                                       .Ajax()
+                                       .ServerOperation(true)
+                                       .PageSize(WebHelper.PageSize)
+                                       .Model(model => model.Id(d => d.Id))
+                                       .Events(events => events.Error("onError('gridTestimonials')").RequestEnd("onReqEnd"))
+                                       .Create(update => update.Action("KendoSave", "Testimonials"))
+                                       .Read(read => read.Action("KendoRead", "Testimonials"))
+                                       .Update(update => update.Action("KendoSave", "Testimonials"))
+                                       .Destroy(update => update.Action("KendoDestroy", "Testimonials"))
+                                   ))
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    function edit(e) {
+        var window = e.container.data('kendoWindow');
+        if (e.model.isNew()) {
+            
+        } else {
+        }
+    }
+
+    function onReqEnd(res) {
+        if (res.type != 'read') {
+            $("#gridTestimonials").data("kendoGrid").dataSource.read();
+        }
+        DisplayResponseMessage(res);
+    }
+
+</script>

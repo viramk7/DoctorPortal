@@ -11,51 +11,22 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
     public class BaseController : Controller
     {
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
-        protected virtual void SuccessNotification(string message, bool persistForTheNextRequest = true, bool saveInSession = false)
+
+        protected virtual void SuccessNotification(string message)
         {
-            AddNotification(Enums.NotifyType.Success, message, persistForTheNextRequest, saveInSession);
+            TempData[NotifyType.Success] = message;
         }
 
-        protected virtual void ErrorNotification(string message, bool persistForTheNextRequest = true, bool saveInSession = false)
+        protected virtual void ErrorNotification(string message)
         {
-            AddNotification(Enums.NotifyType.Error, message, persistForTheNextRequest, saveInSession);
+            TempData[NotifyType.Error] = message;
         }
 
-        protected virtual void ErrorNotification(Exception exception, bool persistForTheNextRequest = true, bool logException = true)
+        protected virtual object GetJson(string message, Enums.NotifyType notifyType)
         {
-            AddNotification(Enums.NotifyType.Error, exception.Message, persistForTheNextRequest, false);
+            return new { IsError = notifyType, Message = message };
         }
 
-        protected virtual void AddNotification(Enums.NotifyType type, string message, bool persistForTheNextRequest, bool saveInSession)
-        {
-            var dataKey = $"tmp.notifications.{type}";
-
-            if (!saveInSession)
-            {
-                if (persistForTheNextRequest)
-                {
-                    if (TempData[dataKey] == null)
-                        TempData[dataKey] = new List<string>();
-
-                    ((List<string>)TempData[dataKey]).Add(message);
-                }
-                else
-                {
-                    if (ViewData[dataKey] == null)
-                        ViewData[dataKey] = new List<string>();
-
-                    ((List<string>)ViewData[dataKey]).Add(message);
-                }
-            }
-            else
-            {
-                if (Session[dataKey] == null)
-                    Session[dataKey] = new List<string>();
-
-                ((List<string>)Session[dataKey]).Add(message);
-            }
-        }
     }
 
     public sealed class UserAuthorizationAttribute : ActionFilterAttribute

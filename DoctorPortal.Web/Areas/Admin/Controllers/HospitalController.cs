@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using DoctorPortal.Web.Areas.Admin.Models;
+﻿using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Models.ViewModels;
 using DoctorPortal.Web.Areas.Admin.Services.HospitalInfo;
 using DoctorPortal.Web.Common;
-using DoctorPortal.Web.Controllers;
+using System;
+using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
@@ -32,16 +28,15 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _hospitalInfoService.SaveHospitalInfo(model);
-                SuccessNotification("Record saved successfully");
+                SuccessNotification(Resources.SaveSuccess);
             }
             catch (Exception e)
             {
                 Logger.log.Error($"Save Hospital: {e.Message}");
-                ErrorNotification(e);
+                ErrorNotification(Resources.SaveFailed);
             }
             
-            return RedirectToAction(nameof(Index),"Hospital");
+            return RedirectToAction(nameof(Index));
         }
-
     }
 }

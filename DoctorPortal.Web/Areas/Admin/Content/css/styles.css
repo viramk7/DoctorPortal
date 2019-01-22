@@ -4630,5 +4630,11 @@
 }
 
 .error-notification, .success-notification {
-    z-index:999999;
+    z-index: 999999;
+}
+
+.k-widget.k-tooltip-validation {
+    border-color: white !important;
+    background-color: white !important;
+    color: red !important;
 }

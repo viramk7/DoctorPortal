@@ -157,6 +157,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
     <Compile Include="Areas\Admin\Models\BaseEntity.cs" />
     <Compile Include="Areas\Admin\Models\ConfigItems.cs" />
     <Compile Include="Areas\Admin\Models\Enums.cs" />
@@ -173,8 +174,12 @@
     <Compile Include="Areas\Admin\Models\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\HospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\IHospitalInfoRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Testimonials\ITestimonialsRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Testimonials\TestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\HospitalInfoService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\IHospitalInfoService.cs" />
+    <Compile Include="Areas\Admin\Services\Testimonials\ITestimonialsService.cs" />
+    <Compile Include="Areas\Admin\Services\Testimonials\TestimonialsService.cs" />
     <Compile Include="Areas\Admin\Services\User\IUserService.cs" />
     <Compile Include="Areas\Admin\Services\User\UserService.cs" />
     <Compile Include="Bootstrapper.cs" />
@@ -185,6 +190,7 @@
     <Compile Include="Common\HtmlHelperExtensions.cs" />
     <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\Utility.cs" />
+    <Compile Include="Common\WebHelper.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DoctorPortalDBEntities.Context.cs">
@@ -215,6 +221,9 @@
     <Compile Include="Database\Repositories\EfRepository.cs" />
     <Compile Include="Database\Repositories\IDbContext.cs" />
     <Compile Include="Database\Repositories\IRepository.cs" />
+    <Compile Include="Database\Testimonial.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\UserMaster.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
@@ -224,6 +233,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HospitalViewModel.cs" />
+    <Compile Include="Models\TestimonialViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -829,6 +839,8 @@
     <Content Include="Areas\Admin\Views\Shared\_ActionBar.cshtml" />
     <Content Include="Areas\Admin\Views\Hospital\_HospitalBasicInfo.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Notifications.cshtml" />
+    <Content Include="Areas\Admin\Views\Testimonials\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ManageTestimonials.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />
@@ -848,11 +860,11 @@
     <Content Include="Views\Shared\_HeaderSearch.cshtml" />
     <Content Include="Views\Shared\_MainMenuArea.cshtml" />
     <Content Include="Views\Shared\_FooterArea.cshtml" />
+    <Content Include="Views\Home\_Testimonials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />
     <Folder Include="Content\images\footer\" />
-    <Folder Include="Views\BaseAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -197,6 +197,19 @@
 
     })();
 
+    function DisplayResponseMessage(para)
+    {
+     
+        if (para.type!='read' && para.response !=undefined  && para.response.Message != undefined ) {
+            if ( para.response.IsError == '@Convert.ToInt32(Enums.NotifyType.Error)') {
+                ShowErrorMessage(para.response.Message);
+            }
+            else {
+                SucessMessage(para.response.Message);
+            }
+        }
+    }
+
     </script>
 
 </body>

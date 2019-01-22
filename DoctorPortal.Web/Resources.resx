@@ -120,6 +120,12 @@
   <data name="CouldNotResetPassword" xml:space="preserve">
     <value>Could not reset password.</value>
   </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>Could not delete the record.</value>
+  </data>
+  <data name="DeleteSuccess" xml:space="preserve">
+    <value>Record deleted successfully.</value>
+  </data>
   <data name="EmailNotExists" xml:space="preserve">
     <value>The email you provided is not registered with us. </value>
   </data>
@@ -146,6 +152,12 @@
   </data>
   <data name="RequiredField" xml:space="preserve">
     <value>This field is required.</value>
+  </data>
+  <data name="SaveFailed" xml:space="preserve">
+    <value>Could not save the record.</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Record saved successfully.</value>
   </data>
   <data name="SessionExpired" xml:space="preserve">
     <value>Your session was expired. Please login again.</value>

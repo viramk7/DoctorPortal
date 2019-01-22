@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DoctorPortal.Web.Models.TestimonialViewModel>
+
+@if (Model.Any())
+{
+    <section class="testimonial-area">
+        <div class="container">
+            <div class="sec-title mar0auto text-center">
+                <h1>What Our Clients Say</h1>
+                <span class="border"></span>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="testimonial-carousel">
+
+                        @foreach (var testimonial in Model)
+                        {
+                            <div class="single-testimonial-item text-center">
+                                <div class="img-box">
+                                    <div class="img-holder">
+                                        <img src="@testimonial.ClientImagePath" alt="Awesome Image">
+                                    </div>
+                                    <div class="quote-box">
+                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="text-holder">
+                                    <p>@testimonial.Message</p>
+                                </div>
+                                <div class="name">
+                                    <h3>@testimonial.Name</h3>
+                                    <span>@testimonial.Location</span>
+                                </div>
+                            </div>   
+                        }
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+}
