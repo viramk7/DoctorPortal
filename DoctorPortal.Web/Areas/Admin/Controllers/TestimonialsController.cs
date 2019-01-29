@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
 using DoctorPortal.Web.Common;
+using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Models;
 using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
@@ -17,6 +19,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
     public class TestimonialsController : BaseController
     {
         private readonly ITestimonialsService _testimonialsService;
+
+        private const string FOLDER_PATH = "~/Uploads/Testimonials";
 
         public TestimonialsController(ITestimonialsService testimonialsService)
         {
@@ -40,37 +44,82 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             return Json(testimonials.ToDataSourceResult(request));
         }
 
-        public ActionResult KendoSave([DataSourceRequest] DataSourceRequest request, TestimonialViewModel model)
+        [HttpGet]
+        public ActionResult AddEdit(int id = 0)
+        {
+            var model = new TestimonialViewModel { HospitalId = ProjectSession.LoggedInUser.HospitalId };
+            if (id == 0)
+                return View(model);
+
+            model = _testimonialsService.GetById(id);
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddEdit(TestimonialViewModel model, string create = null)
         {
             try
             {
                 if (model == null || !ModelState.IsValid)
-                    return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+                    return View(model);
+
+                if (model.ClientImage != null)
+                    model.ClientImagePath = UploadFile(model.ClientImage);
 
                 model.HospitalId = ProjectSession.LoggedInUser.HospitalId;
-                _testimonialsService.Save(model);
+                model = _testimonialsService.Save(model);
 
-                return Json(GetJson(Resources.SaveSuccess, Enums.NotifyType.Success), JsonRequestBehavior.AllowGet);
+                SuccessNotification(Resources.SaveSuccess);
+
+                if (string.IsNullOrEmpty(create))
+                    return RedirectToAction(nameof(Index));
+
+                return create.Equals("Save & Continue")
+                    ? RedirectToAction(nameof(AddEdit), new { id = model.Id })
+                    : RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {
                 Logger.log.Error($"Testimonials > KendoSave. Error: {e.Message}");
-                return Json(GetJson(Resources.SaveFailed, Enums.NotifyType.Error), JsonRequestBehavior.AllowGet);
+                ErrorNotification(Resources.SaveFailed);
+                return View(model);
             }
         }
 
-        public ActionResult KendoDestroy([DataSourceRequest] DataSourceRequest request, TestimonialViewModel model)
+        public ActionResult Delete(int id)
         {
             try
             {
-                _testimonialsService.Delete(model);
+                _testimonialsService.Delete(id);
                 return Json(GetJson(Resources.DeleteSuccess, Enums.NotifyType.Success), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 Logger.log.Error($"Testimonials > KendoDestroy. Error: {e.Message}");
                 return Json(GetJson(Resources.DeleteFailed, Enums.NotifyType.Error), JsonRequestBehavior.AllowGet);
-            }       
+            }
+        }
+
+        public string UploadFile(HttpPostedFileBase file)
+        {
+            if (file == null)
+                return string.Empty;
+
+            var ext = Path.GetExtension(file.FileName);
+            if (!WebHelper.ValidImageFileTypes.Contains(ext))
+                throw new Exception("File type not valid.");
+
+            if (!Directory.Exists(Server.MapPath(FOLDER_PATH)))
+                Directory.CreateDirectory(Server.MapPath(FOLDER_PATH));
+
+            var filename = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+            var fullPath = $"{FOLDER_PATH}/{filename}";
+
+            file.SaveAs(Server.MapPath(fullPath));
+            return fullPath;
+
         }
     }
 }

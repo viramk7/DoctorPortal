@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web;
 using DoctorPortal.Web.Database;
 
 namespace DoctorPortal.Web.Models
@@ -33,11 +34,12 @@ namespace DoctorPortal.Web.Models
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string Location { get; set; }
 
-        [Display(Name = @"Image path")]
-        //[Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
-        [StringLength(250, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
+        [Display(Name = @"Customer Image")]
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase ClientImage { get; set; }
+        
         public string ClientImagePath { get; set; }
-
+        
         [Display(Name = @"Message")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         [StringLength(250, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]

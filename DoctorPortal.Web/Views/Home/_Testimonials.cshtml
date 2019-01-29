@@ -18,7 +18,7 @@
                             <div class="single-testimonial-item text-center">
                                 <div class="img-box">
                                     <div class="img-holder">
-                                        <img src="@testimonial.ClientImagePath" alt="Awesome Image">
+                                        <img src="@(testimonial.ClientImagePath.Replace("~/",""))" alt="Awesome Image">
                                     </div>
                                     <div class="quote-box">
                                         <i class="fa fa-quote-left" aria-hidden="true"></i>

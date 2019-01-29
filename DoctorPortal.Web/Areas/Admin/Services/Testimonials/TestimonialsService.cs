@@ -20,20 +20,32 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Testimonials
             return testimonials.Select(s => new TestimonialViewModel(s));
         }
 
-        public void Save(TestimonialViewModel model)
+        public TestimonialViewModel GetById(int id)
+        {
+            var testimonial = _iTestimonialsRepository.GetById(id);
+            return new TestimonialViewModel(testimonial);
+        }
+
+        public TestimonialViewModel Save(TestimonialViewModel model)
         {
             var testimonial = model.GeTestimonialEntity();
 
             if (testimonial.Id > 0)
+            {
                 _iTestimonialsRepository.Update(testimonial);
+            }
             else
+            {
                 _iTestimonialsRepository.Insert(testimonial);
-            
+                model.Id = testimonial.Id;
+            }
+
+            return model;
         }
 
-        public void Delete(TestimonialViewModel model)
+        public void Delete(int id)
         {
-            var testimonial = _iTestimonialsRepository.GetById(model.Id);
+            var testimonial = _iTestimonialsRepository.GetById(id);
             _iTestimonialsRepository.Delete(testimonial);
         }
     }

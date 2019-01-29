@@ -7,8 +7,10 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Testimonials
     {
         IEnumerable<TestimonialViewModel> GetAllTestimonials();
 
-        void Save(TestimonialViewModel model);
+        TestimonialViewModel GetById(int id);
 
-        void Delete(TestimonialViewModel model);
+        TestimonialViewModel Save(TestimonialViewModel model);
+
+        void Delete(int id);
     }
 }

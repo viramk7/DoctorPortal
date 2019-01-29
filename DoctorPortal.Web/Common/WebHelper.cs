@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace DoctorPortal.Web.Common
 {
@@ -10,6 +7,8 @@ namespace DoctorPortal.Web.Common
         public const int PageSize = 10;
 
         public static int[] PageSizes = { 10, 20, 50, 100, 500 };
+
+        public static string[] ValidImageFileTypes = { ".jpeg", ".jpg", ".png" };
 
         public const string PleaseSelect = "--Select--";
 

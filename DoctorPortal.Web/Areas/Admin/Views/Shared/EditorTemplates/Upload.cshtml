@@ -1,0 +1,23 @@
+﻿@model string
+
+<input type="file" />
+
+@*@(Html.Kendo().Upload()
+              .Name("ImageUpload")
+              .Events(events =>
+              {
+      //events.Select("onSelectResumeFile");
+      events.Success("onUploadSuccessResumeFile");
+              })
+              .Messages(messages =>
+              {
+                  messages.Select("Upload");
+              })
+              .Async(async =>
+              {
+                  async.Save("SaveFile", "Testimonials");
+                  async.Remove("DeleteFile", "Testimonials");
+                  async.AutoUpload(true);
+              })
+      
+              .Multiple(false))*@
