@@ -5,6 +5,7 @@ namespace DoctorPortal.Web.Controllers
 {
     public class BaseAdminController : Controller
     {
+
         // ReSharper disable once InconsistentNaming
         protected readonly ILog _logger;
 
