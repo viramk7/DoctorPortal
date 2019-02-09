@@ -53,8 +53,11 @@
             @Html.LabelFor(m => m.ClientImage, new { @class = "col-sm-6 col-lg-4 col-form-label" })
             <div class="col-sm-6 col-lg-9">
                 @Html.TextBoxFor(m => m.ClientImage, new { type = "file", @class = "k-button k-upload-button" })
-                <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
                 @Html.ValidationMessageFor(m => m.ClientImage)
+                <p>
+                    <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
+                </p>
+
             </div>
         </div>
 
@@ -62,14 +65,12 @@
 </div>
 <script>
     $("#ClientImage").change(function (e) {
-        debugger;
         var validFileTypes = '@string.Join(",",WebHelper.ValidImageFileTypes)';
         var ext = $("#ClientImage").val().split('.')[1];
         if (validFileTypes.indexOf(('.'+ext)) < 0) {
             ShowErrorMessage("Invalid file type.");
             $("#ClientImage").val('');
         }
-        debugger;
     });
 </script>
 

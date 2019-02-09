@@ -36,6 +36,7 @@ namespace DoctorPortal.Web.Models
 
         [Display(Name = @"Customer Image")]
         [DataType(DataType.Upload)]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         public HttpPostedFileBase ClientImage { get; set; }
         
         public string ClientImagePath { get; set; }
