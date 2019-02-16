@@ -147,6 +147,8 @@
   <ItemGroup>
     <Compile Include="AdminRepositories\Hospital\HospitalRepository.cs" />
     <Compile Include="AdminRepositories\Hospital\IHospitalRepository.cs" />
+    <Compile Include="AdminServices\Entity\EntityService.cs" />
+    <Compile Include="AdminServices\Entity\IEntityService.cs" />
     <Compile Include="AdminServices\Hospital\HospitalService.cs" />
     <Compile Include="AdminServices\Hospital\IHospitalService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
