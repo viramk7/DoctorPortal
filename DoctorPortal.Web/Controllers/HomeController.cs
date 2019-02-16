@@ -8,6 +8,7 @@ namespace DoctorPortal.Web.Controllers
     public class HomeController : BaseAdminController
     {
         private readonly IHospitalService _hospitalService;
+        
 
         public HomeController(IHospitalService hospitalService)
         {

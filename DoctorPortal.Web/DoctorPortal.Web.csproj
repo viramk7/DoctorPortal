@@ -157,6 +157,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
@@ -174,10 +175,14 @@
     <Compile Include="Areas\Admin\Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\PageHeaderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\Repositories\Facility\FacilityRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Facility\IFacilityRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\HospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\IHospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\ITestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\TestimonialsRepository.cs" />
+    <Compile Include="Areas\Admin\Services\Facility\FacilityService.cs" />
+    <Compile Include="Areas\Admin\Services\Facility\IFacilityService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\HospitalInfoService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\IHospitalInfoService.cs" />
     <Compile Include="Areas\Admin\Services\Testimonials\ITestimonialsService.cs" />
@@ -211,6 +216,9 @@
       <DependentUpon>DoctorPortalDBEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\DoctorPortalEntities_Ex.cs" />
+    <Compile Include="Database\Facility.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\HospitalContact.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
@@ -234,6 +242,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FacilityViewModel.cs" />
     <Compile Include="Models\HospitalViewModel.cs" />
     <Compile Include="Models\TestimonialViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -846,6 +855,9 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Upload.cshtml" />
     <Content Include="Areas\Admin\Views\Testimonials\AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Testimonials\_AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Facility\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TextArea.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />
@@ -866,6 +878,7 @@
     <Content Include="Views\Shared\_MainMenuArea.cshtml" />
     <Content Include="Views\Shared\_FooterArea.cshtml" />
     <Content Include="Views\Home\_Testimonials.cshtml" />
+    <Content Include="Views\Home\_Facility.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />

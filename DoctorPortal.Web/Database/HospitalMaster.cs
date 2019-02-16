@@ -21,6 +21,7 @@ namespace DoctorPortal.Web.Database
             this.HospitalWorkingDays = new HashSet<HospitalWorkingDay>();
             this.Testimonials = new HashSet<Testimonial>();
             this.UserMasters = new HashSet<UserMaster>();
+            this.Facilities = new HashSet<Facility>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace DoctorPortal.Web.Database
         public virtual ICollection<Testimonial> Testimonials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMaster> UserMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facility> Facilities { get; set; }
     }
 }

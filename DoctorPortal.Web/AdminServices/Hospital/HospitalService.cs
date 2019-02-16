@@ -24,7 +24,7 @@ namespace DoctorPortal.Web.AdminServices.Hospital
                 throw new Exception("No hospital found");
 
             var hospitalViewModel = new HospitalViewModel(hospital);
-
+            
             return hospitalViewModel;
         }
     }

@@ -1,0 +1,77 @@
+﻿@using DoctorPortal.Web.Areas.Admin.Models
+@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+@using DoctorPortal.Web.Common
+@using DoctorPortal.Web.Models
+@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Facility";
+}
+
+@Html.Partial("_PageHeader", new PageHeaderViewModel("Facility", "AdminHome", "Index"))
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            {
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Manage Facility</h5>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+
+                        @(Html.Kendo().Grid<FacilityViewModel>()
+                                       .Name("gridFacility")
+                                       .Columns(columns =>
+                                       {
+                                           columns.Command(command =>
+                                           {
+                                               command.Edit().Text(" ");
+                                               command.Destroy().Text(" ");
+                                           }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                             .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+
+                                           columns.Bound(d => d.HeaderText);
+                                           columns.Bound(d => d.Description);
+                                           columns.Bound(d => d.IconName);
+                                       })
+                                       .ToolBar(toolbar =>
+                                       {
+                                           toolbar.Create().Text("Add");
+                                       })
+                                       .Editable(editable =>
+                                       {
+                                           editable.Mode(GridEditMode.PopUp);
+                                           editable.DisplayDeleteConfirmation("Are you sure you want to delete these Facility?");
+                                           editable.Window(x => x.Title("Manage Facility"));
+                                       })
+                                       .Pageable(x =>
+                                       {
+                                           x.Refresh(true);
+                                           x.PageSizes(WebHelper.PageSizes);
+                                       })
+                                       .Sortable(sortable => sortable.AllowUnsort(false))
+                                       .Filterable(filter => filter.Enabled(false))
+                                       .NoRecords()
+                                       //.Events(grid => grid.Edit("edit"))
+                                       .DataSource(dataSource => dataSource
+                                           .Ajax()
+                                           .ServerOperation(true)
+                                           .PageSize(WebHelper.PageSize)
+                                           .Model(model => model.Id(d => d.FacilityId))
+                                           .Events(events => events.Error("onError('gridFacility')"))
+                                           .Read(read => read.Action("KendoRead", "Facility"))
+                                           .Create(update => update.Action("KendoSave", "Facility"))
+                                           .Update(update => update.Action("KendoSave", "Facility"))
+                                           .Destroy(update => update.Action("KendoDestroy", "Facility"))
+                                       ))
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

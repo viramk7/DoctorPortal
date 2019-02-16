@@ -23,6 +23,7 @@ namespace DoctorPortal.Web.Models
             ContactList = hospital.HospitalContacts;
             WorkingDaysList = hospital.HospitalWorkingDays;
             Testimonials = hospital.Testimonials.Select(s => new TestimonialViewModel(s)).ToList();
+            Facilitylist = hospital.Facilities.Select(s => new FacilityViewModel(s)).ToList();
         }
 
         public int HospitalId { get; set; }
@@ -36,6 +37,8 @@ namespace DoctorPortal.Web.Models
         public string WorkingDays { get; private set; }
 
         public IList<TestimonialViewModel> Testimonials { get; set; }
+
+        public IList<FacilityViewModel> Facilitylist { get; set; }
 
         public ICollection<HospitalWorkingDay> WorkingDaysList
         {

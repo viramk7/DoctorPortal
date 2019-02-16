@@ -30,5 +30,6 @@ namespace DoctorPortal.Web.Database
         public virtual DbSet<HospitalWorkingDay> HospitalWorkingDays { get; set; }
         public virtual DbSet<Testimonial> Testimonials { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
+        public virtual DbSet<Facility> Facilities { get; set; }
     }
 }
