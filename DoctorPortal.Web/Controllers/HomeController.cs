@@ -13,8 +13,7 @@ namespace DoctorPortal.Web.Controllers
         {
             _hospitalService = hospitalService;
         }
-
-
+        
         public ActionResult Index()
         {
             try
