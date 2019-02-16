@@ -10,6 +10,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     public class AdminHomeController : BaseController
     {
+
         private readonly IUserService _userService;
 
         public AdminHomeController(IUserService userService)
