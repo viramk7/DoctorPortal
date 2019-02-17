@@ -1,6 +1,8 @@
+using System;
+
 namespace DoctorPortal.Web.Caching
 {
-    public interface ICacheManager
+    public interface ICacheManager : IDisposable
     {
         T Get<T>(string key);
 
