@@ -205,6 +205,7 @@
     <Compile Include="Controllers\BaseAdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Database\Doctor.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
@@ -895,6 +896,7 @@
     <Content Include="Views\Home\_Facility.cshtml" />
     <Content Include="Views\Home\_Facility_SingleItem.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
+    <Content Include="Views\Testimonial\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />

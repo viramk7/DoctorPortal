@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DoctorPortal.Web.Models.TestimonialViewModel>
+@{
+    ViewBag.Title = "Testimonials";
+}
+
+<section class="breadcrumb-area" style="background-image: url(/Content/images/resources/breadcrumb-bg.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <h1>Testimonials</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="left pull-left">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                            <li class="active">Testimonials</li>
+                        </ul>
+                    </div>
+                    <div class="right pull-right">
+                        <a href="#">
+                            <span><i class="fa fa-share-alt" aria-hidden="true"></i>Share</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-page">
+    <div class="container">
+        <div class="row masonary-layout">
+            @foreach (var testimonial in Model)
+            {
+                <!--Start single testimonial item-->
+                <div class="col-md-6">
+                    <div class="single-testimonial-item text-center">
+                        <div class="img-box">
+                            <div class="img-holder">
+                                <img src="@(testimonial.ClientImagePath.Replace("~/",""))" alt="Awesome Image">
+                            </div>
+                            <div class="quote-box">
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="text-holder">
+                            <p>@testimonial.Message</p>
+                        </div>
+                        <div class="name">
+                            <h3>@testimonial.Name</h3>
+                            <span>@testimonial.Location</span>
+                        </div>
+                    </div>
+                </div>
+                <!--End single testimonial item-->
+            }
+
+        </div>
+        @*<div class="row">
+                <div class="col-md-12">
+                    <ul class="post-pagination text-center">
+                        <li><a href="#"><i class="fa fa-caret-left" aria-hidden="true"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>*@
+    </div>
+</section>
+

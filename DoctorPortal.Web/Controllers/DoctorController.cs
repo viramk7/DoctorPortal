@@ -28,7 +28,7 @@ namespace DoctorPortal.Web.Controllers
             }
             catch (Exception e)
             {
-                Logger.log.Error($"Controller: {nameof(HomeController)} , Action: {nameof(Index)}. Error: {e.Message}");
+                Logger.log.Error($"Controller: {nameof(DoctorController)} , Action: {nameof(Index)}. Error: {e.Message}");
                 return View("Error");
             }
         }
