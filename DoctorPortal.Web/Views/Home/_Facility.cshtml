@@ -1,7 +1,34 @@
-﻿@model IEnumerable<DoctorPortal.Web.Models.FacilityViewModel>
+﻿@using DoctorPortal.Web.Models;
+@model IEnumerable<FacilityViewModel>
 
 @if (Model.Any())
 {
+
+    var mainList = new List<IList<FacilityViewModel>>();
+    var list = new List<FacilityViewModel>(); ;
+
+    var count = 1;
+    var index = 1;
+    foreach (var facility in Model)
+    {
+        if (count == 1)
+        {
+            list = new List<FacilityViewModel>();
+        }
+
+        list.Add(facility);
+
+        if (count == 4 || index == Model.Count())
+        {
+            count = 1;
+            mainList.Add(list);
+        }
+        else
+        {
+            count++;
+        }
+        index++;
+    }
 
     <div class="container">
         <div class="row">
@@ -14,212 +41,41 @@
                     </div>
                     <!--Start facilities carousel-->
                     <div class="facilities-carousel">
-                        <div class="single-facilities-item">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
+
+                        @foreach (var items in mainList)
+                        {
+                            <div class="single-facilities-item">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @if (items.Count >= 1)
+                                        {
+                                            Html.RenderPartial("_Facility_SingleItem", items[0]);
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (items.Count >= 2)
+                                        {
+                                            Html.RenderPartial("_Facility_SingleItem", items[1]);
+                                        }
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @if (items.Count >= 3)
+                                        {
+                                            Html.RenderPartial("_Facility_SingleItem", items[2]);
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (items.Count >= 4)
+                                        {
+                                            Html.RenderPartial("_Facility_SingleItem", items[3]);
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance 1</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        }
 
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-facilities-item">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance 2</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="single-facilities-item">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance 3</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-transport"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>24 Hrs Ambulance</h3>
-                                            <p>How all this mistaken idea denoucing pleasure and praisings pain was born complete account expound.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="single-item">
-                                        <div class="icon-holder">
-                                            <div class="icon-box">
-                                                <div class="icon">
-                                                    <span class="flaticon-drink"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-holder">
-                                            <h3>Food & Dietary</h3>
-                                            <p>The Dietitian plans the diet based on the therapeutic needs of the patient, Local specialties, Continental.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
