@@ -22,8 +22,9 @@ namespace DoctorPortal.Web.Models
             
             ContactList = hospital.HospitalContacts;
             WorkingDaysList = hospital.HospitalWorkingDays;
-            Testimonials = hospital.Testimonials.Select(s => new TestimonialViewModel(s)).ToList();
-            Facilitylist = hospital.Facilities.Select(s => new FacilityViewModel(s)).ToList();
+            Departmentlist = hospital.Department.Select(s=>new DepartmentViewModel(s)).ToList();
+            //Testimonials = hospital.Testimonials.Select(s => new TestimonialViewModel(s)).ToList();
+            //Facilitylist = hospital.Facilities.Select(s => new FacilityViewModel(s)).ToList();
         }
 
         public int HospitalId { get; set; }
@@ -33,12 +34,13 @@ namespace DoctorPortal.Web.Models
         public string ContactNo { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        public string WorkingHours { get; private set; }
-        public string WorkingDays { get; private set; }
+        public string WorkingHours { get;  set; }
+        public string WorkingDays { get; set; }
+        public List<DepartmentViewModel> Departmentlist { get; set; }
 
-        public IList<TestimonialViewModel> Testimonials { get; set; }
+        //public IList<TestimonialViewModel> Testimonials { get; set; }
 
-        public IList<FacilityViewModel> Facilitylist { get; set; }
+        //public IList<FacilityViewModel> Facilitylist { get; set; }
 
         public ICollection<HospitalWorkingDay> WorkingDaysList
         {
@@ -77,6 +79,8 @@ namespace DoctorPortal.Web.Models
                 ContactNo = contactNos;
             }
         }
+
+        
         
     }
     

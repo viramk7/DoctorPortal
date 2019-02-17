@@ -17,10 +17,12 @@ namespace DoctorPortal.Web.Controllers
         {
             _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-            ProjectSession.Hospital = cacheManager.Get("HospitalInfo", () =>
+            var hospitalViewModel = cacheManager.Get("HospitalInfo", () =>
             {
                 return hospitalService.GetHospitalInfo();
             });
+
+            ProjectSession.Hospital = hospitalViewModel;
 
         }
     }

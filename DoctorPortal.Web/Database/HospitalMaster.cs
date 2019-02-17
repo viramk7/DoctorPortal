@@ -22,6 +22,7 @@ namespace DoctorPortal.Web.Database
             this.Testimonials = new HashSet<Testimonial>();
             this.UserMasters = new HashSet<UserMaster>();
             this.Facilities = new HashSet<Facility>();
+            this.Department = new HashSet<Department>();
         }
     
         public int Id { get; set; }
@@ -42,5 +43,7 @@ namespace DoctorPortal.Web.Database
         public virtual ICollection<UserMaster> UserMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Facility> Facilities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Department { get; set; }
     }
 }

@@ -27,22 +27,14 @@ namespace DoctorPortal.Web.Controllers
                 if (ProjectSession.Hospital == null)
                     throw new Exception("Something went wrong");
 
-                var hospital = ProjectSession.Hospital;
+                //var hospital = ProjectSession.Hospital;
 
-                //var hospital = _hospitalService.GetHospitalInfo();
+                var homeinfo = _hospitalService.GetHomePageInfo();
 
-                if (hospital == null)
-                    throw new Exception("Hospital not found.");
+                //if (hospital == null)
+                //    throw new Exception("Hospital not found.");
 
-                BaseLayoutModel.AddressLine1 = hospital.AddressLine1;
-                BaseLayoutModel.AddressLine2 = hospital.AddressLine2;
-                BaseLayoutModel.ContactNo = hospital.ContactNo;
-                BaseLayoutModel.Email = hospital.Email;
-                BaseLayoutModel.EmergencyNo = hospital.EmergencyNo;
-                BaseLayoutModel.Name = hospital.Name;
-                BaseLayoutModel.WorkingDays = hospital.WorkingDays;
-                BaseLayoutModel.WorkingHours = hospital.WorkingHours;
-                return View(hospital);
+                return View(homeinfo);
             }
             catch (Exception e)
             {

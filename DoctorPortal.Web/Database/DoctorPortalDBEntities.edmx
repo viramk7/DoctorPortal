@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DoctorPortalDBEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="BannerImage" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="DoctorId" />
@@ -88,6 +98,18 @@
           <Property Name="IsSuperAdmin" Type="bit" Nullable="false" />
           <Property Name="HospitalId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Department_HospitalMaster">
+          <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Doctor_Speciality">
           <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
@@ -161,6 +183,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DoctorPortalDBEntitiesModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
@@ -169,6 +192,10 @@
           <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Department_HospitalMaster" Association="Self.FK_Department_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMaster" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
           <AssociationSet Name="FK_Doctor_Speciality" Association="Self.FK_Doctor_Speciality">
             <End Role="Speciality" EntitySet="Speciality" />
             <End Role="Doctor" EntitySet="Doctor" />
@@ -231,6 +258,11 @@
             <End Role="Speciality" EntitySet="Speciality" />
             <End Role="Doctor" EntitySet="Doctor" />
           </AssociationSet>
+          <EntitySet Name="Department" EntityType="DoctorPortalDBEntitiesModel.Department" />
+          <AssociationSet Name="FK_Department_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster">
+            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HospitalContact">
           <Key>
@@ -258,6 +290,7 @@
           <NavigationProperty Name="Testimonials" Relationship="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" FromRole="HospitalMaster" ToRole="Testimonial" />
           <NavigationProperty Name="UserMasters" Relationship="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" FromRole="HospitalMaster" ToRole="UserMaster" />
           <NavigationProperty Name="Facilities" Relationship="DoctorPortalDBEntitiesModel.FK_Facility_HospitalMaster" FromRole="HospitalMaster" ToRole="Facility" />
+          <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="HospitalMaster" ToRole="Department" />
         </EntityType>
         <EntityType Name="HospitalWorkingDay">
           <Key>
@@ -399,6 +432,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
+        </EntityType>
+        <Association Name="FK_Department_HospitalMaster">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -492,6 +548,17 @@
               <MappingFragment StoreEntitySet="Speciality">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="BannerImage" ColumnName="BannerImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,7 @@
-﻿using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
+﻿using DoctorPortal.Web.AdminServices.Hospital;
+using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using System;
 using System.Collections.Generic;
@@ -8,11 +11,12 @@ using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Controllers
 {
-    public class TestimonialController : Controller
+    public class TestimonialController : BaseAdminController
     {
         private readonly ITestimonialsService _service;
 
-        public TestimonialController(ITestimonialsService service)
+        public TestimonialController(ITestimonialsService service, IHospitalService hospitalService,
+                             ICacheManager cacheManager) : base(hospitalService, cacheManager)
         {
             _service = service;
         }
@@ -21,6 +25,9 @@ namespace DoctorPortal.Web.Controllers
         {
             try
             {
+                if (ProjectSession.Hospital == null)
+                    throw new Exception("Something went wrong");
+
                 var list = _service.GetAllTestimonials();
                 return View(list);
             }
