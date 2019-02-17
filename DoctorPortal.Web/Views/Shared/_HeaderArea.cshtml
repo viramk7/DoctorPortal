@@ -1,4 +1,5 @@
-﻿@model DoctorPortal.Web.Models.HospitalViewModel
+﻿@*@model DoctorPortal.Web.Models.HospitalViewModel*@
+@using DoctorPortal.Web.Models
 
 <section class="header-area">
     <div class="container">
@@ -20,7 +21,7 @@
                             <div class="text-holder">
                                 <h4>Call us now</h4>
                                 @{
-                                    var contacts = Model.ContactNo.Split(',').ToList();
+                                    var contacts = BaseLayoutModel.ContactNo.Split(',').ToList();
                                 }
 
                                 @if (contacts.Count == 0)
@@ -41,9 +42,9 @@
                                 <span class="flaticon-pin"></span>
                             </div>
                             <div class="text-holder">
-                                <h4>@Model.AddressLine1</h4>
+                                <h4>@BaseLayoutModel.AddressLine1</h4>
                                 @{
-                                    var addressLine2 = Model.AddressLine2.Split(',').ToList();
+                                    var addressLine2 = BaseLayoutModel.AddressLine2.Split(',').ToList();
                                 }
                                 @{
                                     var count = 0;
@@ -61,8 +62,8 @@
                                 <span class="flaticon-agenda"></span>
                             </div>
                             <div class="text-holder">
-                                <h4>@Model.WorkingDays</h4>
-                                <span>@Model.WorkingHours</span>
+                                <h4>@BaseLayoutModel.WorkingDays</h4>
+                                <span>@BaseLayoutModel.WorkingHours</span>
                             </div>
                         </li>
                     </ul>

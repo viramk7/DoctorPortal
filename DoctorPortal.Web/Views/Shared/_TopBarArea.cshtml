@@ -1,15 +1,15 @@
-﻿@model DoctorPortal.Web.Models.HospitalViewModel
-
+﻿@*@model DoctorPortal.Web.Models.HospitalViewModel*@
+@using DoctorPortal.Web.Models
 <section class="top-bar-area">
     <div class="container">
         <div class="row">
 
             <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
-                @if (!string.IsNullOrEmpty(Model.EmergencyNo))
+                @if (!string.IsNullOrEmpty(BaseLayoutModel.EmergencyNo))
                 {
 
                     <div class="top-left">
-                        <p><span class="flaticon-phone"></span>24 hours emergency & ambulance Service: @Model.EmergencyNo</p>
+                        <p><span class="flaticon-phone"></span>24 hours emergency & ambulance Service: @BaseLayoutModel.EmergencyNo</p>
                     </div>
 
                 }

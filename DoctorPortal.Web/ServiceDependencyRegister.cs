@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using DoctorPortal.Web.AdminRepositories.Hospital;
+using DoctorPortal.Web.AdminRepositories.Speciality;
 using DoctorPortal.Web.AdminServices.Entity;
 using DoctorPortal.Web.AdminServices.Hospital;
+using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Repositories.Facility;
 using DoctorPortal.Web.Areas.Admin.Repositories.Hospital;
@@ -30,6 +32,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<HospitalInfoRepository>().As<IHospitalInfoRepository>().InstancePerDependency();
             builder.RegisterType<TestimonialsRepository>().As<ITestimonialsRepository>().InstancePerDependency();
             builder.RegisterType<FacilityRepository>().As<IFacilityRepository>().InstancePerDependency();
+            builder.RegisterType<SpecialityRepository>().As<ISpecialityRepository>().InstancePerDependency();
 
             // Services
             builder.RegisterGeneric(typeof(EntityService<>)).As(typeof(IEntityService<>)).InstancePerDependency();
@@ -39,6 +42,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<HospitalInfoService>().As<IHospitalInfoService>().InstancePerDependency();
             builder.RegisterType<TestimonialsService>().As<ITestimonialsService>().InstancePerDependency();
             builder.RegisterType<FacilityService>().As<IFacilityService>().InstancePerDependency();
+            builder.RegisterType<SpecialityService>().As<ISpecialityService>().InstancePerDependency();
 
         }
     }

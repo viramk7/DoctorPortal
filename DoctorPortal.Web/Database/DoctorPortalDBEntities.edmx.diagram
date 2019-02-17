@@ -16,6 +16,9 @@
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Facility" Width="1.5" PointX="3" PointY="14" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Facility_HospitalMaster" />
+        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Doctor" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Speciality" Width="1.5" PointX="5.375" PointY="1.375" />
+        <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Doctor_Speciality" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

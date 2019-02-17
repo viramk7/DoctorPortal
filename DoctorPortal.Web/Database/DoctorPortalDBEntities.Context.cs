@@ -31,5 +31,7 @@ namespace DoctorPortal.Web.Database
         public virtual DbSet<Testimonial> Testimonials { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<Facility> Facilities { get; set; }
+        public virtual DbSet<Doctor> Doctor { get; set; }
+        public virtual DbSet<Speciality> Speciality { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿@model DoctorPortal.Web.Models.HospitalViewModel
+﻿@using DoctorPortal.Web.Models
+@*@model DoctorPortal.Web.Models.HospitalViewModel*@
+
 
 <footer class="footer-area">
     <div class="container">
@@ -60,13 +62,13 @@
                             <div class="text-holder">
                                 <h5>
                                     @{
-                                        var address1 = string.IsNullOrEmpty(Model.AddressLine1) ? "" : Model.AddressLine1;
-                                        address1 += string.IsNullOrEmpty(Model.AddressLine2) ? "" : ",";
+                                        var address1 = string.IsNullOrEmpty(BaseLayoutModel.AddressLine1) ? "" : BaseLayoutModel.AddressLine1;
+                                        address1 += string.IsNullOrEmpty(BaseLayoutModel.AddressLine2) ? "" : ",";
                                     }
                                     @address1
 
                                     <br>
-                                    @(string.IsNullOrEmpty(Model.AddressLine2) ? "" : Model.AddressLine2)
+                                    @(string.IsNullOrEmpty(BaseLayoutModel.AddressLine2) ? "" : BaseLayoutModel.AddressLine2)
                                 </h5>
                             </div>
                         </li>
@@ -75,13 +77,13 @@
                                 <span class="flaticon-interface"></span>
                             </div>
                             <div class="text-holder">
-                                @if (string.IsNullOrEmpty(Model.Email))
+                                @if (string.IsNullOrEmpty(BaseLayoutModel.Email))
                                 {
                                     <h5> - </h5>
                                 }
                                 else
                                 {
-                                    <h5>@Model.Email</h5>
+                                    <h5>@BaseLayoutModel.Email</h5>
                                 }
                             </div>
                         </li>
@@ -90,13 +92,13 @@
                                 <span class="flaticon-technology-1"></span>
                             </div>
                             <div class="text-holder">
-                                @if (string.IsNullOrEmpty(Model.ContactNo))
+                                @if (string.IsNullOrEmpty(BaseLayoutModel.ContactNo))
                                 {
                                     <h5> - </h5>
                                 }
                                 else
                                 {
-                                    <h5>@Model.ContactNo.Replace(", ", " & ")</h5>
+                                    <h5>@BaseLayoutModel.ContactNo.Replace(", ", " & ")</h5>
                                 }
 
                             </div>
@@ -106,7 +108,7 @@
                                 <span class="flaticon-clock"></span>
                             </div>
                             <div class="text-holder">
-                                <h5>@Model.WorkingDays : @Model.WorkingHours</h5>
+                                <h5>@BaseLayoutModel.WorkingDays : @BaseLayoutModel.WorkingHours</h5>
                             </div>
                         </li>
                     </ul>
