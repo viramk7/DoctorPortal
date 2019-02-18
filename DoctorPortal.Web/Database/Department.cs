@@ -14,6 +14,12 @@ namespace DoctorPortal.Web.Database
     
     public partial class Department
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Department()
+        {
+            this.DepartmentImages = new HashSet<DepartmentImages>();
+        }
+    
         public int DepartmentId { get; set; }
         public int HospitalId { get; set; }
         public string DepartmentName { get; set; }
@@ -21,5 +27,7 @@ namespace DoctorPortal.Web.Database
         public string BannerImage { get; set; }
     
         public virtual HospitalMaster HospitalMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DepartmentImages> DepartmentImages { get; set; }
     }
 }

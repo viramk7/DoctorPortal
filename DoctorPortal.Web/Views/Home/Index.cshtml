@@ -689,7 +689,15 @@
 <!--End latest blog area-->
 
 <section class="facilities-appointment-area">
-    @Html.Partial("_Facility", Model.Facilitylist)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="facilities-content-box">
+                    @Html.Partial("_Facility", Model.Facilitylist)
+                </div>
+            </div>
+            </div>
+    </div>
 </section>
 <!--Start brand area-->
 <section class="brand-area" style="background-image:url(Content/images/awards/awards-bg.jpg);">

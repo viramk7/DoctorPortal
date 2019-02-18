@@ -15,6 +15,14 @@
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="BannerImage" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="DepartmentImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="DoctorId" />
@@ -110,6 +118,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DepartmentImages_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="DepartmentImages" Type="Self.DepartmentImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DepartmentImages">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Doctor_Speciality">
           <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
@@ -184,6 +204,7 @@
         </Association>
         <EntityContainer Name="DoctorPortalDBEntitiesModelStoreContainer">
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentImages" EntityType="Self.DepartmentImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
@@ -195,6 +216,10 @@
           <AssociationSet Name="FK_Department_HospitalMaster" Association="Self.FK_Department_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMaster" />
             <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentImages_Department" Association="Self.FK_DepartmentImages_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentImages" EntitySet="DepartmentImages" />
           </AssociationSet>
           <AssociationSet Name="FK_Doctor_Speciality" Association="Self.FK_Doctor_Speciality">
             <End Role="Speciality" EntitySet="Speciality" />
@@ -262,6 +287,11 @@
           <AssociationSet Name="FK_Department_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
             <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <EntitySet Name="DepartmentImages" EntityType="DoctorPortalDBEntitiesModel.DepartmentImages" />
+          <AssociationSet Name="FK_DepartmentImages_Department" Association="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="DepartmentImages" EntitySet="DepartmentImages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="HospitalContact">
@@ -442,6 +472,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
+          <NavigationProperty Name="DepartmentImages" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="Department" ToRole="DepartmentImages" />
         </EntityType>
         <Association Name="FK_Department_HospitalMaster">
           <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
@@ -452,6 +483,27 @@
             </Principal>
             <Dependent Role="Department">
               <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DepartmentImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="ImageName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="DepartmentImages" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK_DepartmentImages_Department">
+          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.DepartmentImages" Role="DepartmentImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DepartmentImages">
+              <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -559,6 +611,15 @@
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentImages">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.DepartmentImages">
+              <MappingFragment StoreEntitySet="DepartmentImages">
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

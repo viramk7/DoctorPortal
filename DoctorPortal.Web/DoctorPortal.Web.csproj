@@ -145,10 +145,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminRepositories\Department\DepartmentRepository.cs" />
+    <Compile Include="AdminRepositories\Department\IDepartmentRepository.cs" />
     <Compile Include="AdminRepositories\Hospital\HospitalRepository.cs" />
     <Compile Include="AdminRepositories\Hospital\IHospitalRepository.cs" />
     <Compile Include="AdminRepositories\Speciality\ISpecialityRepository.cs" />
     <Compile Include="AdminRepositories\Speciality\SpecialityRepository.cs" />
+    <Compile Include="AdminServices\Department\DepartmentService.cs" />
+    <Compile Include="AdminServices\Department\IDepartmentService.cs" />
     <Compile Include="AdminServices\Entity\EntityService.cs" />
     <Compile Include="AdminServices\Entity\IEntityService.cs" />
     <Compile Include="AdminServices\Hospital\HospitalService.cs" />
@@ -210,6 +214,9 @@
     <Compile Include="Database\Department.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\DepartmentImages.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Doctor.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
@@ -258,6 +265,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DepartmentImageViewModel.cs" />
     <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
@@ -902,12 +910,12 @@
     <Content Include="Views\Home\_Facility_SingleItem.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
     <Content Include="Views\Testimonial\Index.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Testimonials\" />
-    <Folder Include="Views\Department\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

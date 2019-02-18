@@ -30,11 +30,11 @@
         index++;
     }
 
-    <div class="container">
+    @*<div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">*@
 
-                <div class="facilities-content-box">
+                @*<div class="facilities-content-box">*@
                     <div class="sec-title">
                         <h1>Our Facilities</h1>
                         <span class="border"></span>
@@ -49,13 +49,13 @@
                                     <div class="col-md-6">
                                         @if (items.Count >= 1)
                                         {
-                                            Html.RenderPartial("_Facility_SingleItem", items[0]);
+                                            Html.RenderPartial("~/Views/Home/_Facility_SingleItem.cshtml", items[0]);
                                         }
                                     </div>
                                     <div class="col-md-6">
                                         @if (items.Count >= 2)
                                         {
-                                            Html.RenderPartial("_Facility_SingleItem", items[1]);
+                                            Html.RenderPartial("~/Views/Home/_Facility_SingleItem.cshtml", items[1]);
                                         }
                                     </div>
                                 </div>
@@ -63,13 +63,13 @@
                                     <div class="col-md-6">
                                         @if (items.Count >= 3)
                                         {
-                                            Html.RenderPartial("_Facility_SingleItem", items[2]);
+                                            Html.RenderPartial("~/Views/Home/_Facility_SingleItem.cshtml", items[2]);
                                         }
                                     </div>
                                     <div class="col-md-6">
                                         @if (items.Count >= 4)
                                         {
-                                            Html.RenderPartial("_Facility_SingleItem", items[3]);
+                                            Html.RenderPartial("~/Views/Home/_Facility_SingleItem.cshtml", items[3]);
                                         }
                                     </div>
                                 </div>
@@ -77,11 +77,11 @@
                         }
 
                     </div>
-                </div>
+                @*</div>*@
 
-            </div>
+            @*</div>
 
         </div>
-    </div>
+    </div>*@
 
 }
