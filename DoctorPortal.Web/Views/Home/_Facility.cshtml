@@ -3,31 +3,13 @@
 
 @if (Model.Any())
 {
+    var facilities = Model.ToList();
 
-    var mainList = new List<IList<FacilityViewModel>>();
-    var list = new List<FacilityViewModel>(); ;
-
-    var count = 1;
-    var index = 1;
-    foreach (var facility in Model)
+    var size = 4;
+    var mainList = new List<List<FacilityViewModel>>();
+    for (int i = 0; i < facilities.Count; i += size)
     {
-        if (count == 1)
-        {
-            list = new List<FacilityViewModel>();
-        }
-
-        list.Add(facility);
-
-        if (count == 4 || index == Model.Count())
-        {
-            count = 1;
-            mainList.Add(list);
-        }
-        else
-        {
-            count++;
-        }
-        index++;
+        mainList.Add(facilities.GetRange(i, Math.Min(size, facilities.Count - i)));
     }
 
     <div class="container">
