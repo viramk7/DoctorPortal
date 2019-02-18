@@ -1,16 +1,11 @@
 ﻿@using DoctorPortal.Web.Models;
+@using DoctorPortal.Web.Common;
 @model IEnumerable<FacilityViewModel>
 
 @if (Model.Any())
 {
-    var facilities = Model.ToList();
-
     var size = 4;
-    var mainList = new List<List<FacilityViewModel>>();
-    for (int i = 0; i < facilities.Count; i += size)
-    {
-        mainList.Add(facilities.GetRange(i, Math.Min(size, facilities.Count - i)));
-    }
+    var mainList = Utility.SplitListBySize(Model.ToList(), size);
 
     <div class="container">
         <div class="row">
