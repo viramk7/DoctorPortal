@@ -147,5 +147,16 @@ namespace DoctorPortal.Web.Common
             };
         }
 
+        public static List<List<T>> SplitListBySize<T>(List<T> source, int size)
+        {
+            size = size == 0 ? source.Count : size;
+
+            var ret = new List<List<T>>();
+            for (int i = 0; i < source.Count; i += size)
+                ret.Add(source.GetRange(i, Math.Min(size, source.Count - i)));
+
+            return ret;
+        }
+
     }
 }

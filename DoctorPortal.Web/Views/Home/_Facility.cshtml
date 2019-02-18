@@ -1,34 +1,11 @@
 ﻿@using DoctorPortal.Web.Models;
+@using DoctorPortal.Web.Common;
 @model IEnumerable<FacilityViewModel>
 
 @if (Model.Any())
 {
-
-    var mainList = new List<IList<FacilityViewModel>>();
-    var list = new List<FacilityViewModel>(); ;
-
-    var count = 1;
-    var index = 1;
-    foreach (var facility in Model)
-    {
-        if (count == 1)
-        {
-            list = new List<FacilityViewModel>();
-        }
-
-        list.Add(facility);
-
-        if (count == 4 || index == Model.Count())
-        {
-            count = 1;
-            mainList.Add(list);
-        }
-        else
-        {
-            count++;
-        }
-        index++;
-    }
+    var size = 4;
+    var mainList = Utility.SplitListBySize(Model.ToList(), size);
 
     @*<div class="container">
         <div class="row">
