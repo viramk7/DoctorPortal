@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using DoctorPortal.Web.AdminServices.Entity;
+using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Models;
 
 namespace DoctorPortal.Web.Areas.Admin.Services.Testimonials
 {
-    public interface ITestimonialsService
+    public interface ITestimonialsService : IEntityService<Testimonial>
     {
         IEnumerable<TestimonialViewModel> GetAllTestimonials();
 

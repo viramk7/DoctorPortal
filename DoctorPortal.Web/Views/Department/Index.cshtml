@@ -131,7 +131,10 @@
                         </div>
                     </div>*@
                 <div class="service-plan">
-                    @Html.Partial("~/Views/Home/_Facility.cshtml", Model.serviceslist)
+                   
+                    @{
+                        Html.RenderAction("GetServicesPartialView", "Services");
+                    }
                 </div>
                 @*<div class="service-plan">
                         <div class="sec-title">

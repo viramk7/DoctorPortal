@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DoctorPortal.Web.AdminServices.Entity;
 using DoctorPortal.Web.Areas.Admin.Repositories.Testimonials;
+using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Models;
 
 namespace DoctorPortal.Web.Areas.Admin.Services.Testimonials
 {
-    public class TestimonialsService : ITestimonialsService
+    public class TestimonialsService : EntityService<Testimonial>, ITestimonialsService
     {
         private readonly ITestimonialsRepository _iTestimonialsRepository;
 
-        public TestimonialsService(ITestimonialsRepository iTestimonialsRepository)
+        public TestimonialsService(ITestimonialsRepository iTestimonialsRepository) : base(iTestimonialsRepository)
         {
             _iTestimonialsRepository = iTestimonialsRepository;
         }

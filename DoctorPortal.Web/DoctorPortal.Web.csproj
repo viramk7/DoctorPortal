@@ -210,6 +210,7 @@
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Database\Department.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
@@ -905,12 +906,12 @@
     <Content Include="Views\Shared\_HeaderSearch.cshtml" />
     <Content Include="Views\Shared\_MainMenuArea.cshtml" />
     <Content Include="Views\Shared\_FooterArea.cshtml" />
-    <Content Include="Views\Home\_Testimonials.cshtml" />
-    <Content Include="Views\Home\_Facility.cshtml" />
-    <Content Include="Views\Home\_Facility_SingleItem.cshtml" />
     <Content Include="Views\Doctor\Index.cshtml" />
     <Content Include="Views\Testimonial\Index.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Services\_Facility.cshtml" />
+    <Content Include="Views\Services\_Facility_SingleItem.cshtml" />
+    <Content Include="Views\Testimonial\_Testimonials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />

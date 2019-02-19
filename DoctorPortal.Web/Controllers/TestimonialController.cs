@@ -31,5 +31,12 @@ namespace DoctorPortal.Web.Controllers
                 return View("Error");
             }
         }
+
+        public ActionResult GetTestimonialsPartialView()
+        {
+            var testimonials = _service.GetAllTestimonials();
+            return PartialView("_Testimonials", testimonials);
+        }
+
     }
 }

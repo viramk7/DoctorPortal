@@ -27,15 +27,6 @@ namespace DoctorPortal.Web.AdminServices.Hospital
             
             return hospitalViewModel;
         }
-
-        public HomeViewModel GetHomePageInfo()
-        {
-            var hospital = _hospitalRepository.GetHospitalInfo();
-            if (hospital == null)
-                throw new Exception("No hospital found");
-
-            var hospitalViewModel = new HomeViewModel(hospital);
-            return hospitalViewModel;
-        }
+        
     }
 }

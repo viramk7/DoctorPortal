@@ -588,7 +588,9 @@
 <!--End fact counter area-->
 <!--Start testimonial area-->
 
-@Html.Partial("_Testimonials", Model.Testimonials)
+@{
+    Html.RenderAction("GetTestimonialsPartialView", "Testimonial");
+}
 
 <!--End testimonial area-->
 <!--Start latest blog area-->
@@ -693,10 +695,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="facilities-content-box">
-                    @Html.Partial("_Facility", Model.Facilitylist)
+                    @{
+                        Html.RenderAction("GetServicesPartialView", "Services");
+                    }
                 </div>
             </div>
-            </div>
+        </div>
     </div>
 </section>
 <!--Start brand area-->
