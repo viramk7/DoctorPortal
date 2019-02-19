@@ -27,13 +27,14 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="departments.html">Departments</a>
+                                <a href="@Url.Action("Index","Department")">Departments</a>
                                 <ul>
                                     @if (ProjectSession.Hospital.Departmentlist.Any())
                                     {
-                                        foreach (var department in ProjectSession.Hospital.Departmentlist)
+                                        var departments = ProjectSession.Hospital.Departmentlist.OrderBy(o => o.DepartmentName);
+                                        foreach (var department in departments)
                                         {
-                                            <li><a href="@Url.Action("DepartmentById","Department")?id=@department.DepartmentId">@department.DepartmentName</a></li>
+                                            <li><a href="@Url.Action("Index","Department",new { id = department.DepartmentId})">@department.DepartmentName</a></li>
                                         }
                                     }
                                     @*<li><a href="cardiac-clinic.html">Cardiac Clinic</a></li>

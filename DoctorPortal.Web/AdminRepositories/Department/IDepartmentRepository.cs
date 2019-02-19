@@ -8,5 +8,6 @@ namespace DoctorPortal.Web.AdminRepositories.Department
 {
     public interface IDepartmentRepository : IRepository<Database.Department>
     {
+        Database.Department GetFirstDept();
     }
 }

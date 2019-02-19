@@ -304,9 +304,12 @@
                         <ul class="all-departments">
                             @if (ProjectSession.Hospital.Departmentlist.Any())
                             {
-                                foreach (var department in ProjectSession.Hospital.Departmentlist)
+                                var departments = ProjectSession.Hospital.Departmentlist.OrderBy(o => o.DepartmentName);
+                                foreach (var department in departments)
                                 {
-                                    <li @(Model.DepartmentId == department.DepartmentId ? "class=active" : "")><a href="@Url.Action("DepartmentById","Department")?id=@department.DepartmentId">@department.DepartmentName</a></li>
+                                    <li @(Model.DepartmentId == department.DepartmentId ? "class=active" : "")>
+                                        <a href="@Url.Action("Index","Department",new { id = department.DepartmentId })">@department.DepartmentName</a>
+                                    </li>
                                 }
                             }
 

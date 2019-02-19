@@ -9,5 +9,8 @@ namespace DoctorPortal.Web.AdminServices.Department
     public interface IDepartmentService
     {
         DepartmentViewModel GetDepartmentById(int id);
+
+        DepartmentViewModel GetFirstDept();
+
     }
 }
