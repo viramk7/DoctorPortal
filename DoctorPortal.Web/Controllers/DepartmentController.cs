@@ -9,10 +9,7 @@ namespace DoctorPortal.Web.Controllers
     {
         private readonly IDepartmentService _service;
 
-        public DepartmentController(IHospitalService hospitalService,
-                                    ICacheManager cacheManager,
-                                    IDepartmentService service) 
-                                   // : base(hospitalService, cacheManager)
+        public DepartmentController(IDepartmentService service) 
         {
             _service = service;
         }
