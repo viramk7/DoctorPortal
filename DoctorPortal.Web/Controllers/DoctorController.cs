@@ -1,12 +1,7 @@
-﻿using DoctorPortal.Web.AdminServices.Hospital;
-using DoctorPortal.Web.AdminServices.Speciality;
+﻿using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
-using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Controllers
@@ -15,8 +10,7 @@ namespace DoctorPortal.Web.Controllers
     {
         private readonly ISpecialityService _SpecialityService;
 
-        public DoctorController(ISpecialityService specialityService, IHospitalService hospitalService,
-                             ICacheManager cacheManager) : base(hospitalService, cacheManager)
+        public DoctorController(ISpecialityService specialityService) 
         {
             _SpecialityService = specialityService;
         }

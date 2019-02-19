@@ -8,22 +8,17 @@ namespace DoctorPortal.Web.Controllers
 {
     public class BaseAdminController : Controller
     {
+        private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        // ReSharper disable once InconsistentNaming
-        protected readonly ILog _logger;
-
-        public BaseAdminController(IHospitalService hospitalService,
-                                   ICacheManager cacheManager)
+        public BaseAdminController()
         {
-            _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            var hospitalService = EngineContext.Resolve<IHospitalService>();
+            var cacheManager = EngineContext.Resolve<ICacheManager>();
 
-            var hospitalViewModel = cacheManager.Get("HospitalInfo", () =>
+            ProjectSession.Hospital = cacheManager.Get("HospitalInfo", () =>
             {
                 return hospitalService.GetHospitalInfo();
             });
-
-            ProjectSession.Hospital = hospitalViewModel;
-
         }
     }
 }

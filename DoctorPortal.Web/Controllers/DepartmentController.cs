@@ -12,7 +12,7 @@ namespace DoctorPortal.Web.Controllers
         public DepartmentController(IHospitalService hospitalService,
                                     ICacheManager cacheManager,
                                     IDepartmentService service) 
-                                    : base(hospitalService, cacheManager)
+                                   // : base(hospitalService, cacheManager)
         {
             _service = service;
         }

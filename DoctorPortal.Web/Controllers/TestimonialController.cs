@@ -1,12 +1,7 @@
-﻿using DoctorPortal.Web.AdminServices.Hospital;
-using DoctorPortal.Web.Areas.Admin.Models;
+﻿using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
-using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Controllers
@@ -15,8 +10,7 @@ namespace DoctorPortal.Web.Controllers
     {
         private readonly ITestimonialsService _service;
 
-        public TestimonialController(ITestimonialsService service, IHospitalService hospitalService,
-                             ICacheManager cacheManager) : base(hospitalService, cacheManager)
+        public TestimonialController(ITestimonialsService service)
         {
             _service = service;
         }
