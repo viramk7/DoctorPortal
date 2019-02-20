@@ -6,6 +6,8 @@ namespace DoctorPortal.Web.Common
     {
         public const int PageSize = 10;
 
+        public const int HospitalId = 1;
+
         public static int[] PageSizes = { 10, 20, 50, 100, 500 };
 
         public static string[] ValidImageFileTypes = { ".jpeg", ".jpg", ".png" };

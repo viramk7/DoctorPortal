@@ -1,0 +1,20 @@
+﻿@model bool
+
+@{
+    ViewBag.Title = "AppointmentRequested";
+    Layout = null;
+}
+
+@if (Model)
+{
+    <h2>Your appointment request has been registered. Our hospital will get back to you soon.</h2>
+    <a href="@Url.Action("Index","Home")">Go back to hospital</a>
+}
+else
+{
+    <h2>There was some problem in requesting your appointment.</h2>
+    <a href="@Url.Action("Index","Home")">Go back to hospital</a>
+}
+
+
+
