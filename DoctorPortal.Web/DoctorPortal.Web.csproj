@@ -588,6 +588,7 @@
     <Content Include="Content\fonts\flaticon\Flaticon.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\about\welcome.jpg" />
     <Content Include="Content\images\awards\1.png" />
     <Content Include="Content\images\awards\2.png" />
     <Content Include="Content\images\awards\3.png" />
@@ -615,6 +616,10 @@
     <Content Include="Content\images\certificates\2.jpg" />
     <Content Include="Content\images\certificates\3.jpg" />
     <Content Include="Content\images\certificates\4.jpg" />
+    <Content Include="Content\images\certificates\certificate_1.jpg" />
+    <Content Include="Content\images\certificates\certificate_2.jpg" />
+    <Content Include="Content\images\certificates\certificate_3.jpg" />
+    <Content Include="Content\images\certificates\certificate_4.jpg" />
     <Content Include="Content\images\department\tab-content-1.jpg" />
     <Content Include="Content\images\department\tab-content-2.jpg" />
     <Content Include="Content\images\department\tab-content-3.jpg" />
@@ -640,6 +645,12 @@
     <Content Include="Content\images\favicon\favicon.ico" />
     <Content Include="Content\images\favicon\mstile-150x150.png" />
     <Content Include="Content\images\favicon\safari-pinned-tab.svg" />
+    <Content Include="Content\images\gallery\latest-project-1.jpg" />
+    <Content Include="Content\images\gallery\latest-project-2.jpg" />
+    <Content Include="Content\images\gallery\latest-project-3.jpg" />
+    <Content Include="Content\images\gallery\latest-project-4.jpg" />
+    <Content Include="Content\images\gallery\latest-project-5.jpg" />
+    <Content Include="Content\images\gallery\latest-project-6.jpg" />
     <Content Include="Content\images\ic-error.png" />
     <Content Include="Content\images\ic-success.png" />
     <Content Include="Content\images\icon\play-btn.png" />
@@ -697,6 +708,7 @@
     <Content Include="Content\images\resources\breadcrumb-bg.jpg" />
     <Content Include="Content\images\resources\fact-counter-bg-v2.jpg" />
     <Content Include="Content\images\resources\fact-counter-bg.jpg" />
+    <Content Include="Content\images\resources\hospital_logo.png" />
     <Content Include="Content\images\resources\logo.png" />
     <Content Include="Content\images\resources\map-marker.png" />
     <Content Include="Content\images\resources\welcome.jpg" />
@@ -750,6 +762,7 @@
     <Content Include="Content\images\team\7.jpg" />
     <Content Include="Content\images\team\8.jpg" />
     <Content Include="Content\images\team\9.jpg" />
+    <Content Include="Content\images\team\test.png" />
     <Content Include="Content\images\testimonial\1.png" />
     <Content Include="Content\images\testimonial\2.png" />
     <Content Include="Content\images\testimonial\3.png" />
@@ -943,7 +956,6 @@
     <Content Include="Views\Appointment\AppointmentRequested.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\images\about\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />
