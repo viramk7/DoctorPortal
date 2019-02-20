@@ -53,6 +53,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<FacilityService>().As<IFacilityService>().InstancePerDependency();
             builder.RegisterType<SpecialityService>().As<ISpecialityService>().InstancePerDependency();
             builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerDependency();
+            builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerDependency();
 
         }
     }
