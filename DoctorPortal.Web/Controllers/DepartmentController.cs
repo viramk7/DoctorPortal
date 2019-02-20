@@ -19,5 +19,12 @@ namespace DoctorPortal.Web.Controllers
             var department = id == 0 ? _service.GetFirstDept() : _service.GetDepartmentById(id);
             return View(department);
         }
+
+        public ActionResult GetDepartmentPartialView()
+        {
+            var departments = _service.GetAllDepartment();
+            return PartialView("_Departments", departments);
+        }
+
     }
 }

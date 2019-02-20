@@ -1,0 +1,151 @@
+﻿@using DoctorPortal.Web.Areas.Admin.Models
+@{
+    ViewBag.Title = "Contact Us";
+}
+
+<section class="breadcrumb-area" style="background-image: url(images/resources/breadcrumb-bg.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <h1>Contact Us</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="left pull-left">
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+                            <li class="active">Contact Us</li>
+                        </ul>
+                    </div>
+                    <div class="right pull-right">
+                        <a href="#">
+                            <span><i class="fa fa-share-alt" aria-hidden="true"></i>Share</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form-area">
+    <div class="container">
+        <div class="sec-title">
+            <h1>Get Touch With Us</h1>
+            <span class="border"></span>
+            @*<div class="select-box pull-right">
+                <select class="text-capitalize selectpicker form-control required" name="form_subject" data-style="g-select" data-width="100%">
+                    <option>Newyork Campus</option>
+                    <option>Canada Campus</option>
+                    <option>UK Campus</option>
+                    <option>USA Campus</option>
+                </select>
+            </div>*@
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="contact-form">
+                    <form id="contact-form" name="contact_form" class="default-form" action="inc/sendmail.php" method="post">
+                        <h2>Make an Appointment</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="form_name" value="" placeholder="Your Name*" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="form_email" value="" placeholder="Your Mail*" required="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="form_phone" value="" placeholder="Phone">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="form_subject" value="" placeholder="Subject">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea name="form_message" placeholder="Your Message.." required=""></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
+                                <button class="thm-btn bgclr-1" type="submit" data-loading-text="Please wait...">send message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                <div class="quick-contact">
+                    <div class="title">
+                        <h2>Quick Contact</h2>
+                        <p>If you have any questions simply use the following contact details.</p>
+                    </div>
+                    <ul class="contact-info">
+                        <li>
+                            <div class="icon-holder">
+                                <span class="flaticon-pin"></span>
+                            </div>
+                            <div class="text-holder">
+                                <h5><span>Address:</span> @ProjectSession.Hospital.AddressLine1<br>@ProjectSession.Hospital.AddressLine2</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-holder">
+                                <span class="flaticon-technology"></span>
+                            </div>
+                            <div class="text-holder">
+                                <h5><span>Phone:</span> @ProjectSession.Hospital.ContactNo &<br>@ProjectSession.Hospital.EmergencyNo</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-holder">
+                                <span class="flaticon-interface"></span>
+                            </div>
+                            <div class="text-holder">
+                                <h5><span>Email:</span> @ProjectSession.Hospital.Email</h5>
+                            </div>
+                        </li>
+                    </ul>
+                    @*<ul class="social-links">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    </ul>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--End contact form area-->
+<!--Start contact map area-->
+<section class="contact-map-area">
+    <div class="container-fluid">
+        <div class="google-map-inner">
+            <div class="google-map"
+                 id="contact-google-map"
+                 data-map-lat="44.529688"
+                 data-map-lng="-72.933009"
+                 data-icon-path="images/resources/map-marker.png"
+                 data-map-title="Brooklyn, New York, United Kingdom"
+                 data-map-zoom="12"
+                 data-markers='{
+                 "marker-1" : [44.529688, -72.933009, "<h4>Head Office</h4><p>44/77 Alabama, a western U.S.A</p>" ]
+                 }'>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End contact map area-->

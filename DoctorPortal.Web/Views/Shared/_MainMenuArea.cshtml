@@ -16,12 +16,12 @@
                         <ul class="navigation clearfix">
                             <li class="current"><a href="@Url.Action("Index","Home")">Home</a></li>
                             <li class="dropdown">
-                                <a href="about.html">About Us</a>
+                                <a href="@Url.Action("Index","AboutUs")">About Us</a>
                                 <ul>
-                                    <li><a href="about.html">About Hospitals</a></li>
-                                    <li><a href="@Url.Action("Index","Doctor")">Meet Our Doctors</a></li>
-                                    <li><a href="faq.html">FAQ’s</a></li>
-                                    <li><a href="@Url.Action("Index","Testimonial")">Testimonials</a></li>
+                                    <li><a href="@Url.Action("Index","AboutUs")">About Hospitals</a></li>
+                                    @*<li><a href="@Url.Action("Index","Doctor")">Meet Our Doctors</a></li>*@
+                                    <li><a href="@Url.Action("Index","FAQ")">FAQ’s</a></li>
+                                    @*<li><a href="@Url.Action("Index","Testimonial")">Testimonials</a></li>*@
                                     <li><a href="project.html">Our Gallery</a></li>
                                     <li><a href="project-single.html">Gallery Single</a></li>
                                 </ul>
@@ -38,25 +38,19 @@
                                         }
                                     }
                                     @*<li><a href="cardiac-clinic.html">Cardiac Clinic</a></li>
-        <li><a href="pulmonology.html">Pulmonology</a></li>
-        <li><a href="gynecology.html">Gynecology</a></li>
-        <li><a href="neurology.html">Neurology</a></li>
-        <li><a href="urology.html">Urology</a></li>
-        <li><a href="gastrology.html">Gastrology</a></li>
-        <li><a href="pediatrician.html">Pediatrician</a></li>
-        <li><a href="laborotory.html">Laborotory</a></li>*@
+                <li><a href="pulmonology.html">Pulmonology</a></li>
+                <li><a href="gynecology.html">Gynecology</a></li>
+                <li><a href="neurology.html">Neurology</a></li>
+                <li><a href="urology.html">Urology</a></li>
+                <li><a href="gastrology.html">Gastrology</a></li>
+                <li><a href="pediatrician.html">Pediatrician</a></li>
+                <li><a href="laborotory.html">Laborotory</a></li>*@
                                 </ul>
                             </li>
-                            <li><a href="time-table.html">Time Table</a></li>
-                            <li class="dropdown">
-                                <a href="blog-default.html">News</a>
-                                <ul>
-                                    <li><a href="blog-default.html">News Default</a></li>
-                                    <li><a href="blog-large.html">News Large View</a></li>
-                                    <li><a href="blog-single.html">News Single Post</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
+                            <li><a href="@Url.Action("Index","Doctor")">Doctors</a></li>
+
+                            <li><a href="@Url.Action("Index","Testimonial")">Testimonials</a></li>
+                            @*<li class="dropdown">
                                 <a href="shop.html">Shop</a>
                                 <ul>
                                     <li><a href="shop.html">Shop Products</a></li>
@@ -65,8 +59,8 @@
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="account.html">My Account</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            </li>*@
+                            <li><a href="@Url.Action("Index","ContactUs")">Contact Us</a></li>
                         </ul>
                     </div>
                 </nav>

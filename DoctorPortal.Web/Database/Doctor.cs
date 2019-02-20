@@ -21,6 +21,7 @@ namespace DoctorPortal.Web.Database
         public string EmailAddress { get; set; }
         public string ImageName { get; set; }
         public int SpecialityId { get; set; }
+        public Nullable<bool> IsOnHomePage { get; set; }
     
         public virtual Speciality Speciality { get; set; }
     }

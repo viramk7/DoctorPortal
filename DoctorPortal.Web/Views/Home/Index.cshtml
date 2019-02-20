@@ -24,7 +24,7 @@
                         <p>Denouncing pleasure and praising pain was born and we will <br>give you a complete account of the system.</p>
                         <div class="button">
                             <a class="#" href="#">Read More</a>
-                            <a class="btn-style-two" href="#">Departments</a>
+                            <a class="btn-style-two" href="@Url.Action("Index","Department")">Departments</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         <p>Denouncing pleasure and praising pain was born and we will <br>give you a complete account of the system.</p>
                         <div class="button">
                             <a class="#" href="#">Read More</a>
-                            <a class="btn-style-two" href="#">Departments</a>
+                            <a class="btn-style-two" href="@Url.Action("Index","Department")">Departments</a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <p>Denouncing pleasure and praising pain was born and we will <br>give you a complete account of the system.</p>
                         <div class="button">
                             <a class="#" href="#">Read More</a>
-                            <a class="btn-style-two" href="#">Departments</a>
+                            <a class="btn-style-two" href="@Url.Action("Index","Department")">Departments</a>
                         </div>
                     </div>
                 </div>
@@ -144,68 +144,9 @@
 </section>
 <!--End call to action area-->
 <!--Start Medical Departments area-->
-<section class="medical-departments-area">
-    <div class="container">
-        <div class="sec-title">
-            <h1>Medical Departments</h1>
-            <span class="border"></span>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="medical-departments-carousel">
-                    <!--Start single item-->
-                    <div class="single-item text-center">
-                        <div class="iocn-holder">
-                            <span class="flaticon-cardiology"></span>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Cardiology</h3>
-                            <p>How all this mistaken al idea of denouncing pleasure praisings pain was complete.</p>
-                        </div>
-                        <a class="readmore" href="#">Read More</a>
-                    </div>
-                    <!--End single item-->
-                    <!--Start single item-->
-                    <div class="single-item text-center">
-                        <div class="iocn-holder">
-                            <span class="flaticon-lungs"></span>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Pulmonology</h3>
-                            <p> Who chooses to enjoy a pleasure that has annoying consquences, or one who avoids a pain.</p>
-                        </div>
-                        <a class="readmore" href="#">Read More</a>
-                    </div>
-                    <!--End single item-->
-                    <!--Start single item-->
-                    <div class="single-item text-center">
-                        <div class="iocn-holder">
-                            <span class="flaticon-vagina"></span>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Gynecology</h3>
-                            <p> Who chooses to enjoy a pleasure that has annoying consquences, or one who avoids a pain.</p>
-                        </div>
-                        <a class="readmore" href="#">Read More</a>
-                    </div>
-                    <!--End single item-->
-                    <!--Start single item-->
-                    <div class="single-item text-center">
-                        <div class="iocn-holder">
-                            <span class="flaticon-neurology"></span>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Neurology</h3>
-                            <p> Who chooses to enjoy a pleasure that has annoying consquences, or one who avoids a pain.</p>
-                        </div>
-                        <a class="readmore" href="#">Read More</a>
-                    </div>
-                    <!--End single item-->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@{
+    Html.RenderAction("GetDepartmentPartialView", "Department");
+}
 <!--End Medical Departments area-->
 <!--Start service area-->
 <section class="service-area">
@@ -400,136 +341,9 @@
 </section>
 <!--End service area-->
 <!--Start team area-->
-<section class="team-area">
-    <div class="container">
-        <div class="sec-title">
-            <h1>Team of Consultants</h1>
-            <span class="border"></span>
-        </div>
-        <div class="row">
-            <!--Start single item-->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="single-team-member">
-                    <div class="img-holder">
-                        <img src="~/Content/images/team/1.jpg" alt="Awesome Image">
-                        <div class="overlay-style">
-                            <div class="box">
-                                <div class="content">
-                                    <div class="top">
-                                        <h3>Marc Parcival</h3>
-                                        <span>Newyork</span>
-                                    </div>
-                                    <span class="border"></span>
-                                    <div class="bottom">
-                                        <ul>
-                                            <li><i class="fa fa-phone" aria-hidden="true"></i> +321 567 89 0123</li>
-                                            <li><i class="fa fa-envelope" aria-hidden="true"></i> Bailey@Hospitals.com</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Marc Parcival</h3>
-                            <span>Newyork</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End single item-->
-            <!--Start single item-->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="single-team-member">
-                    <div class="img-holder">
-                        <img src="~/Content/images/team/2.jpg" alt="Awesome Image">
-                        <div class="overlay-style">
-                            <div class="box">
-                                <div class="content">
-                                    <div class="top">
-                                        <h3>Alen Bailey</h3>
-                                        <span>Newyork</span>
-                                    </div>
-                                    <span class="border"></span>
-                                    <div class="bottom">
-                                        <ul>
-                                            <li><i class="fa fa-phone" aria-hidden="true"></i> +321 567 89 0123</li>
-                                            <li><i class="fa fa-envelope" aria-hidden="true"></i> Bailey@Hospitals.com</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Marc Parcival</h3>
-                            <span>Newyork</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End single item-->
-            <!--Start single item-->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="single-team-member">
-                    <div class="img-holder">
-                        <img src="~/Content/images/team/3.jpg" alt="Awesome Image">
-                        <div class="overlay-style">
-                            <div class="box">
-                                <div class="content">
-                                    <div class="top">
-                                        <h3>Basil Andrew</h3>
-                                        <span>Newyork</span>
-                                    </div>
-                                    <span class="border"></span>
-                                    <div class="bottom">
-                                        <ul>
-                                            <li><i class="fa fa-phone" aria-hidden="true"></i> +321 567 89 0123</li>
-                                            <li><i class="fa fa-envelope" aria-hidden="true"></i> Bailey@Hospitals.com</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Marc Parcival</h3>
-                            <span>Newyork</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End single item-->
-            <!--Start single item-->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="single-team-member">
-                    <div class="img-holder">
-                        <img src="~/Content/images/team/4.jpg" alt="Awesome Image">
-                        <div class="overlay-style">
-                            <div class="box">
-                                <div class="content">
-                                    <div class="top">
-                                        <h3>Edgar Denzil</h3>
-                                        <span>Newyork</span>
-                                    </div>
-                                    <span class="border"></span>
-                                    <div class="bottom">
-                                        <ul>
-                                            <li><i class="fa fa-phone" aria-hidden="true"></i> +321 567 89 0123</li>
-                                            <li><i class="fa fa-envelope" aria-hidden="true"></i> Bailey@Hospitals.com</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-holder">
-                            <h3>Edgar Denzil</h3>
-                            <span>Newyork</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End single item-->
-        </div>
-    </div>
-</section>
+@{
+    Html.RenderAction("GetDoctorPartialView", "Doctor", new { area = "" });
+}
 <!--End team area-->
 <!--Start fact counter area-->
 <section class="fact-counter-area" style="background-image:url(Content/images/resources/fact-counter-bg.jpg);">

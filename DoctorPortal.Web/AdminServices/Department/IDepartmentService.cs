@@ -12,5 +12,7 @@ namespace DoctorPortal.Web.AdminServices.Department
 
         DepartmentViewModel GetFirstDept();
 
+        List<DepartmentViewModel> GetAllDepartment();
+
     }
 }

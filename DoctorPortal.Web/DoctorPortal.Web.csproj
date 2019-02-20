@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -165,6 +167,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
@@ -183,12 +186,16 @@
     <Compile Include="Areas\Admin\Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\PageHeaderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\Repositories\Doctor\DoctorRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Doctor\IDoctorRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Facility\FacilityRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Facility\IFacilityRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\HospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\IHospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\ITestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\TestimonialsRepository.cs" />
+    <Compile Include="Areas\Admin\Services\Doctor\DoctorService.cs" />
+    <Compile Include="Areas\Admin\Services\Doctor\IDoctorService.cs" />
     <Compile Include="Areas\Admin\Services\Facility\FacilityService.cs" />
     <Compile Include="Areas\Admin\Services\Facility\IFacilityService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\HospitalInfoService.cs" />
@@ -206,9 +213,12 @@
     <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Common\WebHelper.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BaseAdminController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
@@ -887,6 +897,8 @@
     <Content Include="Areas\Admin\Views\Facility\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Areas\Admin\Views\Doctor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Doctor\AddEdit.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />
@@ -912,10 +924,16 @@
     <Content Include="Views\Services\_Facility.cshtml" />
     <Content Include="Views\Services\_Facility_SingleItem.cshtml" />
     <Content Include="Views\Testimonial\_Testimonials.cshtml" />
+    <Content Include="Views\Department\_Departments.cshtml" />
+    <Content Include="Views\Doctor\_Doctors.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\about\" />
     <Folder Include="Content\images\footer\" />
+    <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />
   </ItemGroup>
   <ItemGroup>
