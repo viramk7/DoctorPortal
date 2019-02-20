@@ -23,6 +23,7 @@
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.DepartmentImages" Width="1.5" PointX="5.25" PointY="17.25" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" />
+        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Appointment" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

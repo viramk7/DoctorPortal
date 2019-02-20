@@ -1,0 +1,60 @@
+﻿@using DoctorPortal.Web.Models;
+@model MakeAppointmentViewModel
+
+<style>
+    .field-validation-error{
+        color: red;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<section class="callto-action-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <div class="title-box text-center">
+                        <span class="flaticon-calendar"></span>
+                        <h2>Make an Appointment</h2>
+                    </div>
+
+                    <div class="form-holder clearfix">
+                        <form id="appointment" class="clearfix" name="appointment-form" action="@Url.Action("MakeAppointment","Appointment")" method="post">
+                            <div class="single-box mar-right-30">
+
+                                <div class="input-box">
+
+                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+
+                                </div>
+                                <div class="input-box">
+                                    @Html.TextBoxFor(m => m.Message, new { @placeholder = "Your Message" })
+                                    @Html.ValidationMessageFor(m => m.Message)
+                                </div>
+                            </div>
+                            <div class="single-box">
+                                <div class="input-box">
+                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <div class="input-box">
+                                    @Html.TextBoxFor(m => m.Date, new { @placeholder = "Select Date", @name = "date", @id = "datepicker" })
+                                    @Html.ValidationMessageFor(m => m.Date)
+                                    @*<input type="text" name="date" placeholder="Select Date" id="datepicker">*@
+                                    <div class="icon-box">
+                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="thm-btn bgclr-1" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
