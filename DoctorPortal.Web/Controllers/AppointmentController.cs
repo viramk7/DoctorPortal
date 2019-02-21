@@ -13,6 +13,11 @@ namespace DoctorPortal.Web.Controllers
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAppointmentService _appointmentService;
 
+        public AppointmentController()
+        {
+
+        }
+
         public AppointmentController(IAppointmentService appointmentService)
         {
             _appointmentService = appointmentService;
@@ -52,14 +57,26 @@ namespace DoctorPortal.Web.Controllers
 
         private void SendEmailToHospital(MakeAppointmentViewModel model)
         {
-            var bodyTemplate = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template/Appointment.html"));
+            try
+            {
+                var bodyTemplate = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template/Appointment.html"));
 
-            bodyTemplate = bodyTemplate.Replace("[@NAME]", model.Name);
-            bodyTemplate = bodyTemplate.Replace("[@EMAIL]", model.Email);
-            bodyTemplate = bodyTemplate.Replace("[@MESSAGE]", model.Message);
-            bodyTemplate = bodyTemplate.Replace("[@DATE]", model.Date.ToShortDateString());
+                bodyTemplate = bodyTemplate.Replace("[@NAME]", model.Name);
+                bodyTemplate = bodyTemplate.Replace("[@EMAIL]", model.Email);
+                bodyTemplate = bodyTemplate.Replace("[@MESSAGE]", model.Message);
 
-            EmailHelper.SendAsyncEmail(ProjectSession.Hospital.Email, "Appointment", bodyTemplate, true);
+                if (model.Date != null)
+                    bodyTemplate = bodyTemplate.Replace("[@DATE]", Convert.ToDateTime(model.Date).ToShortDateString());
+                else
+                    bodyTemplate = bodyTemplate.Replace("[@DATE]", "Not provided.");
+
+                EmailHelper.SendAsyncEmail(ProjectSession.Hospital.Email, "Appointment", bodyTemplate, true);
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            
         }
     }
 }

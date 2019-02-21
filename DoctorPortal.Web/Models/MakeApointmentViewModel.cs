@@ -16,11 +16,11 @@ namespace DoctorPortal.Web.Models
         [EmailAddress]
         public string Email { get; set; }
         
-        [Required(ErrorMessage = "Please provide the name")]
+        [Required(ErrorMessage = "Please provide the message")]
         [MaxLength(250, ErrorMessage = "Message must only include 250 characters")]
         public string Message { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         // Returns the entity to save in the database
         public Appointment GetAppointmentEntity()

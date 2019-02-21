@@ -1,0 +1,37 @@
+﻿@using DoctorPortal.Web.Models;
+@model MakeAppointmentViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    <div class="single-footer-widget clearfix">
+        <div class="title">
+            <h3>Make an Appointment</h3>
+            <span class="border"></span>
+        </div>
+        <form class="appointment-form" action="@Url.Action("MakeAppointment","Appointment")" method="post">
+            <div class="input-box">
+                
+                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name" })
+                @Html.ValidationMessageFor(m => m.Name)
+                <div class="icon-box">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email" })
+                @Html.ValidationMessageFor(m => m.Email)
+                <div class="icon-box">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                @Html.TextAreaFor(m => m.Message, new { @placeholder = "Your Message.." })
+                @Html.ValidationMessageFor(m => m.Message)
+                @*<textarea name="form_message" id="Message" placeholder="Your Message.." required="" aria-required="true"></textarea>*@
+            </div>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</div>

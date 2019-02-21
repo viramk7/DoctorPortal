@@ -54,6 +54,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<SpecialityService>().As<ISpecialityService>().InstancePerDependency();
             builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerDependency();
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerDependency();
+            builder.RegisterType<AppointmentService>().As<IAppointmentService>().InstancePerDependency();
 
         }
     }
