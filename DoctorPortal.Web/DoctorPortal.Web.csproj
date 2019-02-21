@@ -955,6 +955,7 @@
     <Content Include="Views\Home\_MakeAppointmentHeader.cshtml" />
     <Content Include="Views\Appointment\AppointmentRequested.cshtml" />
     <Content Include="Views\Shared\_MakeAppointmentFooter.cshtml" />
+    <Content Include="Views\ContactUs\_MakeAppointmentContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\footer\" />

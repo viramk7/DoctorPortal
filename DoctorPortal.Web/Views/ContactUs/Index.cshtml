@@ -41,47 +41,22 @@
             <h1>Get Touch With Us</h1>
             <span class="border"></span>
             @*<div class="select-box pull-right">
-                <select class="text-capitalize selectpicker form-control required" name="form_subject" data-style="g-select" data-width="100%">
-                    <option>Newyork Campus</option>
-                    <option>Canada Campus</option>
-                    <option>UK Campus</option>
-                    <option>USA Campus</option>
-                </select>
-            </div>*@
+                    <select class="text-capitalize selectpicker form-control required" name="form_subject" data-style="g-select" data-width="100%">
+                        <option>Newyork Campus</option>
+                        <option>Canada Campus</option>
+                        <option>UK Campus</option>
+                        <option>USA Campus</option>
+                    </select>
+                </div>*@
         </div>
         <div class="row">
             <div class="col-lg-8 col-md-7">
                 <div class="contact-form">
-                    <form id="contact-form" name="contact_form" class="default-form" action="inc/sendmail.php" method="post">
-                        <h2>Make an Appointment</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="form_name" value="" placeholder="Your Name*" required="">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" name="form_email" value="" placeholder="Your Mail*" required="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="form_phone" value="" placeholder="Phone">
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="form_subject" value="" placeholder="Subject">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <textarea name="form_message" placeholder="Your Message.." required=""></textarea>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
-                                <button class="thm-btn bgclr-1" type="submit" data-loading-text="Please wait...">send message</button>
-                            </div>
-                        </div>
-                    </form>
+
+                    @{
+                        Html.RenderPartial("_MakeAppointmentContactUs");
+                    }
+                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-5">
@@ -117,12 +92,12 @@
                         </li>
                     </ul>
                     @*<ul class="social-links">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                    </ul>*@
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        </ul>*@
                 </div>
             </div>
 

@@ -20,6 +20,12 @@ namespace DoctorPortal.Web.Models
         [MaxLength(250, ErrorMessage = "Message must only include 250 characters")]
         public string Message { get; set; }
 
+        [MaxLength(150, ErrorMessage = "Subject must only include 250 characters")]
+        public string Subject { get; set; }
+
+        [MaxLength(15, ErrorMessage = "Phone no. must only include 15 characters")]
+        public string PhoneNo { get; set; }
+
         public DateTime? Date { get; set; }
 
         // Returns the entity to save in the database
@@ -31,6 +37,8 @@ namespace DoctorPortal.Web.Models
                 Name = Name,
                 Email = Email,
                 Message = Message,
+                Subject = Subject,
+                PhoneNo = PhoneNo,
                 Date = Date
             };
         }

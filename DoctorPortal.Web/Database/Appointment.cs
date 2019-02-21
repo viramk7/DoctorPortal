@@ -17,7 +17,9 @@ namespace DoctorPortal.Web.Database
         public int Id { get; set; }
         public int HospitalId { get; set; }
         public string Name { get; set; }
+        public string Subject { get; set; }
         public string Email { get; set; }
+        public string PhoneNo { get; set; }
         public string Message { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     }

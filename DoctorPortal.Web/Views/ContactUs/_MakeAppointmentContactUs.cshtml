@@ -1,0 +1,48 @@
+﻿
+@using DoctorPortal.Web.Models;
+@model MakeAppointmentViewModel
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<form id="contact-form" name="contact_form" class="default-form" action="@Url.Action("MakeAppointment","Appointment")" method="post">
+    <h2>Make an Appointment</h2>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name*" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email*" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.PhoneNo, new { @placeholder = "Phone" })
+            @Html.ValidationMessageFor(m => m.PhoneNo)
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Subject" })
+            @Html.ValidationMessageFor(m => m.Subject)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message" })
+            @Html.ValidationMessageFor(m => m.Message)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
+            <button class="thm-btn bgclr-1" type="submit" data-loading-text="Please wait...">send message</button>
+        </div>
+    </div>
+</form>

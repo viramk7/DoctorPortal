@@ -41,13 +41,13 @@ namespace DoctorPortal.Web.Controllers
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                return RedirectToAction(nameof(AppointmentRequested), new { success = false});
+                return RedirectToAction(nameof(AppointmentRequested), new { success = false });
             }
-            
+
         }
 
         [HttpGet]
-        public ActionResult AppointmentRequested(bool? success )
+        public ActionResult AppointmentRequested(bool? success)
         {
             if (success == null)
                 RedirectToAction("Index", "Home");
@@ -64,19 +64,18 @@ namespace DoctorPortal.Web.Controllers
                 bodyTemplate = bodyTemplate.Replace("[@NAME]", model.Name);
                 bodyTemplate = bodyTemplate.Replace("[@EMAIL]", model.Email);
                 bodyTemplate = bodyTemplate.Replace("[@MESSAGE]", model.Message);
-
-                if (model.Date != null)
-                    bodyTemplate = bodyTemplate.Replace("[@DATE]", Convert.ToDateTime(model.Date).ToShortDateString());
-                else
-                    bodyTemplate = bodyTemplate.Replace("[@DATE]", "Not provided.");
-
+                bodyTemplate = bodyTemplate.Replace("[@PHONE]", model.PhoneNo ?? "Not provided.");
+                bodyTemplate = model.Date == null
+                    ? bodyTemplate = bodyTemplate.Replace("[@DATE]", "Not provided.")
+                    : bodyTemplate.Replace("[@DATE]", Convert.ToDateTime(model.Date).ToShortDateString());
+                               
                 EmailHelper.SendAsyncEmail(ProjectSession.Hospital.Email, "Appointment", bodyTemplate, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.Error(ex);
             }
-            
+
         }
     }
 }
