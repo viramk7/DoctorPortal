@@ -90,7 +90,20 @@
 </section>
 <!--End welcome area-->
 <!--Start special features area-->
-<section class="special-features-area">
+<section class="facilities-appointment-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="facilities-content-box">
+                    @{
+                        Html.RenderAction("GetServicesPartialView", "Services");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<section class="special-features-area">
     <div class="container">
         <div class="row">
             <!--Start single item-->
@@ -175,7 +188,7 @@
             <!--End single item-->
         </div>
     </div>
-</section>
+</section>*@
 <!--End special features area-->
 <!--Start slogan area-->
 <section class="slogan-area">

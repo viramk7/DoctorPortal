@@ -60,6 +60,18 @@
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="IconName" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="FAQQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HospitalId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="QuestionText" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="HospitalContacts">
           <Key>
             <PropertyRef Name="Id" />
@@ -169,6 +181,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FAQQuestions_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="FAQQuestions" Type="Self.FAQQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="FAQQuestions">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HospitalContacts_HospitalMaster">
           <End Role="HospitalMaster" Type="Self.HospitalMaster" Multiplicity="1" />
           <End Role="HospitalContacts" Type="Self.HospitalContacts" Multiplicity="*" />
@@ -223,6 +247,7 @@
           <EntitySet Name="DepartmentImages" EntityType="Self.DepartmentImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQQuestions" EntityType="Self.FAQQuestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalMaster" EntityType="Self.HospitalMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalWorkingDays" EntityType="Self.HospitalWorkingDays" Schema="dbo" store:Type="Tables" />
@@ -244,6 +269,10 @@
           <AssociationSet Name="FK_Facility_HospitalMaster" Association="Self.FK_Facility_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMaster" />
             <End Role="Facility" EntitySet="Facility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FAQQuestions_Department" Association="Self.FK_FAQQuestions_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="FAQQuestions" EntitySet="FAQQuestions" />
           </AssociationSet>
           <AssociationSet Name="FK_HospitalContacts_HospitalMaster" Association="Self.FK_HospitalContacts_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMaster" />
@@ -310,6 +339,11 @@
             <End Role="DepartmentImages" EntitySet="DepartmentImages" />
           </AssociationSet>
           <EntitySet Name="Appointment" EntityType="DoctorPortalDBEntitiesModel.Appointment" />
+          <EntitySet Name="FAQQuestions" EntityType="DoctorPortalDBEntitiesModel.FAQQuestions" />
+          <AssociationSet Name="FK_FAQQuestions_Department" Association="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="FAQQuestions" EntitySet="FAQQuestions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HospitalContact">
           <Key>
@@ -492,6 +526,7 @@
           <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
           <NavigationProperty Name="DepartmentImages" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="Department" ToRole="DepartmentImages" />
           <Property Name="HomePageIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FAQQuestions" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="Department" ToRole="FAQQuestions" />
         </EntityType>
         <Association Name="FK_Department_HospitalMaster">
           <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
@@ -539,6 +574,31 @@
           <Property Name="Message" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="FAQQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="FAQQuestions" ToRole="Department" />
+          <Property Name="QuestionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_FAQQuestions_Department">
+          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="DoctorPortalDBEntitiesModel.FAQQuestions" Role="FAQQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="FAQQuestions">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -665,6 +725,19 @@
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQQuestions">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.FAQQuestions">
+              <MappingFragment StoreEntitySet="FAQQuestions">
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

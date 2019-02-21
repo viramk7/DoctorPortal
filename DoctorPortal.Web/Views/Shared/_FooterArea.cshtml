@@ -1,4 +1,5 @@
 ﻿@using DoctorPortal.Web.Areas.Admin.Models
+@using DoctorPortal.Web.Models
 @*@model DoctorPortal.Web.Models.HospitalViewModel*@
 
 
@@ -117,7 +118,7 @@
             <!--Start single footer widget-->
             <!--Start single footer widget-->
             @{ 
-                Html.RenderPartial("_MakeAppointmentFooter");
+                Html.RenderPartial("_MakeAppointmentFooter",new MakeAppointmentViewModel());
             }
             <!--End single footer widget-->
         </div>

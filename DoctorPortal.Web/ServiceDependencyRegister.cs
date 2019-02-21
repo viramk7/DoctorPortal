@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using DoctorPortal.Web.AdminRepositories.Appointment;
 using DoctorPortal.Web.AdminRepositories.Department;
+using DoctorPortal.Web.AdminRepositories.FAQ;
 using DoctorPortal.Web.AdminRepositories.Hospital;
 using DoctorPortal.Web.AdminRepositories.Speciality;
 using DoctorPortal.Web.AdminServices.Appointment;
 using DoctorPortal.Web.AdminServices.Department;
 using DoctorPortal.Web.AdminServices.Entity;
+using DoctorPortal.Web.AdminServices.FAQ;
 using DoctorPortal.Web.AdminServices.Hospital;
 using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
@@ -42,6 +44,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<DepartmentRepository>().As<IDepartmentRepository>().InstancePerDependency();
             builder.RegisterType<DoctorRepository>().As<IDoctorRepository>().InstancePerDependency();
             builder.RegisterType<AppointmentRepository>().As<IAppointmentRepository>().InstancePerDependency();
+            builder.RegisterType<FAQRepository>().As<IFAQRepository>().InstancePerDependency();
 
             // Services
             builder.RegisterGeneric(typeof(EntityService<>)).As(typeof(IEntityService<>)).InstancePerDependency();
@@ -55,6 +58,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerDependency();
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerDependency();
             builder.RegisterType<AppointmentService>().As<IAppointmentService>().InstancePerDependency();
+            builder.RegisterType<FAQService>().As<IFAQService>().InstancePerDependency();
 
         }
     }

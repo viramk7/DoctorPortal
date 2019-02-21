@@ -1,6 +1,7 @@
 ﻿using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Doctor;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using System;
 using System.Web.Mvc;
@@ -40,7 +41,14 @@ namespace DoctorPortal.Web.Controllers
 
         public ActionResult GetDoctorPartialView()
         {
-            var doctors = _doctorService.GetHomePageDoctorList();
+            var cacheManager = EngineContext.Resolve<ICacheManager>();
+
+            var doctors =
+                 cacheManager.Get(CacheKeys.DoctorList.ToString(), () =>
+                 {
+                     return _doctorService.GetHomePageDoctorList();
+                 });
+           
             return PartialView("_Doctors", doctors);
         }
     }

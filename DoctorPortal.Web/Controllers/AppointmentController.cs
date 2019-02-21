@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Controllers
 {
-    public class AppointmentController : Controller
+    public class AppointmentController : BaseAdminController
     {
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IAppointmentService _appointmentService;

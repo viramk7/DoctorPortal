@@ -18,6 +18,7 @@ namespace DoctorPortal.Web.Database
         public Department()
         {
             this.DepartmentImages = new HashSet<DepartmentImages>();
+            this.FAQQuestions = new HashSet<FAQQuestions>();
         }
     
         public int DepartmentId { get; set; }
@@ -30,5 +31,7 @@ namespace DoctorPortal.Web.Database
         public virtual HospitalMaster HospitalMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DepartmentImages> DepartmentImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FAQQuestions> FAQQuestions { get; set; }
     }
 }

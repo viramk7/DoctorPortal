@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Data\Projects\DoctorPortal\DoctorPortal.Web\Database\DoctorPortalDBEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\DoctorPortal\DoctorPortal.Web\Database\DoctorPortalDBEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

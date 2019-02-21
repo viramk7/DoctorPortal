@@ -151,6 +151,8 @@
     <Compile Include="AdminRepositories\Appointment\IAppointmentRepository.cs" />
     <Compile Include="AdminRepositories\Department\DepartmentRepository.cs" />
     <Compile Include="AdminRepositories\Department\IDepartmentRepository.cs" />
+    <Compile Include="AdminRepositories\FAQ\FAQRepository.cs" />
+    <Compile Include="AdminRepositories\FAQ\IFAQRepository.cs" />
     <Compile Include="AdminRepositories\Hospital\HospitalRepository.cs" />
     <Compile Include="AdminRepositories\Hospital\IHospitalRepository.cs" />
     <Compile Include="AdminRepositories\Speciality\ISpecialityRepository.cs" />
@@ -161,6 +163,8 @@
     <Compile Include="AdminServices\Department\IDepartmentService.cs" />
     <Compile Include="AdminServices\Entity\EntityService.cs" />
     <Compile Include="AdminServices\Entity\IEntityService.cs" />
+    <Compile Include="AdminServices\FAQ\FAQService.cs" />
+    <Compile Include="AdminServices\FAQ\IFAQService.cs" />
     <Compile Include="AdminServices\Hospital\HospitalService.cs" />
     <Compile Include="AdminServices\Hospital\IHospitalService.cs" />
     <Compile Include="AdminServices\Speciality\ISpecialityService.cs" />
@@ -260,6 +264,9 @@
     <Compile Include="Database\Facility.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\FAQQuestions.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\HospitalContact.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
@@ -290,6 +297,7 @@
     <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\FacilityViewModel.cs" />
+    <Compile Include="Models\FAQQuestionsViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\HospitalViewModel.cs" />
     <Compile Include="Models\MakeApointmentViewModel.cs" />
@@ -925,6 +933,7 @@
     <Content Include="Areas\Admin\Views\Doctor\AddEdit.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
+    <Content Include="Template\FAQQuestion.html" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -958,6 +967,7 @@
     <Content Include="Views\Appointment\AppointmentRequested.cshtml" />
     <Content Include="Views\Shared\_MakeAppointmentFooter.cshtml" />
     <Content Include="Views\ContactUs\_MakeAppointmentContactUs.cshtml" />
+    <Content Include="Views\FAQ\FAQRequested.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />

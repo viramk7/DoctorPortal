@@ -33,8 +33,15 @@ namespace DoctorPortal.Web.Common
                 Credentials = new System.Net.NetworkCredential(email, password),
                 DeliveryMethod = SmtpDeliveryMethod.Network
             };
-
-            smtp.Send(mail);
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            
 
             return true;
         }

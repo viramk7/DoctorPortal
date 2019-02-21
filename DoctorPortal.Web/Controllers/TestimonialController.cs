@@ -1,5 +1,6 @@
 ﻿using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using System;
 using System.Web.Mvc;
@@ -34,7 +35,14 @@ namespace DoctorPortal.Web.Controllers
 
         public ActionResult GetTestimonialsPartialView()
         {
-            var testimonials = _service.GetAllTestimonials();
+            var cacheManager = EngineContext.Resolve<ICacheManager>();
+
+            var testimonials =
+                cacheManager.Get(CacheKeys.TestimonialList.ToString(), () =>
+                {
+                    return _service.GetAllTestimonials();
+                });
+           
             return PartialView("_Testimonials", testimonials);
         }
 

@@ -1,4 +1,15 @@
-﻿
+﻿@using DoctorPortal.Web.Models;
+@using DoctorPortal.Web.Areas.Admin.Models;
+@model FAQQuestionsViewModel
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+@*<script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
 @{
     ViewBag.Title = "FAQ";
 }
@@ -238,31 +249,36 @@
                         <h1>Ask Your Questions</h1>
                         <span class="border"></span>
                     </div>
-                    <form id="faq-form" action="#">
+                    <div class="form-holder clearfix">
+                        <form id="faqform" class="clearfix" name="faq-form" action="@Url.Action("MakeFAQQuestion", "FAQ")" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                    @*<input type="text" name="name" placeholder="Name*" required="">*@
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                    @*<input type="email" name="email" placeholder="Email*" required="">*@
+                                </div>
+                            </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" name="name" placeholder="Name*" required="">
+                                @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Your Subject" })
+                                @Html.ValidationMessageFor(m => m.Subject)
+                                @*<input type="text" name="subject" placeholder="Subject">*@
                             </div>
                             <div class="col-md-6">
-                                <input type="email" name="email" placeholder="Email*" required="">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="subject" placeholder="Subject">
-                            </div>
-                            <div class="col-md-6">
-                                <select class="selectmenu">
-                                    <option selected="selected">Select Category</option>
-                                    <option>Cardiology</option>
-                                    <option>Pulmonology</option>
-                                    <option>Gynecology</option>
-                                </select>
+                                @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ProjectSession.Hospital.Departmentlist, "DepartmentId", "DepartmentName"), new { @class = "selectmenu" })
+                                @Html.ValidationMessageFor(m => m.DepartmentId)
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea name="question" placeholder="Your Questions..."></textarea>
+                                @Html.TextAreaFor(m => m.QuestionText, new { @placeholder = "Your Questions..." })
+                                @Html.ValidationMessageFor(m => m.QuestionText)
+                                @*<textarea name="question" placeholder="Your Questions..."></textarea>*@
                             </div>
                         </div>
                         <div class="row">
@@ -270,7 +286,8 @@
                                 <button class="thm-btn bgclr-1" type="submit">Submit Now</button>
                             </div>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

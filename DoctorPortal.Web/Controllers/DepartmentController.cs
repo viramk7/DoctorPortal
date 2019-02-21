@@ -4,6 +4,7 @@ using DoctorPortal.Web.AdminServices.Hospital;
 using DoctorPortal.Web.Caching;
 using System.Web.Mvc;
 using log4net;
+using DoctorPortal.Web.Common;
 
 namespace DoctorPortal.Web.Controllers
 {
@@ -12,7 +13,7 @@ namespace DoctorPortal.Web.Controllers
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IDepartmentService _service;
 
-        public DepartmentController(IDepartmentService service) 
+        public DepartmentController(IDepartmentService service)
         {
             _service = service;
         }
@@ -29,12 +30,19 @@ namespace DoctorPortal.Web.Controllers
                 _logger.Error(e);
                 return RedirectToAction(nameof(Index));
             }
-            
+
         }
 
         public ActionResult GetDepartmentPartialView()
         {
-            var departments = _service.GetAllDepartment();
+            var cacheManager = EngineContext.Resolve<ICacheManager>();
+
+            var departments =
+               cacheManager.Get(CacheKeys.DepartmentList.ToString(), () =>
+               {
+                   return _service.GetAllDepartment();
+               });
+
             return PartialView("_Departments", departments);
         }
 

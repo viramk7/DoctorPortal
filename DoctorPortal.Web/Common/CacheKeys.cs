@@ -2,7 +2,10 @@
 {
     public enum CacheKeys
     {
-        HospitalInfo
+        HospitalInfo,
+        DepartmentList,
+        DoctorList,
+        TestimonialList
     }
 
 }

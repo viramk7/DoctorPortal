@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Controllers
 {
-    public class ServicesController : Controller
+    public class ServicesController : BaseAdminController
     {
         private readonly IFacilityService _servicefacility;
 
