@@ -171,6 +171,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClearCacheController.cs" />
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Caching\CacheExtensions.cs" />
     <Compile Include="Caching\ICacheManager.cs" />
     <Compile Include="Caching\MemoryCacheManager.cs" />
+    <Compile Include="Common\CacheKeys.cs" />
     <Compile Include="Common\EmailHelper.cs" />
     <Compile Include="Common\HtmlHelperExtensions.cs" />
     <Compile Include="Common\Logger.cs" />
@@ -958,6 +960,7 @@
     <Content Include="Views\ContactUs\_MakeAppointmentContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\ClearCache\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />

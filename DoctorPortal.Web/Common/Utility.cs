@@ -158,5 +158,10 @@ namespace DoctorPortal.Web.Common
             return ret;
         }
 
+        public static IEnumerable<T> GetEnumValues<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<T>();
+        }
+
     }
 }

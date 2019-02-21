@@ -8,7 +8,7 @@ using log4net;
 namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     [UserAuthorization]
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

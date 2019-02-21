@@ -2,6 +2,7 @@
 using DoctorPortal.Web.AdminServices.Hospital;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Caching;
+using DoctorPortal.Web.Common;
 using log4net;
 
 namespace DoctorPortal.Web.Controllers
@@ -15,7 +16,7 @@ namespace DoctorPortal.Web.Controllers
             var hospitalService = EngineContext.Resolve<IHospitalService>();
             var cacheManager = EngineContext.Resolve<ICacheManager>();
 
-            ProjectSession.Hospital = cacheManager.Get("HospitalInfo", () =>
+            ProjectSession.Hospital = cacheManager.Get(CacheKeys.HospitalInfo.ToString(), () =>
             {
                 return hospitalService.GetHospitalInfo();
             });
