@@ -163,5 +163,10 @@ namespace DoctorPortal.Web.Common
             return Enum.GetValues(typeof(T)).Cast<T>();
         }
 
+        public static string ReadFileToString(string templatePath)
+        {
+            return System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath(templatePath));
+        }
+
     }
 }

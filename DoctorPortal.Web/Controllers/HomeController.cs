@@ -10,8 +10,13 @@ namespace DoctorPortal.Web.Controllers
         public HomeController() 
         {
         }
-
-        public ActionResult Index()
+        
+        // TODO: Enable this after going live
+        //[OutputCache(Location = OutputCacheLocation.Client,
+        //             Duration = WebHelper.OutputCacheTime,
+        //             VaryByParam = "id",
+        //             NoStore =false)]
+        public ActionResult Index(int id = 0)
         {
             try
             {

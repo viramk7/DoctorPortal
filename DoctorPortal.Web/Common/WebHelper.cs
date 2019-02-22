@@ -8,6 +8,8 @@ namespace DoctorPortal.Web.Common
 
         public const int HospitalId = 1;
 
+        public const int OutputCacheTime = 60 * 60 * 24; // 1 day
+
         public static int[] PageSizes = { 10, 20, 50, 100, 500 };
 
         public static string[] ValidImageFileTypes = { ".jpeg", ".jpg", ".png" };

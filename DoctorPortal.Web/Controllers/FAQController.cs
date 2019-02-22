@@ -68,8 +68,7 @@ namespace DoctorPortal.Web.Controllers
         {
             try
             {
-                var bodyTemplate = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template/FAQQuestion.html"));
-
+                var bodyTemplate = Utility.ReadFileToString("~/Template/FAQQuestion.html");
                 bodyTemplate = bodyTemplate.Replace("[@NAME]", model.Name);
                 bodyTemplate = bodyTemplate.Replace("[@EMAIL]", model.Email);
                 bodyTemplate = bodyTemplate.Replace("[@SUBJECT]", model.Subject);

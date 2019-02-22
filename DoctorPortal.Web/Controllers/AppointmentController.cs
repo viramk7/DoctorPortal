@@ -59,8 +59,7 @@ namespace DoctorPortal.Web.Controllers
         {
             try
             {
-                var bodyTemplate = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath("~/Template/Appointment.html"));
-
+                var bodyTemplate = Utility.ReadFileToString("~/Template/Appointment.html");
                 bodyTemplate = bodyTemplate.Replace("[@NAME]", model.Name);
                 bodyTemplate = bodyTemplate.Replace("[@EMAIL]", model.Email);
                 bodyTemplate = bodyTemplate.Replace("[@MESSAGE]", model.Message);
@@ -75,7 +74,6 @@ namespace DoctorPortal.Web.Controllers
             {
                 _logger.Error(ex);
             }
-
         }
     }
 }
