@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClearCacheController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
@@ -931,6 +932,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\TextArea.cshtml" />
     <Content Include="Areas\Admin\Views\Doctor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Doctor\AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Department\AddEdit.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
     <Content Include="Template\FAQQuestion.html" />

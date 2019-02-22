@@ -1,0 +1,68 @@
+﻿@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+@using DoctorPortal.Web.Common
+@model DoctorPortal.Web.Models.DepartmentViewModel
+
+@{
+    ViewBag.Title = "Department";
+}
+
+@Html.Partial("_PageHeader", new PageHeaderViewModel("Department", "AdminHome", "Index"))
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="post" enctype="multipart/form-data">
+
+                @Html.ValidationSummary(true)
+                @Html.Partial("_ActionBar", new ActionBarViewModel("Department", displaySaveAndContinueButton: true))
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Manage Department</h5>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+                        @Html.HiddenFor(m => m.DepartmentId)
+
+                        @Html.HiddenFor(m => m.HospitalId)
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DepartmentName, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.DepartmentName, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.DepartmentName)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Description, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.Description)
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.HomePageIcon, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.HomePageIcon, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.HomePageIcon)
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

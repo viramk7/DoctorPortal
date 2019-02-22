@@ -1,6 +1,6 @@
 ﻿@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+@using DoctorPortal.Web.Common
 @model DoctorPortal.Web.Models.DoctorViewModel
-
 
 @{
     ViewBag.Title = "Doctors";
@@ -18,15 +18,127 @@
             <form action="" method="post" enctype="multipart/form-data">
 
                 @Html.ValidationSummary(true)
-                @Html.Partial("_ActionBar", new ActionBarViewModel("Testimonials", displaySaveAndContinueButton: true))
+                @Html.Partial("_ActionBar", new ActionBarViewModel("Doctor", displaySaveAndContinueButton: true))
 
                 <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h5 class="card-title">Manage Testimonials</h5>
+                        <h5 class="card-title">Manage Doctors</h5>
                     </div>
                     <hr />
                     <div class="card-body">
-                        @Html.Partial("_AddEdit")
+                        @Html.HiddenFor(m => m.DoctorId)
+
+                        @Html.HiddenFor(m => m.HospitalId)
+                        <div class="row">
+
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Name, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.Name, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.Name)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ContactNo, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.ContactNo, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.ContactNo)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.SpecialityId, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @(Html.Kendo().ComboBoxFor(m => m.SpecialityId)
+                                                                      .Value(Model.SpecialityId == 0 ? string.Empty : Model.SpecialityId.ToString())
+                                                                      .Placeholder("--Select Speciality --")
+                                                                      .DataTextField("Name")
+                                                                      .DataValueField("SpecialityId")
+                                                                      .HtmlAttributes(new { @style = "width:100%" })
+                                                                      .DataSource(source =>
+                                                                      {
+                                                                          source.Read(read =>
+                                                                          {
+                                                                              read.Action("BindSpecialityDropDown", "Doctor");
+                                                                          });
+                                                                      }))
+                                        @Html.ValidationMessageFor(m => m.SpecialityId)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.IsOnHomePage, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.Kendo().CheckBoxFor(m => m.IsOnHomePage)
+                                        @Html.ValidationMessageFor(m => m.IsOnHomePage)
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Position, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.Position, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.Position)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EmailAddress, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "k-textbox", style = "width: 100%;" , @type="email"})
+                                        @Html.ValidationMessageFor(m => m.EmailAddress)
+                                    </div>
+                                </div>
+
+
+                                @if (!string.IsNullOrEmpty(Model.ImageName))
+                                {
+                                    @Html.HiddenFor(m => m.ImageName)
+                                    <div class="form-group">
+                                        <label for="ImageName" class="col-sm-6 col-lg-4 col-form-label"></label>
+                                        <div class="col-sm-6 col-lg-9">
+                                            <img class="image img-circle"
+                                                 id="ImageName"
+                                                 style="max-height: 150px; max-width: 150px"
+                                                 src="@(Model.ImageName.Replace("~",""))" />
+                                        </div>
+                                    </div>
+                                }
+
+                                @*<div class="form-group">
+                                        @Html.LabelFor(m => m.ImageName, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                        <div class="col-sm-6 col-lg-9">
+                                            @(Html.Kendo().Upload().Name("file").Multiple(false)
+                                                          .Validation(validation => validation.AllowedExtensions(WebHelper.ValidImageFileTypes) ))
+                                            @Html.ValidationMessageFor(m => m.ImageName)
+                                            <p>
+                                                <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
+                                            </p>
+
+                                        </div>
+                                    </div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ImageFile, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.ImageFile, new { type = "file", @class = "k-button k-upload-button" })
+                                        @Html.ValidationMessageFor(m => m.ImageName)
+                                        <p>
+                                            <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -35,6 +147,17 @@
         </div>
     </div>
 </div>
+
+@*<script>
+        $("#ImageFile").change(function (e) {
+            var validFileTypes = '@string.Join(",",WebHelper.ValidImageFileTypes)';
+            var ext = $("#ImageFile").val().split('.')[1];
+            if (validFileTypes.indexOf(('.'+ext)) < 0) {
+                ShowErrorMessage("Invalid file type.");
+                $("#ImageFile").val('');
+            }
+        });
+    </script>*@
 
 
 

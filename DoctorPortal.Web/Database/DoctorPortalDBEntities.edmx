@@ -26,7 +26,6 @@
           <Property Name="HospitalId" Type="int" Nullable="false" />
           <Property Name="DepartmentName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
-          <Property Name="BannerImage" Type="varchar(max)" />
           <Property Name="HomePageIcon" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DepartmentImages">
@@ -328,18 +327,18 @@
             <End Role="Speciality" EntitySet="Speciality" />
             <End Role="Doctor" EntitySet="Doctor" />
           </AssociationSet>
+          <EntitySet Name="DepartmentImages" EntityType="DoctorPortalDBEntitiesModel.DepartmentImages" />
+          <EntitySet Name="Appointment" EntityType="DoctorPortalDBEntitiesModel.Appointment" />
+          <EntitySet Name="FAQQuestions" EntityType="DoctorPortalDBEntitiesModel.FAQQuestions" />
           <EntitySet Name="Department" EntityType="DoctorPortalDBEntitiesModel.Department" />
           <AssociationSet Name="FK_Department_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
-          <EntitySet Name="DepartmentImages" EntityType="DoctorPortalDBEntitiesModel.DepartmentImages" />
           <AssociationSet Name="FK_DepartmentImages_Department" Association="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="DepartmentImages" EntitySet="DepartmentImages" />
           </AssociationSet>
-          <EntitySet Name="Appointment" EntityType="DoctorPortalDBEntitiesModel.Appointment" />
-          <EntitySet Name="FAQQuestions" EntityType="DoctorPortalDBEntitiesModel.FAQQuestions" />
           <AssociationSet Name="FK_FAQQuestions_Department" Association="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="FAQQuestions" EntitySet="FAQQuestions" />
@@ -514,32 +513,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="DepartmentId" />
-          </Key>
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HospitalId" Type="Int32" Nullable="false" />
-          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="BannerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
-          <NavigationProperty Name="DepartmentImages" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="Department" ToRole="DepartmentImages" />
-          <Property Name="HomePageIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FAQQuestions" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="Department" ToRole="FAQQuestions" />
-        </EntityType>
-        <Association Name="FK_Department_HospitalMaster">
-          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
-          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HospitalMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Department">
-              <PropertyRef Name="HospitalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DepartmentImages">
           <Key>
             <PropertyRef Name="Id" />
@@ -549,18 +522,6 @@
           <Property Name="ImageName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="DepartmentImages" ToRole="Department" />
         </EntityType>
-        <Association Name="FK_DepartmentImages_Department">
-          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="1" />
-          <End Type="DoctorPortalDBEntitiesModel.DepartmentImages" Role="DepartmentImages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="DepartmentId" />
-            </Principal>
-            <Dependent Role="DepartmentImages">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="Id" />
@@ -584,9 +545,46 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Subject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentId" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="FAQQuestions" ToRole="Department" />
           <Property Name="QuestionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="FAQQuestions" ToRole="Department" />
         </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HomePageIcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
+          <NavigationProperty Name="DepartmentImages" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="Department" ToRole="DepartmentImages" />
+          <NavigationProperty Name="FAQQuestions" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="Department" ToRole="FAQQuestions" />
+        </EntityType>
+        <Association Name="FK_Department_HospitalMaster">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentImages_Department">
+          <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.DepartmentImages" Role="DepartmentImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DepartmentImages">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FAQQuestions_Department">
           <End Type="DoctorPortalDBEntitiesModel.Department" Role="Department" Multiplicity="0..1" />
           <End Type="DoctorPortalDBEntitiesModel.FAQQuestions" Role="FAQQuestions" Multiplicity="*" />
@@ -696,18 +694,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Department">
-            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="HomePageIcon" ColumnName="HomePageIcon" />
-                <ScalarProperty Name="BannerImage" ColumnName="BannerImage" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
-                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DepartmentImages">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.DepartmentImages">
               <MappingFragment StoreEntitySet="DepartmentImages">
@@ -741,6 +727,17 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="HomePageIcon" ColumnName="HomePageIcon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

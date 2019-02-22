@@ -27,6 +27,7 @@ namespace DoctorPortal.Web.Models
         }
 
         public int DoctorId { get; set; }
+        public int HospitalId { get; set; }
 
         [Display(Name = @"Name")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
@@ -38,6 +39,7 @@ namespace DoctorPortal.Web.Models
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string Position { get; set; }
 
+        [DataType(DataType.PhoneNumber , ErrorMessage = "Please provide valid contact No")]
         [Display(Name = @"Contact No")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         [StringLength(12, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
@@ -51,11 +53,13 @@ namespace DoctorPortal.Web.Models
 
         public string ImageName { get; set; }
 
+        [Display(Name = @"Speciality")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         public int SpecialityId { get; set; }
 
         [Display(Name = @"Doctor Image")]
         [DataType(DataType.Upload)]
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
+        //[Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         public HttpPostedFileBase ImageFile { get; set; }
 
         public Nullable<bool> IsOnHomePage { get; set; }

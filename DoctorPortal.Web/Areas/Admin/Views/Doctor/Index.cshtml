@@ -76,7 +76,7 @@
             var tr = $(e.target).closest("tr");
             var data = this.dataItem(tr);
             if (data != null)
-                uri += '?id=' + data.Id;
+                uri += '?id=' + data.DoctorId;
         }
         window.location.href = uri;
     }
@@ -92,7 +92,7 @@
                 var data = grid.dataItem(tr);
                 var url = '@Url.Action("Delete", "Doctor")';
                 if (data != null)
-                    callwebservice(url, 'id=' + data.Id, DeleteComplete, false, datatypeEnum.text, typeEnum.post);
+                    callwebservice(url, 'id=' + data.DoctorId, DeleteComplete, false, datatypeEnum.text, typeEnum.post);
             }
         }, 'popup-confirmation');
     }

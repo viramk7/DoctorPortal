@@ -31,5 +31,28 @@ namespace DoctorPortal.Web.AdminServices.Department
             var department = _departmentRepository.Table.ToList();
             return department.Select(s=>new DepartmentViewModel(s)).ToList();
         }
+
+        public DepartmentViewModel Save(DepartmentViewModel model)
+        {
+            var obj = model.GetDepartmentEntity();
+
+            if (obj.DepartmentId > 0)
+            {
+                _departmentRepository.Update(obj);
+            }
+            else
+            {
+                _departmentRepository.Insert(obj);
+                model.DepartmentId = obj.DepartmentId;
+            }
+
+            return model;
+        }
+
+        public void Delete(int id)
+        {
+            var obj = _departmentRepository.GetById(id);
+            _departmentRepository.Delete(obj);
+        }
     }
 }

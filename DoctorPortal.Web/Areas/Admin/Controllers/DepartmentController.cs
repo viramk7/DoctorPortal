@@ -1,6 +1,5 @@
-﻿using DoctorPortal.Web.AdminServices.Speciality;
+﻿using DoctorPortal.Web.AdminServices.Department;
 using DoctorPortal.Web.Areas.Admin.Models;
-using DoctorPortal.Web.Areas.Admin.Services.Doctor;
 using DoctorPortal.Web.Common;
 using DoctorPortal.Web.Models;
 using Kendo.Mvc;
@@ -16,17 +15,15 @@ using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
-    public class DoctorController : BaseController
+    public class DepartmentController : BaseController
     {
-        private readonly IDoctorService _service;
-        private readonly ISpecialityService _serviceSpeciality;
+        private readonly IDepartmentService _service;
 
-        private const string FOLDER_PATH = "~/Uploads/Doctors";
+        private const string FOLDER_PATH = "~/Uploads/Department";
 
-        public DoctorController(IDoctorService service, ISpecialityService serviceSpeciality)
+        public DepartmentController(IDepartmentService service)
         {
             _service = service;
-            _serviceSpeciality = serviceSpeciality;
         }
 
         public ActionResult Index()
@@ -38,10 +35,10 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         {
             if (!request.Sorts.Any())
             {
-                request.Sorts.Add(new SortDescriptor("Name", ListSortDirection.Ascending));
+                request.Sorts.Add(new SortDescriptor("DepartmentName", ListSortDirection.Ascending));
             }
 
-            var list = _service.GetAllDoctorList();
+            var list = _service.GetAllDepartment();
 
             return Json(list.ToDataSourceResult(request));
         }
@@ -49,18 +46,18 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult AddEdit(int id = 0)
         {
-            var model = new DoctorViewModel();
+            var model = new DepartmentViewModel();
             if (id == 0)
                 return View(model);
 
-            model = _service.GetById(id);
+            model = _service.GetDepartmentById(id);
 
             return View(model);
         }
 
 
         [HttpPost]
-        public ActionResult AddEdit(DoctorViewModel model, string create = null)
+        public ActionResult AddEdit(DepartmentViewModel model, string create = null)
         {
             try
             {
@@ -69,15 +66,15 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
                 if (model == null || !ModelState.IsValid)
                     return View(model);
 
-                if (model.ImageFile == null && string.IsNullOrEmpty(model.ImageName))
-                {
-                    ModelState.AddModelError("ImageName", "Please Upload Doctor Image");
-                    return View(model);
-                }
-                else if(model.ImageFile != null)
-                {
-                    model.ImageName = UploadFile(model.ImageFile);
-                }
+                //if (model.ImageFile == null && string.IsNullOrEmpty(model.ImageName))
+                //{
+                //    ModelState.AddModelError("ImageName", "Please Upload Doctor Image");
+                //    return View(model);
+                //}
+                //else if (model.ImageFile != null)
+                //{
+                //    model.ImageName = UploadFile(model.ImageFile);
+                //}
 
                 model = _service.Save(model);
 
@@ -87,7 +84,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
                     return RedirectToAction(nameof(Index));
 
                 return create.Equals("Save & Continue")
-                    ? RedirectToAction(nameof(AddEdit), new { id = model.DoctorId })
+                    ? RedirectToAction(nameof(AddEdit), new { id = model.DepartmentId })
                     : RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -129,12 +126,6 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 
             file.SaveAs(Server.MapPath(fullPath));
             return fullPath;
-        }
-
-        public ActionResult BindSpecialityDropDown()
-        {
-            var speciality = _serviceSpeciality.GetAllSpeciality().Select(m => new { m.SpecialityId, m.Name }).ToList();
-            return Json(speciality, JsonRequestBehavior.AllowGet);
         }
     }
 }

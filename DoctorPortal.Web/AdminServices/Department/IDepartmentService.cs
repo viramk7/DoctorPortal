@@ -14,5 +14,9 @@ namespace DoctorPortal.Web.AdminServices.Department
 
         List<DepartmentViewModel> GetAllDepartment();
 
+        DepartmentViewModel Save(DepartmentViewModel model);
+
+        void Delete(int id);
+
     }
 }
