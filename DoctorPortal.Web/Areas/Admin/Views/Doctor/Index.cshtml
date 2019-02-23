@@ -38,12 +38,16 @@
                                            columns.Bound(d => d.Position);
                                            columns.Bound(d => d.ContactNo);
                                            columns.Bound(d => d.EmailAddress);
+                                           columns.Bound(d => d.IsActive).Filterable(false)
+                                                .ClientTemplate(Html.SetStatusClientTemplate("IsActive", "Doctor", "ChangeStatus",
+                                                "id=#= DoctorId #", "#= DoctorId #", "gridDoctors", "Doctor")).HtmlAttributes(WebHelper.StatusColumnStyle)
+                                                .HeaderHtmlAttributes(WebHelper.StatusColumnStyle);
                                        })
                                        .ToolBar(toolbar =>
                                        {
                                            toolbar.Template("<a class='k-button k-button-icontext' onclick='onAddEdit(0)' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
                                        })
-                                       
+
                                        .Pageable(x =>
                                        {
                                            x.Refresh(true);

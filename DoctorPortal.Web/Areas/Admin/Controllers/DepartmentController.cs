@@ -1,5 +1,6 @@
 ﻿using DoctorPortal.Web.AdminServices.Department;
 using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Services.DepartmentImage;
 using DoctorPortal.Web.Common;
 using DoctorPortal.Web.Models;
 using Kendo.Mvc;
@@ -18,12 +19,14 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
     public class DepartmentController : BaseController
     {
         private readonly IDepartmentService _service;
+        private readonly IDepartmentImageService _imageService;
 
         private const string FOLDER_PATH = "~/Uploads/Department";
 
-        public DepartmentController(IDepartmentService service)
+        public DepartmentController(IDepartmentService service, IDepartmentImageService imageService)
         {
             _service = service;
+            _imageService = imageService;
         }
 
         public ActionResult Index()
@@ -43,6 +46,18 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             return Json(list.ToDataSourceResult(request));
         }
 
+        public ActionResult KendoReadImage([DataSourceRequest] DataSourceRequest request,int departmentId)
+        {
+            if (!request.Sorts.Any())
+            {
+                request.Sorts.Add(new SortDescriptor("Id", ListSortDirection.Ascending));
+            }
+
+            var list = _imageService.GetAllDepartmentImages(departmentId);
+
+            return Json(list.ToDataSourceResult(request));
+        }
+
         [HttpGet]
         public ActionResult AddEdit(int id = 0)
         {
@@ -55,9 +70,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-
         [HttpPost]
-        public ActionResult AddEdit(DepartmentViewModel model, string create = null)
+        public ActionResult AddEdit(DepartmentViewModel model,IEnumerable<HttpPostedFileBase> files, string create = null)
         {
             try
             {
@@ -77,6 +91,17 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
                 //}
 
                 model = _service.Save(model);
+
+                if(files != null)
+                {
+                    foreach(HttpPostedFileBase file in files)
+                    {
+                        DepartmentImageViewModel modelfile = new DepartmentImageViewModel();
+                        modelfile.DepartmentId = model.DepartmentId;
+                        modelfile.ImageName = UploadFile(file);
+                        _imageService.Save(modelfile);
+                    }
+                }
 
                 SuccessNotification(Resources.SaveSuccess);
 
@@ -109,6 +134,33 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public string ChangeStatus(int id)
+        {
+            if (id > 0)
+            {
+                DepartmentViewModel obj = _service.GetDepartmentById(id);
+                obj.IsActive = !obj.IsActive;
+                _service.Save(obj);
+                return String.Empty;
+            }
+            return "Something Went Wrong";
+        }
+
+        public ActionResult KendoDestroyImage([DataSourceRequest] DataSourceRequest request, DepartmentImageViewModel model)
+        {
+            try
+            {
+                _imageService.Delete(model.Id);
+                return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception ex)
+            {
+                Logger.log.Error($"DepartmentImage > KendoDestroy. Error: {ex.Message}");
+                return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+            }
+        }
+
         public string UploadFile(HttpPostedFileBase file)
         {
             if (file == null)
@@ -125,7 +177,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             var fullPath = $"{FOLDER_PATH}/{filename}";
 
             file.SaveAs(Server.MapPath(fullPath));
-            return fullPath;
+            //return fullPath;
+            return filename;
         }
     }
 }

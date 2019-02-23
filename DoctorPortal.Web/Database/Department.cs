@@ -26,6 +26,7 @@ namespace DoctorPortal.Web.Database
         public string DepartmentName { get; set; }
         public string Description { get; set; }
         public string HomePageIcon { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual HospitalMaster HospitalMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

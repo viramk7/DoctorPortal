@@ -27,6 +27,7 @@
           <Property Name="DepartmentName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="HomePageIcon" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="DepartmentImages">
           <Key>
@@ -48,6 +49,7 @@
           <Property Name="ImageName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="SpecialityId" Type="int" Nullable="false" />
           <Property Name="IsOnHomePage" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Facility">
           <Key>
@@ -145,7 +147,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DepartmentImages_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DepartmentImages" Type="Self.DepartmentImages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
@@ -492,6 +496,7 @@
           <Property Name="SpecialityId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Speciality" Relationship="DoctorPortalDBEntitiesModel.FK_Doctor_Speciality" FromRole="Doctor" ToRole="Speciality" />
           <Property Name="IsOnHomePage" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Speciality">
           <Key>
@@ -560,6 +565,7 @@
           <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="Department" ToRole="HospitalMaster" />
           <NavigationProperty Name="DepartmentImages" Relationship="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" FromRole="Department" ToRole="DepartmentImages" />
           <NavigationProperty Name="FAQQuestions" Relationship="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" FromRole="Department" ToRole="FAQQuestions" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Department_HospitalMaster">
           <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
@@ -675,6 +681,7 @@
           <EntitySetMapping Name="Doctor">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Doctor">
               <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsOnHomePage" ColumnName="IsOnHomePage" />
                 <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
@@ -733,6 +740,7 @@
           <EntitySetMapping Name="Department">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Department">
               <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="HomePageIcon" ColumnName="HomePageIcon" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />

@@ -11,10 +11,12 @@ using DoctorPortal.Web.AdminServices.FAQ;
 using DoctorPortal.Web.AdminServices.Hospital;
 using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
+using DoctorPortal.Web.Areas.Admin.Repositories.DepartmentImage;
 using DoctorPortal.Web.Areas.Admin.Repositories.Doctor;
 using DoctorPortal.Web.Areas.Admin.Repositories.Facility;
 using DoctorPortal.Web.Areas.Admin.Repositories.Hospital;
 using DoctorPortal.Web.Areas.Admin.Repositories.Testimonials;
+using DoctorPortal.Web.Areas.Admin.Services.DepartmentImage;
 using DoctorPortal.Web.Areas.Admin.Services.Doctor;
 using DoctorPortal.Web.Areas.Admin.Services.Facility;
 using DoctorPortal.Web.Areas.Admin.Services.HospitalInfo;
@@ -45,6 +47,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<DoctorRepository>().As<IDoctorRepository>().InstancePerDependency();
             builder.RegisterType<AppointmentRepository>().As<IAppointmentRepository>().InstancePerDependency();
             builder.RegisterType<FAQRepository>().As<IFAQRepository>().InstancePerDependency();
+            builder.RegisterType<DepartmentImageRepository>().As<IDepartmentImageRepository>().InstancePerDependency();
 
             // Services
             builder.RegisterGeneric(typeof(EntityService<>)).As(typeof(IEntityService<>)).InstancePerDependency();
@@ -59,6 +62,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<DoctorService>().As<IDoctorService>().InstancePerDependency();
             builder.RegisterType<AppointmentService>().As<IAppointmentService>().InstancePerDependency();
             builder.RegisterType<FAQService>().As<IFAQService>().InstancePerDependency();
+            builder.RegisterType<DepartmentImageService>().As<IDepartmentImageService>().InstancePerDependency();
 
         }
     }

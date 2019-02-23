@@ -22,6 +22,7 @@ namespace DoctorPortal.Web.Database
         public string ImageName { get; set; }
         public int SpecialityId { get; set; }
         public Nullable<bool> IsOnHomePage { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual Speciality Speciality { get; set; }
     }

@@ -22,7 +22,7 @@ namespace DoctorPortal.Web.Models
             
             ContactList = hospital.HospitalContacts;
             WorkingDaysList = hospital.HospitalWorkingDays;
-            Departmentlist = hospital.Department.Select(s=>new DepartmentViewModel(s)).ToList();
+            Departmentlist = hospital.Department.Where(m=>m.IsActive == true).Select(s=>new DepartmentViewModel(s)).ToList();
             //Testimonials = hospital.Testimonials.Select(s => new TestimonialViewModel(s)).ToList();
             //Facilitylist = hospital.Facilities.Select(s => new FacilityViewModel(s)).ToList();
         }

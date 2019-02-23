@@ -17,7 +17,7 @@ namespace DoctorPortal.Web.Models
         {
             SpecialityId = speciality.SpecialityId;
             Name = speciality.Name;
-            doctorlist = speciality.Doctor.Select(s => new DoctorViewModel(s)).ToList();
+            doctorlist = speciality.Doctor.Where(m=>m.IsActive == true).Select(s => new DoctorViewModel(s)).ToList();
         }
         public int SpecialityId { get; set; }
         public string Name { get; set; }

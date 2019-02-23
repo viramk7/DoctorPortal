@@ -24,6 +24,7 @@ namespace DoctorPortal.Web.Models
             ImageName = doctor.ImageName;
             SpecialityId = doctor.SpecialityId;
             IsOnHomePage = doctor.IsOnHomePage;
+            IsActive = doctor.IsActive == null ? false : (bool)doctor.IsActive;
         }
 
         public int DoctorId { get; set; }
@@ -64,6 +65,9 @@ namespace DoctorPortal.Web.Models
 
         public Nullable<bool> IsOnHomePage { get; set; }
 
+        [Display(Name = @"Is Active")]
+        public bool IsActive { get; set; }
+
         public Doctor GetDoctorEntity()
         {
             return new Doctor
@@ -75,7 +79,8 @@ namespace DoctorPortal.Web.Models
                 EmailAddress = EmailAddress,
                 ImageName = ImageName ?? Name,
                 SpecialityId = SpecialityId,
-                IsOnHomePage = IsOnHomePage
+                IsOnHomePage = IsOnHomePage,
+                IsActive = IsActive
             };
         }
     }

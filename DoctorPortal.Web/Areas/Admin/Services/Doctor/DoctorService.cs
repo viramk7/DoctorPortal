@@ -27,7 +27,7 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Doctor
 
         public IEnumerable<DoctorViewModel> GetHomePageDoctorList()
         {
-            var list = _idoctorRepository.Table.Where(m=>m.IsOnHomePage == true).Take(4).ToList();
+            var list = _idoctorRepository.Table.Where(m=>m.IsOnHomePage == true && m.IsActive == true).Take(4).ToList();
             return list.Select(s => new DoctorViewModel(s));
         }
 

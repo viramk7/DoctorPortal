@@ -24,42 +24,45 @@
                     <div class="card-body">
 
                         @(Html.Kendo().Grid<DepartmentViewModel>()
-                                                       .Name("gridDepartment")
-                                                       .Columns(columns =>
-                                                       {
-                                                           columns.Command(command =>
-                                                           {
-                                                               command.Custom("Edit").Text("<span class='k-icon k-i-edit' title='Edit'></span>").HtmlAttributes(new { @style = "margin:2px" }).Click("onAddEdit");
-                                                               command.Custom("Delete").Text("<span class='k-icon k-i-close' title='Delete'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onDelete");
-                                                           }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
-                                                             .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+                                                                       .Name("gridDepartment")
+                                                                       .Columns(columns =>
+                                                                       {
+                                                                           columns.Command(command =>
+                                                                           {
+                                                                               command.Custom("Edit").Text("<span class='k-icon k-i-edit' title='Edit'></span>").HtmlAttributes(new { @style = "margin:2px" }).Click("onAddEdit");
+                                                                               command.Custom("Delete").Text("<span class='k-icon k-i-close' title='Delete'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onDelete");
+                                                                           }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                                                             .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
 
-                                                           columns.Bound(d => d.DepartmentName);
-                                                           columns.Bound(d => d.Description);
-                                                           columns.Bound(d => d.HomePageIcon);
-                                                           
-                                                       })
-                                                       .ToolBar(toolbar =>
-                                                       {
-                                                           toolbar.Template("<a class='k-button k-button-icontext' onclick='onAddEdit(0)' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
-                                                       })
+                                                                           columns.Bound(d => d.DepartmentName);
+                                                                           columns.Bound(d => d.Description);
+                                                                           columns.Bound(d => d.HomePageIcon);
+                                                                           columns.Bound(d => d.IsActive).Filterable(false)
+                                                                                .ClientTemplate(Html.SetStatusClientTemplate("IsActive", "Department", "ChangeStatus",
+                                                                                "id=#= DepartmentId #", "#= DepartmentId #", "gridDepartment", "Department")).HtmlAttributes(WebHelper.StatusColumnStyle)
+                                                                                .HeaderHtmlAttributes(WebHelper.StatusColumnStyle);
+                                                                       })
+                                                                       .ToolBar(toolbar =>
+                                                                       {
+                                                                           toolbar.Template("<a class='k-button k-button-icontext' onclick='onAddEdit(0)' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
+                                                                       })
 
-                                                       .Pageable(x =>
-                                                       {
-                                                           x.Refresh(true);
-                                                           x.PageSizes(WebHelper.PageSizes);
-                                                       })
-                                                       .Sortable(sortable => sortable.AllowUnsort(false))
-                                                       .Filterable(filter => filter.Enabled(false))
-                                                       .NoRecords()
-                                                       .DataSource(dataSource => dataSource
-                                                           .Ajax()
-                                                           .ServerOperation(true)
-                                                           .PageSize(WebHelper.PageSize)
-                                                           .Model(model => model.Id(d => d.DepartmentId))
-                                                           .Events(events => events.Error("onError('gridDepartment')").RequestEnd("onReqEnd"))
-                                                           .Read(read => read.Action("KendoRead", "Department"))
-                                                       ))
+                                                                       .Pageable(x =>
+                                                                       {
+                                                                           x.Refresh(true);
+                                                                           x.PageSizes(WebHelper.PageSizes);
+                                                                       })
+                                                                       .Sortable(sortable => sortable.AllowUnsort(false))
+                                                                       .Filterable(filter => filter.Enabled(false))
+                                                                       .NoRecords()
+                                                                       .DataSource(dataSource => dataSource
+                                                                           .Ajax()
+                                                                           .ServerOperation(true)
+                                                                           .PageSize(WebHelper.PageSize)
+                                                                           .Model(model => model.Id(d => d.DepartmentId))
+                                                                           .Events(events => events.Error("onError('gridDepartment')").RequestEnd("onReqEnd"))
+                                                                           .Read(read => read.Action("KendoRead", "Department"))
+                                                                       ))
 
                     </div>
                 </div>
@@ -69,6 +72,8 @@
 </div>
 
 <script>
+    
+
     function onAddEdit(e) {
         var uri = '@Url.Action("AddEdit", "Department")';
         if (e != 0) {

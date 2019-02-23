@@ -15,7 +15,7 @@ namespace DoctorPortal.Web.AdminRepositories.Department
 
         public Database.Department GetFirstDept()
         {
-            return Entities.OrderBy(o => o.DepartmentName).FirstOrDefault();
+            return Entities.Where(m=>m.IsActive == true).OrderBy(o => o.DepartmentName).FirstOrDefault();
         }
     }
 }

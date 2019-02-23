@@ -112,6 +112,19 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public string ChangeStatus(int id)
+        {
+            if (id > 0)
+            {
+                DoctorViewModel obj = _service.GetById(id);
+                obj.IsActive = !obj.IsActive;
+                _service.Save(obj);
+                return String.Empty;
+            }
+            return "Something Went Wrong";
+        }
+
         public string UploadFile(HttpPostedFileBase file)
         {
             if (file == null)

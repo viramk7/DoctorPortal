@@ -21,6 +21,7 @@ namespace DoctorPortal.Web.Models
             DepartmentName = department.DepartmentName;
             Description = department.Description;
             HomePageIcon = department.HomePageIcon;
+            IsActive = department.IsActive == null ? false : (bool)department.IsActive;
             imageslist = department.DepartmentImages.Select(s=>new DepartmentImageViewModel(s)).ToList();
         }
         public int DepartmentId { get; set; }
@@ -40,6 +41,9 @@ namespace DoctorPortal.Web.Models
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string HomePageIcon { get; set; }
 
+        [Display(Name = @"Is Active")]
+        public bool IsActive { get; set; }
+
         public IEnumerable<DepartmentImageViewModel> imageslist { get; set; }
         public IEnumerable<FacilityViewModel> serviceslist { get; set; }
 
@@ -51,7 +55,8 @@ namespace DoctorPortal.Web.Models
                 HospitalId = WebHelper.HospitalId,
                 DepartmentName = DepartmentName,
                 Description = Description,
-                HomePageIcon = HomePageIcon
+                HomePageIcon = HomePageIcon,
+                IsActive = IsActive
             };
         }
     }

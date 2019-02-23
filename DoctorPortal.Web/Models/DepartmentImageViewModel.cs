@@ -23,5 +23,15 @@ namespace DoctorPortal.Web.Models
         public int Id { get; set; }
         public int DepartmentId { get; set; }
         public string ImageName { get; set; }
+
+        public DepartmentImages GetDepartmentImagesEntity()
+        {
+            return new DepartmentImages
+            {
+                Id = Id,
+                DepartmentId = DepartmentId,
+                ImageName = ImageName
+            };
+        }
     }
 }

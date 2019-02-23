@@ -40,7 +40,7 @@ namespace DoctorPortal.Web.Controllers
             var departments =
                cacheManager.Get(CacheKeys.DepartmentList.ToString(), () =>
                {
-                   return _service.GetAllDepartment();
+                   return _service.GetAllActiveDepartment();
                });
 
             return PartialView("_Departments", departments);

@@ -28,7 +28,7 @@ var validationMessageTemplate = kendo.template(
     "</div>");
 
 function callwebservice(ajaxurl, parameter, callbackFunction, isErrorHandle, dataTypem, typeEnum) {
-
+    debugger;
     if (typeof (parameter) === 'undefined') {
         parameter = '';
     }
@@ -180,11 +180,14 @@ function clearAllData(formId) {
 }
 
 function changeStatus(controllerName, action, reloadAction, parameter, message, id, gridId) {
+    debugger;
     var grid = $("#" + gridId).data("kendoGrid");
     bootbox.confirm(message, function (result) {
         if (result === true) {
-            callwebservice(getWindowPathName() + controllerName + '/' + action, parameter, function (data) {
+            debugger;
+            callwebservice(getWindowPathName() + "Admin/" + controllerName + '/' + action, parameter, function (data) {
                 if (data === "") {
+                    debugger;
                     if (grid != undefined) {
                         grid.dataSource.read();
                         return;

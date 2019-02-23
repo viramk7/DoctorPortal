@@ -1,4 +1,5 @@
 ﻿@using DoctorPortal.Web.Areas.Admin.Models
+@using DoctorPortal.Web.Common
 @*@using StandardEng.Common*@
 <!DOCTYPE html>
 <html>
@@ -87,6 +88,10 @@
     }
 
     <script type="text/javascript">
+         var pathArray = '@ConfigItems.SiteRootPathUrl' + '/';
+
+        var controllerName = '@ViewContext.RouteData.Values["Controller"].ToString()';
+
 
     $(document).ready(function () {
         $(document).ajaxError(function (xhr, props) {
@@ -97,9 +102,7 @@
             }
         });
     });
-    var pathArray = '@ConfigItems.SiteRootPathUrl' + '/';
-
-    var controllerName = '@ViewContext.RouteData.Values["Controller"].ToString()';
+   
 
     $(document).ready(function () {
         kendo.culture('en-IN');

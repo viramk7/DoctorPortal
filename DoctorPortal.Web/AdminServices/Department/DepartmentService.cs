@@ -32,6 +32,12 @@ namespace DoctorPortal.Web.AdminServices.Department
             return department.Select(s=>new DepartmentViewModel(s)).ToList();
         }
 
+        public List<DepartmentViewModel> GetAllActiveDepartment()
+        {
+            var department = _departmentRepository.Table.Where(m=>m.IsActive == true).ToList();
+            return department.Select(s => new DepartmentViewModel(s)).ToList();
+        }
+
         public DepartmentViewModel Save(DepartmentViewModel model)
         {
             var obj = model.GetDepartmentEntity();

@@ -53,18 +53,18 @@
                                     @Html.LabelFor(m => m.SpecialityId, new { @class = "col-sm-6 col-lg-4 col-form-label" })
                                     <div class="col-sm-6 col-lg-9">
                                         @(Html.Kendo().ComboBoxFor(m => m.SpecialityId)
-                                                                      .Value(Model.SpecialityId == 0 ? string.Empty : Model.SpecialityId.ToString())
-                                                                      .Placeholder("--Select Speciality --")
-                                                                      .DataTextField("Name")
-                                                                      .DataValueField("SpecialityId")
-                                                                      .HtmlAttributes(new { @style = "width:100%" })
-                                                                      .DataSource(source =>
-                                                                      {
-                                                                          source.Read(read =>
-                                                                          {
-                                                                              read.Action("BindSpecialityDropDown", "Doctor");
-                                                                          });
-                                                                      }))
+                                                                              .Value(Model.SpecialityId == 0 ? string.Empty : Model.SpecialityId.ToString())
+                                                                              .Placeholder("--Select Speciality --")
+                                                                              .DataTextField("Name")
+                                                                              .DataValueField("SpecialityId")
+                                                                              .HtmlAttributes(new { @style = "width:100%" })
+                                                                              .DataSource(source =>
+                                                                              {
+                                                                                  source.Read(read =>
+                                                                                  {
+                                                                                      read.Action("BindSpecialityDropDown", "Doctor");
+                                                                                  });
+                                                                              }))
                                         @Html.ValidationMessageFor(m => m.SpecialityId)
                                     </div>
                                 </div>
@@ -74,6 +74,14 @@
                                     <div class="col-sm-6 col-lg-9">
                                         @Html.Kendo().CheckBoxFor(m => m.IsOnHomePage)
                                         @Html.ValidationMessageFor(m => m.IsOnHomePage)
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.IsActive, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.Kendo().CheckBoxFor(m => m.IsActive)
+                                        @Html.ValidationMessageFor(m => m.IsActive)
                                     </div>
                                 </div>
 

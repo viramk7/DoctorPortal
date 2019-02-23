@@ -13,6 +13,32 @@ namespace DoctorPortal.Web.Common
 {
     public static class HtmlHelperExtensions
     {
+        public static string SetStatusClientTemplate(this HtmlHelper helper, string isActive, string controllerName, string action, string parameter, string id, string gridId, string entityName)
+        {
+
+            string deactivteMessage = "Are you sure you want to deactivate this " + entityName;
+
+
+            string activteMessage = "Are you sure you want to activate this " + entityName;
+
+            var deactiveAttributes = " onclick='changeStatus(" + @"""" + controllerName + @"""" + ", " + @"""" +
+                                    action + @"""" + ", " + @"""""" + ", "
+                                    + @"""" + parameter + @"""" + ", " + @"""" + deactivteMessage + @"""" + ", " + id
+                                    + ", " + @"""" + gridId + @"""" + @")'";
+
+            var activeAttributes = " onclick='changeStatus(" + @"""" + controllerName + @"""" + ", " + @"""" +
+                                   action + @"""" + ", " + @"""""" + ", "
+                                   + @"""" + parameter + @"""" + ", " + @"""" + activteMessage + @"""" + ", " + id
+                                   + ", " + @"""" + gridId + @"""" + @")'";
+
+
+            return "# if (" + isActive + ")    {#" +
+                     @"<a class='k-button' " + deactiveAttributes + @"><span class='k-icon k-i-check'></span></a>" +
+                     "#}else { #" +
+                     @"<a class='k-button' " + activeAttributes + @"><span class='k-icon k-i-close'></span></a>"
+                     + "#}#";
+        }
+
         public static MvcHtmlString GenerateMenu(this HtmlHelper helper)
         {
             var parentMenuList = ProjectSession.UserAccessPermissions.Where(x => x.ParentMenuId == null).OrderBy(item => item.DisplayOrder).ToList();

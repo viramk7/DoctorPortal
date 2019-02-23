@@ -196,6 +196,8 @@
     <Compile Include="Areas\Admin\Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\PageHeaderViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\Repositories\DepartmentImage\DepartmentImageRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\DepartmentImage\IDepartmentImageRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Doctor\DoctorRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Doctor\IDoctorRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Facility\FacilityRepository.cs" />
@@ -204,6 +206,8 @@
     <Compile Include="Areas\Admin\Repositories\Hospital\IHospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\ITestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\TestimonialsRepository.cs" />
+    <Compile Include="Areas\Admin\Services\DepartmentImage\DepartmentImageService.cs" />
+    <Compile Include="Areas\Admin\Services\DepartmentImage\IDepartmentImageService.cs" />
     <Compile Include="Areas\Admin\Services\Doctor\DoctorService.cs" />
     <Compile Include="Areas\Admin\Services\Doctor\IDoctorService.cs" />
     <Compile Include="Areas\Admin\Services\Facility\FacilityService.cs" />
