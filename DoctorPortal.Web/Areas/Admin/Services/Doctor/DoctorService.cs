@@ -39,16 +39,28 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Doctor
 
         public DoctorViewModel Save(DoctorViewModel model)
         {
-            var obj = model.GetDoctorEntity();
-
-            if (obj.DoctorId > 0)
+            if (model.DoctorId > 0)
             {
-                _idoctorRepository.Update(obj);
+                var doctor = _idoctorRepository.GetById(model.DoctorId);
+                if(doctor == null)
+                    throw  new Exception("Not found");
+
+                doctor.Name = model.Name;
+                doctor.Position = model.Position;
+                doctor.ContactNo = model.ContactNo;
+                doctor.EmailAddress = model.EmailAddress;
+                doctor.ImageName = model.ImageName;
+                doctor.SpecialityId = model.SpecialityId;
+                doctor.IsOnHomePage = model.IsOnHomePage;
+                doctor.IsActive = model.IsActive;
+
+                _idoctorRepository.Update(doctor);
             }
             else
             {
-                _idoctorRepository.Insert(obj);
-                model.DoctorId = obj.DoctorId;
+                var doctor = model.GetDoctorEntity();
+                _idoctorRepository.Insert(doctor);
+                model.DoctorId = doctor.DoctorId;
             }
 
             return model;

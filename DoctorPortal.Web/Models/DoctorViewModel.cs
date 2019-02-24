@@ -1,8 +1,6 @@
 ﻿using DoctorPortal.Web.Database;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
 
 namespace DoctorPortal.Web.Models
@@ -11,7 +9,7 @@ namespace DoctorPortal.Web.Models
     {
         public DoctorViewModel()
         {
-
+            IsActive = true;
         }
 
         public DoctorViewModel(Doctor doctor)
@@ -63,9 +61,10 @@ namespace DoctorPortal.Web.Models
         //[Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         public HttpPostedFileBase ImageFile { get; set; }
 
-        public Nullable<bool> IsOnHomePage { get; set; }
+        [Display(Name = @"Display On Home page")]
+        public bool? IsOnHomePage { get; set; }
 
-        [Display(Name = @"Is Active")]
+        [Display(Name = @"Active")]
         public bool IsActive { get; set; }
 
         public Doctor GetDoctorEntity()

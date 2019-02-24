@@ -36,12 +36,12 @@ namespace DoctorPortal.Web.Models
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         public string Description { get; set; }
 
-        [Display(Name = @"Home Page Icon")]
+        [Display(Name = @"Icon")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string HomePageIcon { get; set; }
 
-        [Display(Name = @"Is Active")]
+        [Display(Name = @"Active")]
         public bool IsActive { get; set; }
 
         public IEnumerable<DepartmentImageViewModel> imageslist { get; set; }
