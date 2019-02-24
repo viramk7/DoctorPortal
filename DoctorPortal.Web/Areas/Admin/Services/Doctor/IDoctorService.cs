@@ -14,5 +14,6 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Doctor
         DoctorViewModel Save(DoctorViewModel model);
         void Delete(int id);
         IEnumerable<DoctorViewModel> GetHomePageDoctorList();
+        void ChangeStatus(int id);
     }
 }

@@ -59,5 +59,16 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Doctor
             var obj = _idoctorRepository.GetById(id);
             _idoctorRepository.Delete(obj);
         }
+
+        public void ChangeStatus(int id)
+        {
+            var doctor = _idoctorRepository.GetById(id);
+            if(doctor == null)
+                throw new Exception("not found");
+
+            doctor.IsActive = !doctor.IsActive;
+            _idoctorRepository.Update(doctor);
+        }
+
     }
 }

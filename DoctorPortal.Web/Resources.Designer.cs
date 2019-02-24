@@ -196,6 +196,24 @@ namespace DoctorPortal.Web {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not change the status..
+        /// </summary>
+        internal static string StatusChangeFailed {
+            get {
+                return ResourceManager.GetString("StatusChangeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status changed successfully..
+        /// </summary>
+        internal static string StatusChangeSuccess {
+            get {
+                return ResourceManager.GetString("StatusChangeSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum length for {0} is {1}..
         /// </summary>
         internal static string StringLengthValidation {

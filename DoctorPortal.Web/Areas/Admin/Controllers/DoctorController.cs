@@ -6,6 +6,7 @@ using DoctorPortal.Web.Models;
 using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     public class DoctorController : BaseController
     {
+        private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly IDoctorService _service;
         private readonly ISpecialityService _serviceSpeciality;
 
@@ -74,7 +77,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("ImageName", "Please Upload Doctor Image");
                     return View(model);
                 }
-                else if(model.ImageFile != null)
+                else if (model.ImageFile != null)
                 {
                     model.ImageName = UploadFile(model.ImageFile);
                 }
@@ -115,14 +118,16 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         [HttpPost]
         public string ChangeStatus(int id)
         {
-            if (id > 0)
+            try
             {
-                DoctorViewModel obj = _service.GetById(id);
-                obj.IsActive = !obj.IsActive;
-                _service.Save(obj);
-                return String.Empty;
+                _service.ChangeStatus(id);
+                return string.Empty;
             }
-            return "Something Went Wrong";
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                return Resources.StatusChangeFailed;
+            }
         }
 
         public string UploadFile(HttpPostedFileBase file)
