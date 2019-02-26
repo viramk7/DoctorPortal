@@ -34,6 +34,9 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Doctor
         public DoctorViewModel GetById(int id)
         {
             var obj = _idoctorRepository.GetById(id);
+            if (obj == null)
+                throw new Exception("not found");
+
             return new DoctorViewModel(obj);
         }
 

@@ -76,7 +76,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             }
             catch(Exception ex)
             {
-                _logger.Error(ex);
+                Logger.log.Error($"Departments > AddEdit. Error: {ex.Message}");
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -87,19 +87,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
 
-
                 if (model == null || !ModelState.IsValid)
                     return View(model);
-
-                //if (model.ImageFile == null && string.IsNullOrEmpty(model.ImageName))
-                //{
-                //    ModelState.AddModelError("ImageName", "Please Upload Doctor Image");
-                //    return View(model);
-                //}
-                //else if (model.ImageFile != null)
-                //{
-                //    model.ImageName = UploadFile(model.ImageFile);
-                //}
 
                 model = _service.Save(model);
 

@@ -12,7 +12,7 @@ namespace DoctorPortal.Web.Models
     {
         public DepartmentViewModel()
         {
-
+            IsActive = true;
         }
         public DepartmentViewModel(Department department)
         {

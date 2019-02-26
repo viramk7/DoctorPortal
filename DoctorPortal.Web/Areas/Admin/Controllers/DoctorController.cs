@@ -55,10 +55,17 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             var model = new DoctorViewModel();
             if (id == 0)
                 return View(model);
+            try
+            {
+                model = _service.GetById(id);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Logger.log.Error($"Doctors > AddEdit. Error: {ex.Message}");
+                return RedirectToAction(nameof(Index));
+            }
 
-            model = _service.GetById(id);
-
-            return View(model);
         }
 
 
@@ -67,8 +74,6 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         {
             try
             {
-
-
                 if (model == null || !ModelState.IsValid)
                     return View(model);
 

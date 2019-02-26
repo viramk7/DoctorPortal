@@ -80,7 +80,7 @@
             var tr = $(e.target).closest("tr");
             var data = this.dataItem(tr);
             if (data != null)
-                uri += '?id=' + data.DoctorId;
+                uri += '/' + data.DoctorId;
         }
         window.location.href = uri;
     }

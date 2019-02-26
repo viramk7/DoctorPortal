@@ -18,6 +18,9 @@ namespace DoctorPortal.Web.AdminServices.Department
         public DepartmentViewModel GetDepartmentById(int id)
         {
             var department = _departmentRepository.GetById(id);
+            if (department == null)
+                throw new Exception("not found");
+
             return new DepartmentViewModel(department);
         }
 
