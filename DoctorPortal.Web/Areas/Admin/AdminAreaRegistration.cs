@@ -11,7 +11,7 @@ namespace DoctorPortal.Web.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { controller = "AdminHome",action = "Index", id = UrlParameter.Optional }
+                new { controller = "Hospital", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

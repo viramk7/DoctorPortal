@@ -234,6 +234,7 @@
     <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -977,6 +978,11 @@
     <Content Include="Views\Shared\_MakeAppointmentFooter.cshtml" />
     <Content Include="Views\ContactUs\_MakeAppointmentContactUs.cshtml" />
     <Content Include="Views\FAQ\FAQRequested.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Errors\HttpError404.cshtml" />
+    <Content Include="Views\Errors\HttpError500.cshtml" />
+    <Content Include="Views\Errors\General.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />
