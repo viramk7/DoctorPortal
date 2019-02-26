@@ -20,5 +20,7 @@ namespace DoctorPortal.Web.AdminServices.Department
 
         List<DepartmentViewModel> GetAllActiveDepartment();
 
+        void ChangeStatus(int id);
+
     }
 }

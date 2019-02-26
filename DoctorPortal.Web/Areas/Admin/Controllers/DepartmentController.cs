@@ -6,6 +6,7 @@ using DoctorPortal.Web.Models;
 using Kendo.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
     public class DepartmentController : BaseController
     {
+
+        private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IDepartmentService _service;
         private readonly IDepartmentImageService _imageService;
 
@@ -62,12 +65,20 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         public ActionResult AddEdit(int id = 0)
         {
             var model = new DepartmentViewModel();
+
             if (id == 0)
                 return View(model);
 
-            model = _service.GetDepartmentById(id);
-
-            return View(model);
+            try
+            {
+                model = _service.GetDepartmentById(id);
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(ex);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpPost]
@@ -137,14 +148,16 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         [HttpPost]
         public string ChangeStatus(int id)
         {
-            if (id > 0)
+            try
             {
-                DepartmentViewModel obj = _service.GetDepartmentById(id);
-                obj.IsActive = !obj.IsActive;
-                _service.Save(obj);
-                return String.Empty;
+                _service.ChangeStatus(id);
+                return string.Empty;
             }
-            return "Something Went Wrong";
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+                return Resources.StatusChangeFailed;
+            }
         }
 
         public ActionResult KendoDestroyImage([DataSourceRequest] DataSourceRequest request, DepartmentImageViewModel model)

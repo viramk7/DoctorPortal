@@ -81,7 +81,7 @@
             var tr = $(e.target).closest("tr");
             var data = this.dataItem(tr);
             if (data != null)
-                uri += '?id=' + data.DepartmentId;
+                uri += '/' + data.DepartmentId;
         }
         window.location.href = uri;
     }

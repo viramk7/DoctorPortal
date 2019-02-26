@@ -12,16 +12,17 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header header-elements-inline">
-                    <h5 class="card-title">
-                        Manage Department
-                    </h5>
-                </div>
-                <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
 
-                    @Html.ValidationSummary(true)
-                    @Html.Partial("_ActionBar", new ActionBarViewModel("Department", displaySaveAndContinueButton: true))
+                @Html.ValidationSummary(true)
+                @Html.Partial("_ActionBar", new ActionBarViewModel("Department", displaySaveAndContinueButton: true))
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">
+                            Manage Department
+                        </h5>
+                    </div>
 
                     <hr />
                     <div class="card-body">
@@ -31,7 +32,6 @@
                         <div class="row">
 
                             <div class="col-lg-6">
-
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.DepartmentName, new { @class = "col-sm-6 col-lg-4 col-form-label" })
                                     <div class="col-sm-6 col-lg-9">
@@ -39,40 +39,16 @@
                                         @Html.ValidationMessageFor(m => m.DepartmentName)
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     @Html.Label(" ", new { @class = "col-sm-6 col-lg-4 col-form-label" })
-                                    <div class="col-sm-6 col-lg-9">
+                                    <div class="col-sm-6 col-lg-9" style="margin-top:15px;">
                                         @Html.Kendo().CheckBoxFor(m => m.IsActive)
                                         @Html.ValidationMessageFor(m => m.IsActive)
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="col-lg-6">
-
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.HomePageIcon, new { @class = "col-sm-6 col-lg-4 col-form-label" })
-                                    <div class="col-sm-6 col-lg-9">
-                                        @Html.TextBoxFor(m => m.HomePageIcon, new { @class = "k-textbox", style = "width: 100%;" })
-                                        @Html.ValidationMessageFor(m => m.HomePageIcon)
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.Label("Upload Files", new { @class = "col-sm-6 col-lg-4 col-form-label" })
-                                    <div class="col-sm-6 col-lg-9">
-                                        @(Html.Kendo().Upload().Name("files").Multiple(true)
-                                                              .Validation(validation => validation.AllowedExtensions(WebHelper.ValidImageFileTypes)))
-                                        @*@Html.ValidationMessage()*@
-                                        <p>
-                                            <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
-                                        </p>
-
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
@@ -88,40 +64,66 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.HomePageIcon, new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @Html.TextBoxFor(m => m.HomePageIcon, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @Html.ValidationMessageFor(m => m.HomePageIcon)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    @Html.Label("Upload Files", new { @class = "col-sm-6 col-lg-4 col-form-label" })
+                                    <div class="col-sm-6 col-lg-9">
+                                        @(Html.Kendo().Upload().Name("files").Multiple(true)
+                                                                                                      .Validation(validation => validation.AllowedExtensions(WebHelper.ValidImageFileTypes)))
+                                        <p>
+                                            <span class="text-muted">*Only @string.Join(", ", WebHelper.ValidImageFileTypes) allowed.</span>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
 
-                <div class="card-body">
-                    @if (Model.DepartmentId > 0)
-                    {
-                        @(Html.Kendo().Grid<DepartmentImageViewModel>()
-                                                                   .Name("gridImage")
-                                                                   .Columns(columns =>
-                                                                   {
-                                                                       columns.Command(command =>
-                                                                       {
-                                                                           command.Destroy().Text(" ");
 
-                                                                       }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
-                                                                         .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+                    <div class="card-body">
+                        @if (Model.DepartmentId > 0)
+                        {
+                            @(Html.Kendo().Grid<DepartmentImageViewModel>()
+                                                                                       .Name("gridImage")
+                                                                                       .Columns(columns =>
+                                                                                       {
+                                                                                           columns.Command(command =>
+                                                                                           {
+                                                                                               command.Destroy().Text(" ");
 
-                                                                       columns.Bound(d => d.ImageName).ClientTemplate("<img src='" + Url.Content("/Uploads/Department/") + "#=ImageName#' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
-                                                                               //columns.Bound(d => d.ImageName).ClientTemplate("<img src='"+ Url.Content("#=ImageName #") + "' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
-                                                                           })
+                                                                                           }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                                                                             .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
 
-                                                                   .NoRecords()
-                                                                   .DataSource(dataSource => dataSource
-                                                                       .Ajax()
-                                                                       .ServerOperation(true)
-                                                                       .PageSize(WebHelper.PageSize)
-                                                                       .Model(model => model.Id(d => d.Id))
-                                                                       .Events(events => events.Error("onError('gridImage')"))
-                                                                       .Read(read => read.Action("KendoReadImage", "Department").Data("onAdditionalData"))
-                                                                       .Destroy(update => update.Action("KendoDestroyImage", "Department"))
-                                                                   ))
-                    }
+                                                                                           columns.Bound(d => d.ImageName).ClientTemplate("<img src='" + Url.Content("/Uploads/Department/") + "#=ImageName#' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
+                                                                                           //columns.Bound(d => d.ImageName).ClientTemplate("<img src='"+ Url.Content("#=ImageName #") + "' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
+                                                                                       })
+
+                                                                                       .NoRecords()
+                                                                                       .DataSource(dataSource => dataSource
+                                                                                           .Ajax()
+                                                                                           .ServerOperation(true)
+                                                                                           .PageSize(WebHelper.PageSize)
+                                                                                           .Model(model => model.Id(d => d.Id))
+                                                                                           .Events(events => events.Error("onError('gridImage')"))
+                                                                                           .Read(read => read.Action("KendoReadImage", "Department").Data("onAdditionalData"))
+                                                                                           .Destroy(update => update.Action("KendoDestroyImage", "Department"))
+                                                                                       ))
+                        }
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

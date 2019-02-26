@@ -47,6 +47,8 @@ namespace DoctorPortal.Web.Areas.Admin.Services.DepartmentImage
             var obj = _iRepository.GetById(id);
             _iRepository.Delete(obj);
         }
+
         
+
     }
 }

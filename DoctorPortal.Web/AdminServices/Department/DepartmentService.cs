@@ -1,5 +1,6 @@
 ﻿using DoctorPortal.Web.AdminRepositories.Department;
 using DoctorPortal.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,6 +60,16 @@ namespace DoctorPortal.Web.AdminServices.Department
         {
             var obj = _departmentRepository.GetById(id);
             _departmentRepository.Delete(obj);
+        }
+
+        public void ChangeStatus(int id)
+        {
+            var department = _departmentRepository.GetById(id);
+            if (department == null)
+                throw new Exception("not found");
+
+            department.IsActive = !department.IsActive;
+            _departmentRepository.Update(department);
         }
     }
 }
