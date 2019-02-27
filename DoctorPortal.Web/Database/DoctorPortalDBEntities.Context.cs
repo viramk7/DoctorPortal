@@ -37,5 +37,6 @@ namespace DoctorPortal.Web.Database
         public virtual DbSet<Appointment> Appointment { get; set; }
         public virtual DbSet<FAQQuestions> FAQQuestions { get; set; }
         public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<tblIcons> tblIcons { get; set; }
     }
 }

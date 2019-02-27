@@ -12,15 +12,9 @@ namespace DoctorPortal.Web.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Facility
+    public partial class tblIcons
     {
-        public int FacilityId { get; set; }
-        public int HospitalId { get; set; }
-        public string HeaderText { get; set; }
-        public string Description { get; set; }
+        public int Id { get; set; }
         public string IconName { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-    
-        public virtual HospitalMaster HospitalMaster { get; set; }
     }
 }

@@ -37,6 +37,10 @@
                                            columns.Bound(d => d.HeaderText);
                                            columns.Bound(d => d.Description);
                                            columns.Bound(d => d.IconName);
+                                           columns.Bound(d => d.IsActive).Filterable(false)
+                                             .ClientTemplate(Html.SetStatusClientTemplate("IsActive", "Facility", "ChangeStatus",
+                                             "id=#= FacilityId #", "#= FacilityId #", "gridFacility", "Facility")).HtmlAttributes(WebHelper.StatusColumnStyle)
+                                             .HeaderHtmlAttributes(WebHelper.StatusColumnStyle);
                                        })
                                        .ToolBar(toolbar =>
                                        {
@@ -56,6 +60,7 @@
                                        .Sortable(sortable => sortable.AllowUnsort(false))
                                        .Filterable(filter => filter.Enabled(false))
                                        .NoRecords()
+                                       .Events(e=>e.Edit("onEdit"))
                                        //.Events(grid => grid.Edit("edit"))
                                        .DataSource(dataSource => dataSource
                                            .Ajax()
@@ -75,3 +80,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function onEdit(e) {
+        if (e.model.isNew()) {
+            e.model.set("IsActive", true);
+        }
+        e.container.data('kendoWindow').bind('activate', function () {
+            setFocusById('HeaderText');
+        });
+    }
+</script>

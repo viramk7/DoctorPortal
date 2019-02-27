@@ -11,7 +11,7 @@ namespace DoctorPortal.Web.Models
     {
         public FacilityViewModel()
         {
-
+            IsActive = true;
         }
 
         public FacilityViewModel(Facility facility)
@@ -21,6 +21,7 @@ namespace DoctorPortal.Web.Models
             Description = facility.Description;
             IconName = facility.IconName;
             HospitalId = facility.HospitalId;
+            IsActive = facility.IsActive == null ? false : facility.IsActive.Value;
         }
 
         [ScaffoldColumn(false)]
@@ -41,8 +42,11 @@ namespace DoctorPortal.Web.Models
         public string Description { get; set; }
 
         [Display(Name = @"IconName")]
+        [UIHint("IconDropDown")]
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string IconName { get; set; }
+
+        public bool IsActive { get; set; }
 
         public Facility GetFacilityEntity()
         {
@@ -52,7 +56,8 @@ namespace DoctorPortal.Web.Models
                 HospitalId = HospitalId,
                 HeaderText = HeaderText,
                 Description = Description,
-                IconName = IconName
+                IconName = IconName,
+                IsActive = IsActive
             };
         }
     }

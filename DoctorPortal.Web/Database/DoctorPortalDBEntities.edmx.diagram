@@ -26,6 +26,7 @@
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_DepartmentImages_Department" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" />
+        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.tblIcons" Width="1.5" PointX="7.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

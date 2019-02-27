@@ -67,10 +67,32 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group">
+                                <div class="form-group demo-section k-content">
                                     @Html.LabelFor(m => m.HomePageIcon, new { @class = "col-sm-6 col-lg-4 col-form-label" })
                                     <div class="col-sm-6 col-lg-9">
-                                        @Html.TextBoxFor(m => m.HomePageIcon, new { @class = "k-textbox", style = "width: 100%;" })
+                                        @*@Html.TextBoxFor(m => m.HomePageIcon, new { @class = "k-textbox", style = "width: 100%;" })*@
+                                        @(Html.Kendo().ComboBoxFor(m => m.HomePageIcon)
+                                  .DataTextField("IconName")
+                                  .DataValueField("IconName")
+                                  .DataSource(source =>
+                                  {
+                                      source.Read(read =>
+                                      {
+                                          read.Action("GetIconList", "Icons");
+                                      });
+                                  })
+                                 .Height(400)
+                                 .HtmlAttributes(new { @style = "width: 100%" })
+                                 //.HeaderTemplate("<div class=\"dropdown-header k-widget k-header\">" +
+                                 //              "<span>Photo</span>" +
+                                 //              "<span>Contact info</span>" +
+                                 //          "</div>")
+                                 // .FooterTemplate("Total <strong>#: instance.dataSource.total() #</strong> items found")
+                                 @*.Template("<span class=\"k-state-default\" style=\"background-image: url(" + Url.Content("/Content/images/DepartmentIcons/") + "#: data.IconName#.png" + ");\" ></span>" +
+                                 "<span class=\"k-state-default\"><h4>#: data.IconName #</h4></span>").Value("<span class=\"selected-value\" style=\"background-image: url(" + Url.Content("/Content/images/DepartmentIcons/") + "#:data.IconName#.jpg" + ");\" ></span>" + "<span>#:data.IconName#</span>"))*@
+                                 .Template("<img class=\"k-state-default\" src=" + Url.Content("/Content/images/DepartmentIcons/" + "#: data.IconName#.png") + " width=50 height=50/>" + "<span> #: data.IconName# <span/>"))
+                                 @*.ValueTemplate("<span class=\"selected-value\" style=\"background-image: url(" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg" + ");\" ></span>" + "<span>#:data.ContactName#</span>"))*@
+
                                         @Html.ValidationMessageFor(m => m.HomePageIcon)
                                     </div>
                                 </div>

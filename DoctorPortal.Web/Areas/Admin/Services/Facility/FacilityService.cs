@@ -16,6 +16,12 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Facility
             _iFacilityRepository = iFacilityRepository;
         }
 
+        public IEnumerable<FacilityViewModel> GetAllActiveFacility()
+        {
+            var facilities = _iFacilityRepository.Table.Where(m=>m.IsActive == true).ToList();
+            return facilities.Select(s => new FacilityViewModel(s));
+        }
+
         public IEnumerable<FacilityViewModel> GetAllFacility()
         {
             var facilities = _iFacilityRepository.Table.ToList();
@@ -49,6 +55,16 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Facility
         {
             var facility = _iFacilityRepository.GetById(id);
             _iFacilityRepository.Delete(facility);
+        }
+
+        public void ChangeStatus(int id)
+        {
+            var facility = _iFacilityRepository.GetById(id);
+            if (facility == null)
+                throw new Exception("not found");
+
+            facility.IsActive = !facility.IsActive;
+            _iFacilityRepository.Update(facility);
         }
     }
 }

@@ -77,6 +77,21 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public string ChangeStatus(int id)
+        {
+            try
+            {
+                _facilityService.ChangeStatus(id);
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Logger.log.Error($"Facility > KendochangeStatus. Error: {ex.Message}");
+                return Resources.StatusChangeFailed;
+            }
+        }
+
         //[HttpGet]
         //public ActionResult AddEdit(int id = 0)
         //{

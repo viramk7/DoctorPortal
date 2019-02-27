@@ -14,7 +14,7 @@ namespace DoctorPortal.Web.Controllers
 
         public ActionResult GetServicesPartialView()
         {
-            var services = _servicefacility.GetAllFacility();
+            var services = _servicefacility.GetAllActiveFacility();
             return PartialView("_Facility", services);
         }
     }

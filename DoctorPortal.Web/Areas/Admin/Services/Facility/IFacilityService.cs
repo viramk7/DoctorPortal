@@ -10,10 +10,14 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Facility
     {
         IEnumerable<FacilityViewModel> GetAllFacility();
 
+        IEnumerable<FacilityViewModel> GetAllActiveFacility();
+
         FacilityViewModel GetById(int id);
 
         FacilityViewModel Save(FacilityViewModel model);
 
         void Delete(int id);
+
+        void ChangeStatus(int id);
     }
 }

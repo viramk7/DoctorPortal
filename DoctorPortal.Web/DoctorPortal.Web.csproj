@@ -180,6 +180,7 @@
     <Compile Include="Areas\Admin\Controllers\DoctorController.cs" />
     <Compile Include="Areas\Admin\Controllers\FacilityController.cs" />
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IconsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
     <Compile Include="Areas\Admin\Models\BaseEntity.cs" />
@@ -286,6 +287,9 @@
     <Compile Include="Database\Repositories\IDbContext.cs" />
     <Compile Include="Database\Repositories\IRepository.cs" />
     <Compile Include="Database\Speciality.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\tblIcons.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Testimonial.cs">
@@ -636,6 +640,32 @@
     <Content Include="Content\images\certificates\certificate_2.jpg" />
     <Content Include="Content\images\certificates\certificate_3.jpg" />
     <Content Include="Content\images\certificates\certificate_4.jpg" />
+    <Content Include="Content\images\DepartmentIcons\favicon-agenda.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-avatar-1.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-avatar.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-calendar.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-cardiology.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-drink.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-earth-grid.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-heart.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-interface.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-kidneys.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-lungs.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-medical-1.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-medical-2.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-medical.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-neurology.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-phone.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-ribbon.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-shapes.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-smile.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-stethoscope-1.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-technology-2.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-technology-3.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-transport.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-vagina-1.png" />
+    <Content Include="Content\images\DepartmentIcons\favicon-vagina.png" />
+    <Content Include="Content\images\DepartmentIcons\flaticon-research.png" />
     <Content Include="Content\images\department\tab-content-1.jpg" />
     <Content Include="Content\images\department\tab-content-2.jpg" />
     <Content Include="Content\images\department\tab-content-3.jpg" />
@@ -939,6 +969,7 @@
     <Content Include="Areas\Admin\Views\Doctor\AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Department\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Department\AddEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\IconDropDown.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
     <Content Include="Template\FAQQuestion.html" />
@@ -986,6 +1017,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />
+    <Folder Include="Areas\Admin\Views\Icons\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />
