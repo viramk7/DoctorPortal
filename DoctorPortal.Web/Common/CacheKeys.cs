@@ -5,7 +5,8 @@
         HospitalInfo,
         DepartmentList,
         DoctorList,
-        TestimonialList
+        TestimonialList,
+        Flaticons
     }
 
 }

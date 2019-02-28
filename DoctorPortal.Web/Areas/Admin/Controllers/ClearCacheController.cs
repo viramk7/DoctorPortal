@@ -20,7 +20,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             values.ForEach(s => _cacheManager.Remove(s.ToString())); 
             
             SuccessNotification("Cache cleared successfully.");
-            return RedirectToAction("Index", "AdminHome");
+            return RedirectToAction("Index", "Hospital");
         }
     }
 }
