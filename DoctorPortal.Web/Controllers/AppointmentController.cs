@@ -65,7 +65,7 @@ namespace DoctorPortal.Web.Controllers
                 bodyTemplate = bodyTemplate.Replace("[@MESSAGE]", model.Message);
                 bodyTemplate = bodyTemplate.Replace("[@PHONE]", model.PhoneNo ?? "Not provided.");
                 bodyTemplate = model.Date == null
-                    ? bodyTemplate = bodyTemplate.Replace("[@DATE]", "Not provided.")
+                    ? bodyTemplate.Replace("[@DATE]", "Not provided.")
                     : bodyTemplate.Replace("[@DATE]", Convert.ToDateTime(model.Date).ToShortDateString());
                                
                 EmailHelper.SendAsyncEmail(ProjectSession.Hospital.Email, "Appointment", bodyTemplate, true);
