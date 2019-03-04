@@ -8,7 +8,6 @@ namespace DoctorPortal.Web.Controllers
 {
     public class AboutUsController : BaseAdminController
     {
-        // GET: AboutUs
         public ActionResult Index()
         {
             return View();
