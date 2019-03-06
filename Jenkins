@@ -4,7 +4,7 @@ node{
     deleteDir()
     
     stage 'checkout'
-    git branch: 'develop', url: 'https://github.com/viramk7/DoctorPortal.git'
+    checkout scm
     
     stage 'docker: build'
     bat label: '', script: 'docker build -t doctor-portal-jenkins .'
