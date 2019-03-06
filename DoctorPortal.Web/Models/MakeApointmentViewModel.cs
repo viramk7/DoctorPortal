@@ -7,6 +7,30 @@ namespace DoctorPortal.Web.Models
 {
     public class MakeAppointmentViewModel
     {
+        public MakeAppointmentViewModel()
+        {
+
+        }
+
+        public MakeAppointmentViewModel(Appointment appointment)
+        {
+            Id = appointment.Id;
+            HospitalId = appointment.HospitalId;
+            Name = appointment.Name;
+            Email = appointment.Email;
+            Message = appointment.Message;
+            Subject = appointment.Subject;
+            PhoneNo = appointment.PhoneNo;
+            Date = appointment.Date;
+            ApprovedDate = appointment.ApprovedDate;
+            IsApproved = appointment.IsApproved;
+        }
+
+        public int Id { get; set; }
+        public int HospitalId { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+
         [Required(ErrorMessage = "Please provide the name")]
         [MaxLength(50,ErrorMessage = "Name must only include 50 characters")]
         public string Name { get; set; }
@@ -43,5 +67,11 @@ namespace DoctorPortal.Web.Models
             };
         }
     
+    }
+
+    public class ApproveAppointment
+    {
+        public int Id { get; set; }
+        public DateTime ApproveDate { get; set; }
     }
 }

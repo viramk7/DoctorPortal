@@ -22,5 +22,7 @@ namespace DoctorPortal.Web.Database
         public string PhoneNo { get; set; }
         public string Message { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
     }
 }

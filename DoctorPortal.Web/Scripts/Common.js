@@ -154,6 +154,10 @@ function getKendoDatePickerValue(datepickerId) {
     return $("#" + datepickerId).data('kendoDatePicker').value();
 }
 
+function getKendoDateTimePickerValue(datepickerId) {
+    return $("#" + datepickerId).data('kendoDateTimePicker').value();
+}
+
 function getWindowPathName() {
     return window.pathArray;
 }

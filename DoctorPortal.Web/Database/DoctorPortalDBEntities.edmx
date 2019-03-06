@@ -17,6 +17,8 @@
           <Property Name="PhoneNo" Type="varchar" MaxLength="15" />
           <Property Name="Message" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Date" Type="datetime" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="IsApproved" Type="bit" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -550,6 +552,8 @@
           <Property Name="PhoneNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" />
         </EntityType>
         <EntityType Name="FAQQuestions">
           <Key>
@@ -732,6 +736,8 @@
           <EntitySetMapping Name="Appointment">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />

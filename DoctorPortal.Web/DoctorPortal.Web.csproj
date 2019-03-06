@@ -173,6 +173,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppointmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClearCacheController.cs" />
@@ -970,8 +971,11 @@
     <Content Include="Areas\Admin\Views\Department\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Department\AddEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\IconDropDown.cshtml" />
+    <Content Include="Areas\Admin\Views\Appointment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Appointment\_ApproveAppointmentPartial.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
+    <Content Include="Template\ApproveAppointment.html" />
     <Content Include="Template\FAQQuestion.html" />
     <Content Include="Template\ForgotPassword.html" />
     <Content Include="Web.config">

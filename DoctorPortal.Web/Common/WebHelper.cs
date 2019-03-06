@@ -25,5 +25,11 @@ namespace DoctorPortal.Web.Common
 
         public static readonly Dictionary<string, object> SmallColumnStyle = new Dictionary<string, object> { { "align", "center" }, { "style", "text-align:center;vertical-align:middle !important;" }, { "width", "30px" } };
 
+        public const string DateFormate = "dd/MM/yyyy";
+
+        public const string TimeFormate = "HH:mm";
+
+        public const string DateTimeFormat = "dd/MM/yyyy hh:mm tt";
+
     }
 }
