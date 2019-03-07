@@ -1,7 +1,6 @@
-﻿@using DoctorPortal.Web.Areas.Admin.Models
-@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+﻿@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
 @using DoctorPortal.Web.Common
-@using DoctorPortal.Web.Models
+@using DoctorPortal.Web.Areas.Admin.Controllers;
 @using Kendo.Mvc.UI
 
 @{
@@ -15,14 +14,19 @@
     <div class="row">
         <div class="col-md-12">
 
-            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
-            {
+            @Html.Hidden("SelectedPatients")
+
+            @*@using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            {*@
                 <div class="card">
                     <div class="card-header header-elements-inline">
                         <h5 class="card-title">Patients</h5>
                     </div>
                     <hr />
                     <div class="card-body">
+
+                        <button type="button" class="btn btn-outline-primary legitRipple pull-right" onclick="onClickPromotion()">Send Promotional Emails</button>
+                        <hr />
 
                         @(Html.Kendo().Grid<PatientViewModel>()
                                 .Name("gridPatients")
@@ -32,8 +36,17 @@
                                     //{
                                     //    command.Custom("Edit").Text("<span class='k-icon k-i-edit' title='Edit'></span>").HtmlAttributes(new { @style = "margin:2px" }).Click("onAddEdit");
                                     //    command.Custom("Delete").Text("<span class='k-icon k-i-close' title='Delete'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onDelete");
-                                    //}).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
-                                    //    .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+
+                                    //})
+                                    //.Title("Action")
+                                    //.HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                    //.HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+                                    columns.Bound(d => d.Active)
+                                        .Sortable(false).Filterable(false)
+                                        .HeaderTemplate("<input type=checkbox onchange='onSelectAll(this)'>")
+                                        .ClientTemplate("<input type=checkbox class='select-for-promo' patientid=#=Id# onchange='StatusChanged()'>")
+                                        .HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                        .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
                                     columns.Bound(d => d.Name);
                                     columns.Bound(d => d.Email);
                                     columns.Bound(d => d.Active)
@@ -66,7 +79,7 @@
 
                     </div>
                 </div>
-            }
+            @*}*@
         </div>
     </div>
 </div>
@@ -78,5 +91,38 @@
         }
         DisplayResponseMessage(res);
     }
+
+    function StatusChanged() {
+
+        var selectedPts = '';
+        var chks = $('.select-for-promo').toArray();
+        chks.forEach(function (chk) {
+            if (chk.checked) {
+                var id = chk.attributes.patientid.value;
+                selectedPts = selectedPts + id + ',';
+            }
+        });
+
+        $('#SelectedPatients').val(selectedPts);
+    }
+
+    function onSelectAll(e) {
+        var chks = $('.select-for-promo').toArray();
+        chks.forEach(function (chk) {
+            chk.checked = e.checked;
+        });
+        StatusChanged();
+    }
+
+    function onClickPromotion() {
+        var selectedPts = $('#SelectedPatients').val();
+        if (selectedPts == '') {
+            bootbox.alert("Please select atlease one patient");
+        } else {
+            var uri = '@Url.Action("Index", "Promotions")';
+            window.location.href = uri + '?patients=' + selectedPts;
+        }
+    }
+
 </script>
 

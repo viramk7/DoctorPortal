@@ -183,6 +183,7 @@
     <Compile Include="Areas\Admin\Controllers\HospitalController.cs" />
     <Compile Include="Areas\Admin\Controllers\IconsController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
     <Compile Include="Areas\Admin\Models\BaseEntity.cs" />
     <Compile Include="Areas\Admin\Models\ConfigItems.cs" />
@@ -244,7 +245,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PatientController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Database\Appointment.cs">
@@ -982,6 +983,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\IconDropDown.cshtml" />
     <Content Include="Areas\Admin\Views\Appointment\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Appointment\_ApproveAppointmentPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\Index.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
     <Content Include="Template\ApproveAppointment.html" />
@@ -1027,11 +1029,12 @@
     <Content Include="Views\Errors\HttpError404.cshtml" />
     <Content Include="Views\Errors\HttpError500.cshtml" />
     <Content Include="Views\Errors\General.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Patient\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />
     <Folder Include="Areas\Admin\Views\Icons\" />
+    <Folder Include="Areas\Admin\Views\Patients\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />
