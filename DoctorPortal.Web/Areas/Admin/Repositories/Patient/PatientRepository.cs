@@ -13,5 +13,16 @@ namespace DoctorPortal.Web.Areas.Admin.Repositories.Patient
         {
             
         }
+
+        public IEnumerable<PatientMaster> GetPatientsByIds(string ids)
+        {
+            if (string.IsNullOrEmpty(ids))
+                throw new ArgumentNullException("ids");
+
+            var idArray = ids.Split(',');
+            return Entities.Where(w => idArray.Contains(w.Id.ToString()));
+        }
+
+
     }
 }

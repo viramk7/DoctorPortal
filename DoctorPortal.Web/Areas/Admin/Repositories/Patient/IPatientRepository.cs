@@ -10,5 +10,6 @@ namespace DoctorPortal.Web.Areas.Admin.Repositories.Patient
 {
     public interface IPatientRepository : IRepository<PatientMaster>
     {
+        IEnumerable<PatientMaster> GetPatientsByIds(string ids);
     }
 }
