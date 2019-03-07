@@ -984,6 +984,7 @@
     <Content Include="Areas\Admin\Views\Appointment\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Appointment\_ApproveAppointmentPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\_PromoActionBar.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
     <Content Include="Template\ApproveAppointment.html" />
@@ -1034,7 +1035,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />
     <Folder Include="Areas\Admin\Views\Icons\" />
-    <Folder Include="Areas\Admin\Views\Patients\" />
     <Folder Include="Content\images\footer\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />

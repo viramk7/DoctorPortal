@@ -28,6 +28,10 @@
                         <button type="button" class="btn btn-outline-primary legitRipple pull-right" onclick="onClickPromotion()">Send Promotional Emails</button>
                         <hr />
 
+                        @{ 
+                            var checkbox = "<input type=checkbox class='select-for-promo' patientid=#=Id# onchange='StatusChanged()'>";
+                        }
+
                         @(Html.Kendo().Grid<PatientViewModel>()
                                 .Name("gridPatients")
                                 .Columns(columns =>
@@ -43,8 +47,8 @@
                                     //.HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
                                     columns.Bound(d => d.Active)
                                         .Sortable(false).Filterable(false)
-                                        .HeaderTemplate("<input type=checkbox onchange='onSelectAll(this)'>")
-                                        .ClientTemplate("<input type=checkbox class='select-for-promo' patientid=#=Id# onchange='StatusChanged()'>")
+                                        .HeaderTemplate("<input type=checkbox id=selectall onchange='onSelectAll(this)'>")
+                                        .ClientTemplate("<input type=#=(Active == 1 ? 'checkbox': 'hidden')#  #=(Active == 1 ? 'class=select-for-promo' :'')# patientid=#=Id#  onchange='StatusChanged()'>")
                                         .HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
                                         .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
                                     columns.Bound(d => d.Name);
@@ -85,6 +89,17 @@
 </div>
 
 <script>
+
+    $(document).ready(function () {
+        debugger;
+        $('#SelectedPatients').val();
+        $('#selectall').prop('checked',false);
+        var chks = $('.select-for-promo').toArray();
+        chks.forEach(function (chk) {
+            chk.checked = false;
+        });
+    });
+
     function onReqEnd(res) {
         if (res.type != 'read') {
             $("#gridPatients").data("kendoGrid").dataSource.read();
@@ -120,6 +135,7 @@
             bootbox.alert("Please select atlease one patient");
         } else {
             var uri = '@Url.Action("Index", "Promotions")';
+            selectedPts = selectedPts.substring(0, selectedPts.length - 1);
             window.location.href = uri + '?patients=' + selectedPts;
         }
     }

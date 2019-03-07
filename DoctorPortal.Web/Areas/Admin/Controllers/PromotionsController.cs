@@ -11,7 +11,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         public ActionResult Index(string patients = "")
         {
             if (string.IsNullOrEmpty(patients))
-                return RedirectToAction(nameof(Index),nameof(PatientController));
+                return RedirectToAction("Index","Patient");
 
             ViewBag.Patients = patients;
 

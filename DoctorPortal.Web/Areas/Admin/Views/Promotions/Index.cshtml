@@ -1,8 +1,32 @@
 ﻿
+@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Promotions";
 }
 
-<h2>Index</h2>
+@Html.Partial("_PageHeader", new PageHeaderViewModel("Promotions", "Promotions", "Index"))
 
-<h3>@ViewBag.Patients</h3>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            {
+                @Html.ValidationSummary(true)
+                @Html.Partial("_PromoActionBar")
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Promotions</h5>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+                        @*@Html.Partial("_HospitalBasicInfo")*@
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
