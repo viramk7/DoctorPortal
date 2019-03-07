@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace DoctorPortal.Web.Areas.Admin.Controllers
 {
-    public class AppointmentController : Controller
+    public class AppointmentController : BaseController
     {
 
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -26,7 +26,6 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             _service = service;
         }
 
-        // GET: Admin/Appointment
         public ActionResult Index()
         {
             return View();
@@ -44,18 +43,20 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             return Json(list.ToDataSourceResult(request));
         }
 
+        // TODO: Take Doctor comment prop in ApproveAppointment model
+        // Send this instructions with the notification email to patient
+        // Also store this in db
         public ActionResult ApproveAppointmentPartial(int Id)
         {
-            ApproveAppointment obj = new ApproveAppointment();
-            obj.Id = Id;
-            return PartialView("_ApproveAppointmentPartial", obj);
+            var approveAppointment = new ApproveAppointment(Id);
+            return PartialView("_ApproveAppointmentPartial", approveAppointment);
         }
 
         public string ApproveAppointment(ApproveAppointment model)
         {
-            if(model.Id > 0)
+            if (model.Id > 0)
             {
-                MakeAppointmentViewModel result = _service.ApproveAppointment(model.Id, model.ApproveDate);
+                var result = _service.ApproveAppointment(model.Id, model.ApproveDate);
                 if (result != null)
                 {
                     var bodyTemplate = Utility.ReadFileToString("~/Template/ApproveAppointment.html");
@@ -64,11 +65,16 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
                     bodyTemplate = bodyTemplate.Replace("[@FULLNAME]", result.Name);
                     bodyTemplate = bodyTemplate.Replace("[@APPROVEDDATE]", result.ApprovedDate.Value.ToString("dd/MM/yyyy hh:mm tt"));
 
+                    // TODO: if confirmation email fails then take one flag "notified" in the db table
+                    // and update it to false. by this doctor will know that the patient is not notified 
+                    // about the appointment by email so hospital can call the patient.
                     EmailHelper.SendMail(result.Email, "Appointment Confirmation", bodyTemplate, true);
                 }
+
+                // TODO: "result" can be null here. Possible null exception
                 return result.Id.ToString();
             }
-            return String.Empty;
+            return string.Empty;
         }
     }
 }

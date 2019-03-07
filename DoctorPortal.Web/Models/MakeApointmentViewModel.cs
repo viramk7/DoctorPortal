@@ -71,6 +71,17 @@ namespace DoctorPortal.Web.Models
 
     public class ApproveAppointment
     {
+        public ApproveAppointment(int id)
+        {
+            Id = id;
+        }
+
+        public ApproveAppointment(int id, DateTime approvalDate)
+        {
+            Id = id;
+            ApproveDate = approvalDate;
+        }
+
         public int Id { get; set; }
         public DateTime ApproveDate { get; set; }
     }
