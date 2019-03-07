@@ -1,0 +1,82 @@
+﻿@using DoctorPortal.Web.Areas.Admin.Models
+@using DoctorPortal.Web.Areas.Admin.Models.ViewModels
+@using DoctorPortal.Web.Common
+@using DoctorPortal.Web.Models
+@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+@Html.Partial("_PageHeader", new PageHeaderViewModel("Patients", "Patient", "Index"))
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm(new { @class = "form form-horizontal" }))
+            {
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">Patients</h5>
+                    </div>
+                    <hr />
+                    <div class="card-body">
+
+                        @(Html.Kendo().Grid<PatientViewModel>()
+                                .Name("gridPatients")
+                                .Columns(columns =>
+                                {
+                                    //columns.Command(command =>
+                                    //{
+                                    //    command.Custom("Edit").Text("<span class='k-icon k-i-edit' title='Edit'></span>").HtmlAttributes(new { @style = "margin:2px" }).Click("onAddEdit");
+                                    //    command.Custom("Delete").Text("<span class='k-icon k-i-close' title='Delete'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onDelete");
+                                    //}).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                    //    .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
+                                    columns.Bound(d => d.Name);
+                                    columns.Bound(d => d.Email);
+                                    columns.Bound(d => d.Active)
+                                    .Filterable(false)
+                                    .ClientTemplate(Html.SetStatusClientTemplate("Active", "Patient", "ChangeStatus","id=#= Id #", "#= Id #", "gridPatients", "Patient"))
+                                    .HtmlAttributes(WebHelper.StatusColumnStyle)
+                                    .HeaderHtmlAttributes(WebHelper.StatusColumnStyle);
+                                })
+                                //.ToolBar(toolbar =>
+                                //{
+                                //    toolbar.Template("<a class='k-button k-button-icontext' onclick='onAddEdit(0)' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
+                                //})
+
+                                .Pageable(x =>
+                                {
+                                    x.Refresh(true);
+                                    x.PageSizes(WebHelper.PageSizes);
+                                })
+                                .Sortable(sortable => sortable.AllowUnsort(false))
+                                .Filterable(filter => filter.Enabled(false))
+                                .NoRecords()
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .ServerOperation(true)
+                                    .PageSize(WebHelper.PageSize)
+                                    .Model(model => model.Id(d => d.Id))
+                                    .Events(events => events.Error("onError('gridDepartment')").RequestEnd("onReqEnd"))
+                                    .Read(read => read.Action("KendoRead", "Patient"))
+                                ))
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    function onReqEnd(res) {
+        if (res.type != 'read') {
+            $("#gridPatients").data("kendoGrid").dataSource.read();
+        }
+        DisplayResponseMessage(res);
+    }
+</script>
+

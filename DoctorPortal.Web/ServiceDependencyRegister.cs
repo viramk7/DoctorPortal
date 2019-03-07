@@ -15,12 +15,14 @@ using DoctorPortal.Web.Areas.Admin.Repositories.DepartmentImage;
 using DoctorPortal.Web.Areas.Admin.Repositories.Doctor;
 using DoctorPortal.Web.Areas.Admin.Repositories.Facility;
 using DoctorPortal.Web.Areas.Admin.Repositories.Hospital;
+using DoctorPortal.Web.Areas.Admin.Repositories.Patient;
 using DoctorPortal.Web.Areas.Admin.Repositories.Testimonials;
 using DoctorPortal.Web.Areas.Admin.Services.DepartmentImage;
 using DoctorPortal.Web.Areas.Admin.Services.Doctor;
 using DoctorPortal.Web.Areas.Admin.Services.Facility;
 using DoctorPortal.Web.Areas.Admin.Services.HospitalInfo;
 using DoctorPortal.Web.Areas.Admin.Services.Login;
+using DoctorPortal.Web.Areas.Admin.Services.Patient;
 using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
 using DoctorPortal.Web.Areas.Admin.Services.User;
 using DoctorPortal.Web.Caching;
@@ -31,6 +33,10 @@ namespace DoctorPortal.Web
 {
     public class ServiceDependencyRegister
     {
+        protected ServiceDependencyRegister()
+        {
+        }
+
         public static void Resolve(ContainerBuilder builder)
         {
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerDependency();
@@ -48,6 +54,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<AppointmentRepository>().As<IAppointmentRepository>().InstancePerDependency();
             builder.RegisterType<FAQRepository>().As<IFAQRepository>().InstancePerDependency();
             builder.RegisterType<DepartmentImageRepository>().As<IDepartmentImageRepository>().InstancePerDependency();
+            builder.RegisterType<PatientRepository>().As<IPatientRepository>().InstancePerDependency();
 
             // Services
             builder.RegisterGeneric(typeof(EntityService<>)).As(typeof(IEntityService<>)).InstancePerDependency();
@@ -63,6 +70,7 @@ namespace DoctorPortal.Web
             builder.RegisterType<AppointmentService>().As<IAppointmentService>().InstancePerDependency();
             builder.RegisterType<FAQService>().As<IFAQService>().InstancePerDependency();
             builder.RegisterType<DepartmentImageService>().As<IDepartmentImageService>().InstancePerDependency();
+            builder.RegisterType<PatientService>().As<IPatientService>().InstancePerDependency();
 
         }
     }

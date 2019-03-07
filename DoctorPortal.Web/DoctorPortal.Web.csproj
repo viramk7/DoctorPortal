@@ -190,6 +190,7 @@
     <Compile Include="Areas\Admin\Models\KendoDropdownModel.cs" />
     <Compile Include="Areas\Admin\Models\LoggedInUserModel.cs" />
     <Compile Include="Areas\Admin\Models\NotifyType.cs" />
+    <Compile Include="Areas\Admin\Models\ViewModels\PatientViewModel.cs" />
     <Compile Include="Areas\Admin\Models\ProjectSession.cs" />
     <Compile Include="Areas\Admin\Models\UserAccessPermission.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ActionBarViewModel.cs" />
@@ -206,6 +207,8 @@
     <Compile Include="Areas\Admin\Repositories\Facility\IFacilityRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\HospitalInfoRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Hospital\IHospitalInfoRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Patient\IPatientRepository.cs" />
+    <Compile Include="Areas\Admin\Repositories\Patient\PatientRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\ITestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Repositories\Testimonials\TestimonialsRepository.cs" />
     <Compile Include="Areas\Admin\Services\DepartmentImage\DepartmentImageService.cs" />
@@ -216,6 +219,8 @@
     <Compile Include="Areas\Admin\Services\Facility\IFacilityService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\HospitalInfoService.cs" />
     <Compile Include="Areas\Admin\Services\HospitalInfo\IHospitalInfoService.cs" />
+    <Compile Include="Areas\Admin\Services\Patient\IPatientService.cs" />
+    <Compile Include="Areas\Admin\Services\Patient\PatientService.cs" />
     <Compile Include="Areas\Admin\Services\Testimonials\ITestimonialsService.cs" />
     <Compile Include="Areas\Admin\Services\Testimonials\TestimonialsService.cs" />
     <Compile Include="Areas\Admin\Services\User\IUserService.cs" />
@@ -239,6 +244,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\FAQController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Database\Appointment.cs">
@@ -282,6 +288,9 @@
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\HospitalWorkingDay.cs">
+      <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\PatientMaster.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Repositories\EfRepository.cs" />
@@ -1018,6 +1027,7 @@
     <Content Include="Views\Errors\HttpError404.cshtml" />
     <Content Include="Views\Errors\HttpError500.cshtml" />
     <Content Include="Views\Errors\General.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />

@@ -105,6 +105,15 @@
           <Property Name="HospitalId" Type="int" Nullable="false" />
           <Property Name="Day" Type="tinyint" Nullable="false" />
         </EntityType>
+        <EntityType Name="PatientMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Speciality">
           <Key>
             <PropertyRef Name="SpecialityId" />
@@ -264,6 +273,7 @@
           <EntitySet Name="HospitalContacts" EntityType="Self.HospitalContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalMaster" EntityType="Self.HospitalMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalWorkingDays" EntityType="Self.HospitalWorkingDays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientMaster" EntityType="Self.PatientMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblIcons" EntityType="Self.tblIcons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Testimonials" EntityType="Self.Testimonials" Schema="dbo" store:Type="Tables" />
@@ -359,6 +369,7 @@
             <End Role="FAQQuestions" EntitySet="FAQQuestions" />
           </AssociationSet>
           <EntitySet Name="tblIcons" EntityType="DoctorPortalDBEntitiesModel.tblIcons" />
+          <EntitySet Name="PatientMaster" EntityType="DoctorPortalDBEntitiesModel.PatientMaster" />
         </EntityContainer>
         <EntityType Name="HospitalContact">
           <Key>
@@ -625,6 +636,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IconName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="PatientMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -778,6 +798,16 @@
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.tblIcons">
               <MappingFragment StoreEntitySet="tblIcons">
                 <ScalarProperty Name="IconName" ColumnName="IconName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientMaster">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.PatientMaster">
+              <MappingFragment StoreEntitySet="PatientMaster">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
