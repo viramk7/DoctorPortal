@@ -46,6 +46,7 @@ namespace DoctorPortal.Web.Models
         [StringLength(50, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string IconName { get; set; }
 
+        [Display(Name = @"Active")]
         public bool IsActive { get; set; }
 
         public Facility GetFacilityEntity()

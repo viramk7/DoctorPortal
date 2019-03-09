@@ -1,4 +1,5 @@
 ﻿@using DoctorPortal.Web.Models
+@using DoctorPortal.Web.Common
 @model ApproveAppointment
 
 <div class="k-edit-form-container" id="statusItem">
@@ -9,8 +10,17 @@
         @Html.LabelFor(m => m.ApproveDate)
     </div>
     <div class="k-edit-field">
-        @Html.Kendo().DateTimePickerFor(m => m.ApproveDate).Min(DateTime.Now.Date).Value(DateTime.Now.Date).HtmlAttributes(new { @tabindex = 1 })
+        @(Html.Kendo().DateTimePickerFor(m => m.ApproveDate).Min(DateTime.Now.Date).Value(DateTime.Now.Date)
+            .Format(WebHelper.DateTimeFormat).HtmlAttributes(new { @tabindex = 1 }))
         @Html.ValidationMessageFor(m => m.ApproveDate)
+    </div>
+
+    <div class="k-edit-label">
+        @Html.LabelFor(m => m.ApproveRemarks)
+    </div>
+    <div class="k-edit-field">
+        @Html.TextAreaFor(m => m.ApproveRemarks, new { @tabindex = 2 , @class="k-textbox" , @rows="4"})
+        @Html.ValidationMessageFor(m => m.ApproveRemarks)
     </div>
 
     <div class="k-edit-buttons k-state-default">

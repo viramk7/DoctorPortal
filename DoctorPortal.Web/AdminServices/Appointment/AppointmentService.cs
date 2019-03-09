@@ -22,7 +22,7 @@ namespace DoctorPortal.Web.AdminServices.Appointment
             return list.Select(s => new MakeAppointmentViewModel(s));
         }
 
-        public MakeAppointmentViewModel ApproveAppointment(int id, DateTime date)
+        public int ApproveAppointment(int id, DateTime date,bool isNotifySuccess,string AppointmentRemarks)
         {
             var appointment = _appointmentRepository.GetById(id);
             if (appointment == null)
@@ -30,9 +30,11 @@ namespace DoctorPortal.Web.AdminServices.Appointment
 
             appointment.ApprovedDate = date;
             appointment.IsApproved = true;
+            appointment.ApproveRemarks = AppointmentRemarks;
+            appointment.IsNotifiedSuccess = isNotifySuccess;
             _appointmentRepository.Update(appointment);
 
-            return new MakeAppointmentViewModel(appointment);
+            return appointment.Id;
         }
     }
 }

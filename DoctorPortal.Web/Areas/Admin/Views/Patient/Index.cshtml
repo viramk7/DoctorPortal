@@ -36,15 +36,13 @@
                                 .Name("gridPatients")
                                 .Columns(columns =>
                                 {
-                                    //columns.Command(command =>
-                                    //{
-                                    //    command.Custom("Edit").Text("<span class='k-icon k-i-edit' title='Edit'></span>").HtmlAttributes(new { @style = "margin:2px" }).Click("onAddEdit");
-                                    //    command.Custom("Delete").Text("<span class='k-icon k-i-close' title='Delete'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onDelete");
+                                    columns.Command(command =>
+                                    {
+                                        command.Edit().Text(" ");
+                                        command.Destroy().Text(" ");
+                                    }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
+                                      .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
 
-                                    //})
-                                    //.Title("Action")
-                                    //.HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
-                                    //.HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
                                     columns.Bound(d => d.Active)
                                         .Sortable(false).Filterable(false)
                                         .HeaderTemplate("<input type=checkbox id=selectall onchange='onSelectAll(this)'>")
@@ -59,11 +57,16 @@
                                     .HtmlAttributes(WebHelper.StatusColumnStyle)
                                     .HeaderHtmlAttributes(WebHelper.StatusColumnStyle);
                                 })
-                                //.ToolBar(toolbar =>
-                                //{
-                                //    toolbar.Template("<a class='k-button k-button-icontext' onclick='onAddEdit(0)' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
-                                //})
-
+                                .ToolBar(toolbar =>
+                                {
+                                    toolbar.Create().Text("Add");
+                                })
+                                .Editable(editable =>
+                                {
+                                    editable.Mode(GridEditMode.PopUp);
+                                    editable.DisplayDeleteConfirmation("Are you sure you want to delete these Patient?");
+                                    editable.Window(x => x.Title("Manage Patient"));
+                                })
                                 .Pageable(x =>
                                 {
                                     x.Refresh(true);
@@ -72,13 +75,17 @@
                                 .Sortable(sortable => sortable.AllowUnsort(false))
                                 .Filterable(filter => filter.Enabled(false))
                                 .NoRecords()
+                                .Events(e => e.Edit("onEdit"))
                                 .DataSource(dataSource => dataSource
                                     .Ajax()
                                     .ServerOperation(true)
                                     .PageSize(WebHelper.PageSize)
                                     .Model(model => model.Id(d => d.Id))
-                                    .Events(events => events.Error("onError('gridDepartment')").RequestEnd("onReqEnd"))
+                                    .Events(events => events.Error("onError('gridPatients')").RequestEnd("onReqEnd"))
                                     .Read(read => read.Action("KendoRead", "Patient"))
+                                    .Create(update => update.Action("KendoSave", "Patient"))
+                                    .Update(update => update.Action("KendoSave", "Patient"))
+                                    .Destroy(update => update.Action("KendoDestroy", "Patient"))
                                 ))
 
                     </div>
@@ -137,6 +144,15 @@
             selectedPts = selectedPts.substring(0, selectedPts.length - 1);
             window.location.href = uri + '?patients=' + selectedPts;
         }
+    }
+
+    function onEdit(e) {
+        if (e.model.isNew()) {
+            e.model.set("Active", true);
+        }
+        e.container.data('kendoWindow').bind('activate', function () {
+            setFocusById('Name');
+        });
     }
 
 </script>

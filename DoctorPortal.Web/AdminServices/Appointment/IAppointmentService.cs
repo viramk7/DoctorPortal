@@ -8,6 +8,6 @@ namespace DoctorPortal.Web.AdminServices.Appointment
     public interface IAppointmentService : IEntityService<Database.Appointment>
     {
         IEnumerable<MakeAppointmentViewModel> GetAllAppointmentList();
-        MakeAppointmentViewModel ApproveAppointment(int id, DateTime date);
+        int ApproveAppointment(int id, DateTime date, bool isNotifySuccess, string AppointmentRemarks);
     }
 }

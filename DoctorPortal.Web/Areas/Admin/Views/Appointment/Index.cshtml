@@ -35,6 +35,8 @@
                                                   columns.Bound(d => d.PhoneNo);
                                                   columns.Bound(d => d.Date).Format("{0:" + WebHelper.DateFormate + "}");
                                                   columns.Bound(d => d.ApprovedDate).Format("{0:" + WebHelper.DateTimeFormat + "}");
+                                                  columns.Bound(d => d.ApproveRemarks);
+                                                  columns.Bound(d => d.IsNotifiedSuccess);
                                                   columns.Command(command =>
                                                   {
 
@@ -77,7 +79,7 @@
               .Draggable(true)
               .Modal(true)
               .Width(680)
-              .Height(120))
+              .Height(200))
 
 <script>
     function onApproveA(e) {
@@ -104,7 +106,8 @@
         var date = getKendoDateTimePickerValue('ApproveDate');
         var dataModel = {
             'Id': getInputValueById('Id'),
-            'ApproveDate': kendo.toString(date, "dd/MM/yyyy hh:mm tt")
+            'ApproveDate': kendo.toString(date, "dd/MM/yyyy hh:mm tt"),
+            'ApproveRemarks': getInputValueById('ApproveRemarks')
         };
 
         var url = '@Url.Action("ApproveAppointment", "Appointment")';
@@ -112,8 +115,9 @@
     }
 
     function ApproveAppointmentCompleted(returString) {
+        debugger;
         if (returString != null) {
-            if (returString !== "") {
+            if (returString == "") {
                 closeKendoWindow("wApproveA");
                 window.location.reload();
             } else {

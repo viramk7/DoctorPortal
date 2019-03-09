@@ -24,12 +24,16 @@ namespace DoctorPortal.Web.Models
             Date = appointment.Date;
             ApprovedDate = appointment.ApprovedDate;
             IsApproved = appointment.IsApproved;
+            IsNotifiedSuccess = appointment.IsNotifiedSuccess;
+            ApproveRemarks = appointment.ApproveRemarks;
         }
 
         public int Id { get; set; }
         public int HospitalId { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public Nullable<bool> IsApproved { get; set; }
+        public Nullable<bool> IsNotifiedSuccess { get; set; }
+        public string ApproveRemarks { get; set; }
 
         [Required(ErrorMessage = "Please provide the name")]
         [MaxLength(50,ErrorMessage = "Name must only include 50 characters")]
@@ -71,18 +75,29 @@ namespace DoctorPortal.Web.Models
 
     public class ApproveAppointment
     {
+        
+        public ApproveAppointment()
+        {
+
+        }
+
         public ApproveAppointment(int id)
         {
             Id = id;
         }
 
-        public ApproveAppointment(int id, DateTime approvalDate)
-        {
-            Id = id;
-            ApproveDate = approvalDate;
-        }
+        //public ApproveAppointment(int id, DateTime approvalDate)
+        //{
+        //    Id = id;
+        //    ApproveDate = approvalDate;
+        //}
 
         public int Id { get; set; }
+
+        [Display(Name = @"Approve Date")]
         public DateTime ApproveDate { get; set; }
+
+        [Display(Name = @"Approve Remarks")]
+        public string ApproveRemarks { get; set; }
     }
 }

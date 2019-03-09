@@ -24,5 +24,7 @@ namespace DoctorPortal.Web.Database
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public Nullable<bool> IsApproved { get; set; }
+        public Nullable<bool> IsNotifiedSuccess { get; set; }
+        public string ApproveRemarks { get; set; }
     }
 }

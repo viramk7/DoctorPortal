@@ -19,6 +19,8 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="ApprovedDate" Type="datetime" />
           <Property Name="IsApproved" Type="bit" />
+          <Property Name="IsNotifiedSuccess" Type="bit" />
+          <Property Name="ApproveRemarks" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -565,6 +567,8 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
           <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="IsNotifiedSuccess" Type="Boolean" />
+          <Property Name="ApproveRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="FAQQuestions">
           <Key>
@@ -756,6 +760,8 @@
           <EntitySetMapping Name="Appointment">
             <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="ApproveRemarks" ColumnName="ApproveRemarks" />
+                <ScalarProperty Name="IsNotifiedSuccess" ColumnName="IsNotifiedSuccess" />
                 <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

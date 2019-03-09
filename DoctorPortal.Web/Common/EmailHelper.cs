@@ -41,8 +41,6 @@ namespace DoctorPortal.Web.Common
             {
                 return false;
             }
-            
-
             return true;
         }
 

@@ -11,5 +11,10 @@ namespace DoctorPortal.Web.Areas.Admin.Services.Patient
     public interface IPatientService : IEntityService<PatientMaster>
     {
         IEnumerable<PatientViewModel> GetPatientsByIds(string ids);
+        IEnumerable<PatientViewModel> GetAllPatient();
+        PatientViewModel GetById(int id);
+        PatientViewModel Save(PatientViewModel model);
+        void Delete(int id);
+        void ChangeStatus(int id);
     }
 }

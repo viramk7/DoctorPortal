@@ -985,6 +985,7 @@
     <Content Include="Areas\Admin\Views\Appointment\_ApproveAppointmentPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\_PromoActionBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Email.cshtml" />
     <None Include="Scripts\_references.js" />
     <Content Include="Template\Appointment.html" />
     <Content Include="Template\ApproveAppointment.html" />

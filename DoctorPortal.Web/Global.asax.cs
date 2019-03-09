@@ -6,6 +6,8 @@ using System.Web.Routing;
 using System.Web;
 using DoctorPortal.Web.Filters;
 using DoctorPortal.Web.Controllers;
+using System.Threading;
+using System.Globalization;
 
 namespace DoctorPortal.Web
 {
@@ -20,6 +22,15 @@ namespace DoctorPortal.Web
             log4net.Config.XmlConfigurator.Configure();
             GlobalFilters.Filters.Add(new AjaxErrorHandler());
             Bootstrapper.Resolve(new ContainerBuilder());
+        }
+
+        protected void Application_BeginRequest()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-IN");
+            CultureInfo info = new CultureInfo(System.Threading.Thread.CurrentThread.CurrentCulture.ToString());
+            info.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy hh:mm tt";
+            //info.DateTimeFormat.FullDateTimePattern = "dd/MM/yyyy hh:mm tt";
+            System.Threading.Thread.CurrentThread.CurrentCulture = info;
         }
 
         protected void Application_Error(object sender, EventArgs e)

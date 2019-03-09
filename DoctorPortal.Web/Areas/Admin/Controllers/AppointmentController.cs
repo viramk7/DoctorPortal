@@ -43,9 +43,6 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             return Json(list.ToDataSourceResult(request));
         }
 
-        // TODO: Take Doctor comment prop in ApproveAppointment model
-        // Send this instructions with the notification email to patient
-        // Also store this in db
         public ActionResult ApproveAppointmentPartial(int Id)
         {
             var approveAppointment = new ApproveAppointment(Id);
@@ -56,25 +53,23 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         {
             if (model.Id > 0)
             {
-                var result = _service.ApproveAppointment(model.Id, model.ApproveDate);
-                if (result != null)
+                var appointment = _service.GetById(model.Id);
+                if(appointment != null)
                 {
                     var bodyTemplate = Utility.ReadFileToString("~/Template/ApproveAppointment.html");
 
                     bodyTemplate = bodyTemplate.Replace("[@PORTAL-NAME]", ConfigItems.PortalName);
-                    bodyTemplate = bodyTemplate.Replace("[@FULLNAME]", result.Name);
-                    bodyTemplate = bodyTemplate.Replace("[@APPROVEDDATE]", result.ApprovedDate.Value.ToString("dd/MM/yyyy hh:mm tt"));
+                    bodyTemplate = bodyTemplate.Replace("[@FULLNAME]", appointment.Name);
+                    bodyTemplate = bodyTemplate.Replace("[@APPROVEDDATE]", model.ApproveDate.ToString("dd/MM/yyyy hh:mm tt"));
+                    bodyTemplate = bodyTemplate.Replace("[@REMARKS]", model.ApproveRemarks);
 
-                    // TODO: if confirmation email fails then take one flag "notified" in the db table
-                    // and update it to false. by this doctor will know that the patient is not notified 
-                    // about the appointment by email so hospital can call the patient.
-                    EmailHelper.SendMail(result.Email, "Appointment Confirmation", bodyTemplate, true);
+                    bool resultNotify = EmailHelper.SendMail(appointment.Email, "Appointment Confirmation", bodyTemplate, true);
+
+                    var result = _service.ApproveAppointment(model.Id, model.ApproveDate,resultNotify,model.ApproveRemarks);
+                    return string.Empty;
                 }
-
-                // TODO: "result" can be null here. Possible null exception
-                return result.Id.ToString();
             }
-            return string.Empty;
+            return "Something Went Wrong";
         }
     }
 }
