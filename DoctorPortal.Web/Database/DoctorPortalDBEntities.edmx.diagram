@@ -8,11 +8,9 @@
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.HospitalContact" Width="1.5" PointX="3" PointY="1.375" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.HospitalMaster" Width="1.5" PointX="0.75" PointY="5.375" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.HospitalWorkingDay" Width="1.5" PointX="3" PointY="7.25" />
-        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Testimonial" Width="1.5" PointX="3" PointY="4.125" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.UserMaster" Width="1.5" PointX="3" PointY="9.625" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" />
-        <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Facility" Width="1.5" PointX="3" PointY="14" />
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Facility_HospitalMaster" />
@@ -28,6 +26,8 @@
         <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_FAQQuestions_Department" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.tblIcons" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.PatientMaster" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DoctorPortalDBEntitiesModel.Testimonial" Width="1.5" PointX="3" PointY="22" />
+        <AssociationConnector Association="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

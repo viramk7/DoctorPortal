@@ -43,7 +43,7 @@ namespace DoctorPortal.Web.Models
         
         [Display(Name = @"Message")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "RequiredField")]
-        [StringLength(250, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
+        //[StringLength(500, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "StringLengthValidation")]
         public string Message { get; set; }
 
         public Testimonial GeTestimonialEntity()

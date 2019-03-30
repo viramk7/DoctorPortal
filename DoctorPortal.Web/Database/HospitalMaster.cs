@@ -19,10 +19,10 @@ namespace DoctorPortal.Web.Database
         {
             this.HospitalContacts = new HashSet<HospitalContact>();
             this.HospitalWorkingDays = new HashSet<HospitalWorkingDay>();
-            this.Testimonials = new HashSet<Testimonial>();
             this.UserMasters = new HashSet<UserMaster>();
             this.Facilities = new HashSet<Facility>();
             this.Department = new HashSet<Department>();
+            this.Testimonials = new HashSet<Testimonial>();
         }
     
         public int Id { get; set; }
@@ -38,12 +38,12 @@ namespace DoctorPortal.Web.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HospitalWorkingDay> HospitalWorkingDays { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Testimonial> Testimonials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserMaster> UserMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Facility> Facilities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Testimonial> Testimonials { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Testimonials;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using DoctorPortal.Web.Database;
 using DoctorPortal.Web.Models;
@@ -19,12 +20,15 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
     public class TestimonialsController : BaseController
     {
         private readonly ITestimonialsService _testimonialsService;
+        private readonly ICacheManager _cacheManager;
 
         private const string FOLDER_PATH = "~/Uploads/Testimonials";
 
-        public TestimonialsController(ITestimonialsService testimonialsService)
+        public TestimonialsController(ITestimonialsService testimonialsService,
+                                      ICacheManager cacheManager)
         {
             _testimonialsService = testimonialsService;
+            _cacheManager = cacheManager;
         }
 
         public ActionResult Index()
@@ -70,6 +74,9 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 
                 model.HospitalId = ProjectSession.LoggedInUser.HospitalId;
                 model = _testimonialsService.Save(model);
+
+                // Clear the cache
+                _cacheManager.Remove(CacheKeys.TestimonialList.ToString());
 
                 SuccessNotification(Resources.SaveSuccess);
 

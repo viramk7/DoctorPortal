@@ -28,7 +28,6 @@ namespace DoctorPortal.Web.Database
         public virtual DbSet<HospitalContact> HospitalContacts { get; set; }
         public virtual DbSet<HospitalMaster> HospitalMasters { get; set; }
         public virtual DbSet<HospitalWorkingDay> HospitalWorkingDays { get; set; }
-        public virtual DbSet<Testimonial> Testimonials { get; set; }
         public virtual DbSet<UserMaster> UserMasters { get; set; }
         public virtual DbSet<Facility> Facilities { get; set; }
         public virtual DbSet<Doctor> Doctor { get; set; }
@@ -39,5 +38,6 @@ namespace DoctorPortal.Web.Database
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<tblIcons> tblIcons { get; set; }
         public virtual DbSet<PatientMaster> PatientMaster { get; set; }
+        public virtual DbSet<Testimonial> Testimonials { get; set; }
     }
 }

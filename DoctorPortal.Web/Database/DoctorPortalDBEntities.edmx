@@ -138,7 +138,7 @@
           <Property Name="HospitalId" Type="int" Nullable="false" />
           <Property Name="ClientName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Location" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Message" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
           <Property Name="ClientImagePath" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="UserMaster">
@@ -325,7 +325,6 @@
           <EntitySet Name="HospitalContacts" EntityType="DoctorPortalDBEntitiesModel.HospitalContact" />
           <EntitySet Name="HospitalMasters" EntityType="DoctorPortalDBEntitiesModel.HospitalMaster" />
           <EntitySet Name="HospitalWorkingDays" EntityType="DoctorPortalDBEntitiesModel.HospitalWorkingDay" />
-          <EntitySet Name="Testimonials" EntityType="DoctorPortalDBEntitiesModel.Testimonial" />
           <EntitySet Name="UserMasters" EntityType="DoctorPortalDBEntitiesModel.UserMaster" />
           <AssociationSet Name="FK_HospitalContacts_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
@@ -334,10 +333,6 @@
           <AssociationSet Name="FK_HospitalWorkingDays_HospitalMaster" Association="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
             <End Role="HospitalWorkingDay" EntitySet="HospitalWorkingDays" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Testimonials_Testimonials" Association="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials">
-            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
-            <End Role="Testimonial" EntitySet="Testimonials" />
           </AssociationSet>
           <AssociationSet Name="FK_UserMaster_Role" Association="DoctorPortalDBEntitiesModel.FK_UserMaster_Role">
             <End Role="HospitalMaster" EntitySet="HospitalMasters" />
@@ -372,6 +367,11 @@
           </AssociationSet>
           <EntitySet Name="tblIcons" EntityType="DoctorPortalDBEntitiesModel.tblIcons" />
           <EntitySet Name="PatientMaster" EntityType="DoctorPortalDBEntitiesModel.PatientMaster" />
+          <EntitySet Name="Testimonials" EntityType="DoctorPortalDBEntitiesModel.Testimonial" />
+          <AssociationSet Name="FK_Testimonials_Testimonials" Association="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials">
+            <End Role="HospitalMaster" EntitySet="HospitalMasters" />
+            <End Role="Testimonial" EntitySet="Testimonials" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HospitalContact">
           <Key>
@@ -396,10 +396,10 @@
           <Property Name="WorkingHoursTo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HospitalContacts" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalContacts_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalContact" />
           <NavigationProperty Name="HospitalWorkingDays" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" FromRole="HospitalMaster" ToRole="HospitalWorkingDay" />
-          <NavigationProperty Name="Testimonials" Relationship="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" FromRole="HospitalMaster" ToRole="Testimonial" />
           <NavigationProperty Name="UserMasters" Relationship="DoctorPortalDBEntitiesModel.FK_UserMaster_Role" FromRole="HospitalMaster" ToRole="UserMaster" />
           <NavigationProperty Name="Facilities" Relationship="DoctorPortalDBEntitiesModel.FK_Facility_HospitalMaster" FromRole="HospitalMaster" ToRole="Facility" />
           <NavigationProperty Name="Department" Relationship="DoctorPortalDBEntitiesModel.FK_Department_HospitalMaster" FromRole="HospitalMaster" ToRole="Department" />
+          <NavigationProperty Name="Testimonials" Relationship="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" FromRole="HospitalMaster" ToRole="Testimonial" />
         </EntityType>
         <EntityType Name="HospitalWorkingDay">
           <Key>
@@ -409,18 +409,6 @@
           <Property Name="HospitalId" Type="Int32" Nullable="false" />
           <Property Name="Day" Type="Byte" Nullable="false" />
           <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_HospitalWorkingDays_HospitalMaster" FromRole="HospitalWorkingDay" ToRole="HospitalMaster" />
-        </EntityType>
-        <EntityType Name="Testimonial">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HospitalId" Type="Int32" Nullable="false" />
-          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ClientImagePath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" FromRole="Testimonial" ToRole="HospitalMaster" />
         </EntityType>
         <EntityType Name="UserMaster">
           <Key>
@@ -457,18 +445,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="HospitalWorkingDay">
-              <PropertyRef Name="HospitalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Testimonials_Testimonials">
-          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
-          <End Type="DoctorPortalDBEntitiesModel.Testimonial" Role="Testimonial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HospitalMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Testimonial">
               <PropertyRef Name="HospitalId" />
             </Dependent>
           </ReferentialConstraint>
@@ -649,6 +625,30 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Testimonial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HospitalId" Type="Int32" Nullable="false" />
+          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientImagePath" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HospitalMaster" Relationship="DoctorPortalDBEntitiesModel.FK_Testimonials_Testimonials" FromRole="Testimonial" ToRole="HospitalMaster" />
+        </EntityType>
+        <Association Name="FK_Testimonials_Testimonials">
+          <End Type="DoctorPortalDBEntitiesModel.HospitalMaster" Role="HospitalMaster" Multiplicity="1" />
+          <End Type="DoctorPortalDBEntitiesModel.Testimonial" Role="Testimonial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HospitalMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Testimonial">
+              <PropertyRef Name="HospitalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -683,18 +683,6 @@
               <MappingFragment StoreEntitySet="HospitalWorkingDays">
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Testimonials">
-            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Testimonial">
-              <MappingFragment StoreEntitySet="Testimonials">
-                <ScalarProperty Name="ClientImagePath" ColumnName="ClientImagePath" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
-                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -818,6 +806,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Testimonials">
+            <EntityTypeMapping TypeName="DoctorPortalDBEntitiesModel.Testimonial">
+              <MappingFragment StoreEntitySet="Testimonials">
+                <ScalarProperty Name="ClientImagePath" ColumnName="ClientImagePath" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="HospitalId" ColumnName="HospitalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -832,7 +832,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
