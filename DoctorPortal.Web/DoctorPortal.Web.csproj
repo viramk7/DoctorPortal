@@ -247,6 +247,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PatientController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\SportInjuriesController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
     <Compile Include="Database\Appointment.cs">
       <DependentUpon>DoctorPortalDBEntities.tt</DependentUpon>
@@ -1000,6 +1001,7 @@
     <Content Include="Views\Errors\HttpError500.cshtml" />
     <Content Include="Views\Errors\General.cshtml" />
     <Content Include="Areas\Admin\Views\Patient\Index.cshtml" />
+    <Content Include="Views\SportInjuries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />

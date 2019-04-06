@@ -770,14 +770,14 @@
 .main-menu .navbar-header .navbar-toggle {
     display: inline-block;
     z-index: 7;
-    border: 2px solid #0392ce;
+    border: 2px solid #c12b37;
     float: none;
     margin: 24px 0;
     border-radius: 0;
     padding: 10px 9px;
 }
 .main-menu .navbar-header .navbar-toggle .icon-bar {
-    background: #0392ce none repeat scroll 0 0;
+    background: #c12b37 none repeat scroll 0 0;
     font-weight: 700;
 } 
     
@@ -854,7 +854,7 @@
     padding:10px 10px !important;
     line-height:22px;
     color:#222222;
-    background:#0392ce;
+    background:#c12b37;
     text-align:left;
 } 
 .main-menu .navbar-collapse > .navigation > li > ul > li > a{
@@ -913,7 +913,7 @@
 .callto-action-area .inner-content .title-box {
     position: relative;
     max-width: 100%;
-    background: #0392ce;
+    background: #c12b37;
     padding: 50px 0 50px;
     width: 100%;
 }    

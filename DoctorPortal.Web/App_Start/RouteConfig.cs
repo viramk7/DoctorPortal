@@ -54,6 +54,12 @@ namespace DoctorPortal.Web
             );
 
             routes.MapRoute(
+                name: "sport-injuries",
+                url: "sport-injuries",
+                defaults: new { controller = "SportInjuries", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
