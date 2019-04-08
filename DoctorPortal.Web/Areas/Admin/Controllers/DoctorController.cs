@@ -1,6 +1,7 @@
 ﻿using DoctorPortal.Web.AdminServices.Speciality;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.Doctor;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using DoctorPortal.Web.Models;
 using Kendo.Mvc;
@@ -23,13 +24,14 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 
         private readonly IDoctorService _service;
         private readonly ISpecialityService _serviceSpeciality;
-
+        private readonly ICacheManager _cacheManager;
         private const string FOLDER_PATH = "~/Uploads/Doctors";
 
-        public DoctorController(IDoctorService service, ISpecialityService serviceSpeciality)
+        public DoctorController(IDoctorService service, ISpecialityService serviceSpeciality, ICacheManager cacheManager)
         {
             _service = service;
             _serviceSpeciality = serviceSpeciality;
+            _cacheManager = cacheManager;
         }
 
         public ActionResult Index()
@@ -89,6 +91,8 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 
                 model = _service.Save(model);
 
+                _cacheManager.Remove(CacheKeys.DoctorList.ToString());
+
                 SuccessNotification(Resources.SaveSuccess);
 
                 if (string.IsNullOrEmpty(create))
@@ -111,6 +115,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _service.Delete(id);
+                _cacheManager.Remove(CacheKeys.DoctorList.ToString());
                 return Json(GetJson(Resources.DeleteSuccess, Enums.NotifyType.Success), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -126,6 +131,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _service.ChangeStatus(id);
+                _cacheManager.Remove(CacheKeys.DoctorList.ToString());
                 return string.Empty;
             }
             catch (Exception ex)

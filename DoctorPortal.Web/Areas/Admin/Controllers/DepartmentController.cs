@@ -1,6 +1,7 @@
 ﻿using DoctorPortal.Web.AdminServices.Department;
 using DoctorPortal.Web.Areas.Admin.Models;
 using DoctorPortal.Web.Areas.Admin.Services.DepartmentImage;
+using DoctorPortal.Web.Caching;
 using DoctorPortal.Web.Common;
 using DoctorPortal.Web.Models;
 using Kendo.Mvc;
@@ -23,13 +24,16 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
         private readonly ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private readonly IDepartmentService _service;
         private readonly IDepartmentImageService _imageService;
-
+        private readonly ICacheManager _cacheManager;
         private const string FOLDER_PATH = "~/Uploads/Department";
 
-        public DepartmentController(IDepartmentService service, IDepartmentImageService imageService)
+        public DepartmentController(IDepartmentService service, 
+                                    IDepartmentImageService imageService,
+                                    ICacheManager cacheManager)
         {
             _service = service;
             _imageService = imageService;
+            _cacheManager = cacheManager;
         }
 
         public ActionResult Index()
@@ -92,7 +96,9 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
 
                 model = _service.Save(model);
 
-                if(files != null)
+                _cacheManager.Remove(CacheKeys.DepartmentList.ToString());
+
+                if (files != null)
                 {
                     foreach(HttpPostedFileBase file in files)
                     {
@@ -125,6 +131,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _service.Delete(id);
+                _cacheManager.Remove(CacheKeys.DepartmentList.ToString());
                 return Json(GetJson(Resources.DeleteSuccess, Enums.NotifyType.Success), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -140,6 +147,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _service.ChangeStatus(id);
+                _cacheManager.Remove(CacheKeys.DepartmentList.ToString());
                 return string.Empty;
             }
             catch (Exception ex)
@@ -154,6 +162,7 @@ namespace DoctorPortal.Web.Areas.Admin.Controllers
             try
             {
                 _imageService.Delete(model.Id);
+                _cacheManager.Remove(CacheKeys.DepartmentList.ToString());
                 return Json(new[] { model }.ToDataSourceResult(request, ModelState));
             }
             catch (Exception ex)
