@@ -38,7 +38,7 @@ namespace DoctorPortal.Web.Controllers
             try
             {
                  if (!ModelState.IsValid)
-                    throw new Exception("Invalid data");
+                    return Json(new { success = false, message = "Invalid data" }, JsonRequestBehavior.AllowGet);
 
                 var faq = model.GetFAQQuestionsEntity();
                 _faqService.Insert(faq);
@@ -46,12 +46,13 @@ namespace DoctorPortal.Web.Controllers
                 model.DepartmentName = ProjectSession.Hospital.Departmentlist.FirstOrDefault(m => m.DepartmentId == faq.DepartmentId).DepartmentName;
                 SendEmailToHospital(model);
 
-                return RedirectToAction(nameof(FAQRequested), new { success = true });
+                return Json(new { success = true, message = "" }, JsonRequestBehavior.AllowGet);
+                
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                return RedirectToAction(nameof(FAQRequested), new { success = false });
+                return Json(new { success = false, message = "There was some problem in requesting your question." }, JsonRequestBehavior.AllowGet);
             }
         }
 

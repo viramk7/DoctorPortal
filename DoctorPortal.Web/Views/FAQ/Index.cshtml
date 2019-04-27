@@ -287,37 +287,39 @@
                         <form id="faqform" class="clearfix" name="faq-form" action="@Url.Action("MakeFAQQuestion", "FAQ")" method="post">
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name" })
+                                    @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name", @id = "Faq-Name" })
                                     @Html.ValidationMessageFor(m => m.Name)
                                     @*<input type="text" name="name" placeholder="Name*" required="">*@
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email" })
+                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email", @id = "Faq-Email" })
                                     @Html.ValidationMessageFor(m => m.Email)
                                     @*<input type="email" name="email" placeholder="Email*" required="">*@
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Your Subject" })
+                                    @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Your Subject", @id = "Faq-Subject" })
                                     @Html.ValidationMessageFor(m => m.Subject)
                                     @*<input type="text" name="subject" placeholder="Subject">*@
                                 </div>
                                 <div class="col-md-6">
-                                    @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ProjectSession.Hospital.Departmentlist, "DepartmentId", "DepartmentName"), new { @class = "selectmenu" })
+                                    @Html.DropDownListFor(m => m.DepartmentId, 
+                                        new SelectList(ProjectSession.Hospital.Departmentlist, "DepartmentId", "DepartmentName"), 
+                                        new { @class = "selectmenu", @id = "Faq-DepartmentId" })
                                     @Html.ValidationMessageFor(m => m.DepartmentId)
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.TextAreaFor(m => m.QuestionText, new { @placeholder = "Your Questions..." })
+                                    @Html.TextAreaFor(m => m.QuestionText, new { @placeholder = "Your Questions...", @id = "Faq-QuestionText" })
                                     @Html.ValidationMessageFor(m => m.QuestionText)
                                     @*<textarea name="question" placeholder="Your Questions..."></textarea>*@
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="thm-btn bgclr-1" type="submit">Submit Now</button>
+                                    <button class="thm-btn bgclr-1" type="button" onclick="onFaqSubmit()">Submit Now</button>
                                 </div>
                             </div>
                         </form>
@@ -328,3 +330,38 @@
     </div>
 </section>
 <!--End faq questions form area-->
+
+<script>
+    function onFaqSubmit() {
+        var uri = '@Url.Action("MakeFAQQuestion", "FAQ")';
+        var data = {
+            Name: $('#Faq-Name').val(),
+            Email: $('#Faq-Email').val(),
+            Subject: $('#Faq-Subject').val(),
+            DepartmentId: $('#Faq-DepartmentId').val(),
+            QuestionText: $('#Faq-QuestionText').val()
+        };
+        
+        $.post(uri, data, function (res) {
+            
+            clearControlsFaq();
+            if (res.success) {
+                alert("Your question request has been registered. Our hospital will get back to you soon.");
+            } else {
+                if (res.message != '' && res.message != null) {
+                    alert(res.message);
+                } else {
+                    alert("There was some problem in requesting your question.");
+                }
+            }
+        });
+    }
+
+    function clearControlsFaq() {
+        $('#Faq-Name').val('');
+        $('#Faq-Email').val('');
+        $('#Faq-Subject').val('');
+        $('#Faq-DepartmentId').val('');
+        $('#Faq-QuestionText').val('');
+    }
+</script>

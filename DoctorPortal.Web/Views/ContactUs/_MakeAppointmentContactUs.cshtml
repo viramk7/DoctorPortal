@@ -11,38 +11,78 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+
+<script>
+
+    function onContactUsSubmit() {
+
+        var uri = '@Url.Action("MakeAppointment", "Appointment")';
+        var data = {
+            Name: $('#ContactUs-Name').val(),
+            Message: $('#ContactUs-Message').val(),
+            Email: $('#ContactUs-Email').val(),
+            PhoneNo: $('#ContactUs-PhoneNo').val(),
+            Subject: $('#ContactUs-Subject').val()
+        };
+        
+        $.post(uri, data, function (res) {
+            
+            clearControlsContactUs();
+            if (res.success) {
+                alert("Your appointment request has been registered. Our hospital will get back to you soon.");
+            } else {
+                if (res.message != '' && res.message != null) {
+                    alert(res.message);
+                } else {
+                    alert("There was some problem in requesting your appointment.");
+                }
+            }
+        });
+
+    }
+
+    function clearControlsContactUs() {
+        $('#ContactUs-Name').val('');
+        $('#ContactUs-Message').val('');
+        $('#ContactUs-Email').val('');
+        $('#ContactUs-PhoneNo').val('');
+        $('#ContactUs-Subject').val('');
+    }
+
+</script>
+
 <form id="contact-form" name="contact_form" class="default-form" action="@Url.Action("MakeAppointment","Appointment")" method="post">
     <h2>Make an Appointment</h2>
     <div class="row">
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name*" })
+            @Html.TextBoxFor(m => m.Name, new { @placeholder = "Your Name*", @id = "ContactUs-Name" })
             @Html.ValidationMessageFor(m => m.Name)
         </div>
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email*" })
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Your Email*", @id = "ContactUs-Email" })
             @Html.ValidationMessageFor(m => m.Email)
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.PhoneNo, new { @placeholder = "Phone" })
+            @Html.TextBoxFor(m => m.PhoneNo, new { @placeholder = "Phone", @id = "ContactUs-PhoneNo" })
             @Html.ValidationMessageFor(m => m.PhoneNo)
         </div>
         <div class="col-md-6">
-            @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Subject" })
+            @Html.TextBoxFor(m => m.Subject, new { @placeholder = "Subject", @id = "ContactUs-Subject" })
             @Html.ValidationMessageFor(m => m.Subject)
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message" })
+            @Html.TextAreaFor(m => m.Message, new { @placeholder = "Message", @id = "ContactUs-Message" })
             @Html.ValidationMessageFor(m => m.Message)
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="">
-            <button class="thm-btn bgclr-1" type="submit" data-loading-text="Please wait...">send message</button>
+            <button class="thm-btn bgclr-1" type="button" onclick="onContactUsSubmit()" data-loading-text="Please wait...">send message</button>
         </div>
     </div>
 </form>

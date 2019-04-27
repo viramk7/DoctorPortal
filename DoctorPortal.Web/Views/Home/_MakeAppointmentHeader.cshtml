@@ -2,7 +2,7 @@
 @model MakeAppointmentViewModel
 
 <style>
-    .field-validation-error{
+    .field-validation-error {
         color: red;
     }
 </style>
@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="thm-btn bgclr-1" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            <button class="thm-btn bgclr-1" type="button" onclick="onSubmit()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </form>
                     </div>
 
@@ -58,3 +58,35 @@
         </div>
     </div>
 </section>
+
+<script>
+    
+    function onSubmit() {
+        
+        var uri = '@Url.Action("MakeAppointment", "Appointment")';
+        var data = {
+            Name: $('#Name').val(),
+            Message: $('#Message').val(),
+            Email: $('#Email').val(),
+            Date: $.datepicker.formatDate('dd-mm-yy', new Date($("#datepicker").val()))
+        };
+        
+        $.post(uri, data, function (res) {
+            clearControls();
+            if (res.success) {
+                alert("Your appointment request has been registered. Our hospital will get back to you soon.");
+            } else {
+                alert("There was some problem in requesting your appointment.");
+            }
+        });
+
+    }
+
+    function clearControls() {
+        $('#Name').val('');
+        $('#Message').val('');
+        $('#Email').val('');
+        $('#datepicker').val('');
+    }
+
+</script>

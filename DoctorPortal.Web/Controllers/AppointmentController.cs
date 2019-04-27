@@ -29,19 +29,21 @@ namespace DoctorPortal.Web.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    throw new Exception("Invalid data");
+                    return Json(new { success = false, message = "The data you provided is invalid." }, JsonRequestBehavior.AllowGet);
 
                 var appointment = model.GetAppointmentEntity();
                 _appointmentService.Insert(appointment);
 
                 SendEmailToHospital(model);
 
-                return RedirectToAction(nameof(AppointmentRequested), new { success = true });
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction(nameof(AppointmentRequested), new { success = true });
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                return RedirectToAction(nameof(AppointmentRequested), new { success = false });
+                return Json(new { success = false, message = "There was some problem in requesting your appointment." }, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction(nameof(AppointmentRequested), new { success = false });
             }
 
         }
@@ -67,7 +69,7 @@ namespace DoctorPortal.Web.Controllers
                 bodyTemplate = model.Date == null
                     ? bodyTemplate.Replace("[@DATE]", "Not provided.")
                     : bodyTemplate.Replace("[@DATE]", Convert.ToDateTime(model.Date).ToShortDateString());
-                               
+
                 EmailHelper.SendAsyncEmail(ProjectSession.Hospital.Email, "Appointment", bodyTemplate, true);
             }
             catch (Exception ex)
