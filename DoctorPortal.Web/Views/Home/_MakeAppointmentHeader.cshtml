@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="thm-btn bgclr-1" type="button" onclick="onSubmit()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            <button class="thm-btn bgclr-1" type="button" onclick="onHomeSubmit()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </form>
                     </div>
 
@@ -61,7 +61,7 @@
 
 <script>
     
-    function onSubmit() {
+    function onHomeSubmit() {
         
         var uri = '@Url.Action("MakeAppointment", "Appointment")';
         var data = {
@@ -70,7 +70,7 @@
             Email: $('#Email').val(),
             Date: $.datepicker.formatDate('dd-mm-yy', new Date($("#datepicker").val()))
         };
-        
+        debugger;
         $.post(uri, data, function (res) {
             clearControls();
             if (res.success) {
