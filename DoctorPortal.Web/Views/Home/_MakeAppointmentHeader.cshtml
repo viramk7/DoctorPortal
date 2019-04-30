@@ -70,9 +70,9 @@
             Email: $('#Email').val(),
             Date: $.datepicker.formatDate('dd-mm-yy', new Date($("#datepicker").val()))
         };
-        debugger;
+        
         $.post(uri, data, function (res) {
-            clearControls();
+            clearHomeControls();
             if (res.success) {
                 alert("Your appointment request has been registered. Our hospital will get back to you soon.");
             } else {
@@ -82,7 +82,7 @@
 
     }
 
-    function clearControls() {
+    function clearHomeControls() {
         $('#Name').val('');
         $('#Message').val('');
         $('#Email').val('');
