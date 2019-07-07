@@ -29,7 +29,7 @@ namespace DoctorPortal.Web
 
             // CSS
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
                 "~/Content/css/style.css",
                 "~/Content/css/responsive.css"));
 

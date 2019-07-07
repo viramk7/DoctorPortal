@@ -1013,8 +1013,8 @@ select:focus {
     padding-top: 80px;
     padding-bottom: 80px;
     background: #ffffff;
-    position: relative;
-    overflow: hidden;
+    /*position: relative;
+    overflow: hidden;*/
 }
 .medical-departments-area .single-item {
     position: relative;

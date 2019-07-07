@@ -90,7 +90,7 @@
                                  // .FooterTemplate("Total <strong>#: instance.dataSource.total() #</strong> items found")
                                  @*.Template("<span class=\"k-state-default\" style=\"background-image: url(" + Url.Content("/Content/images/DepartmentIcons/") + "#: data.IconName#.png" + ");\" ></span>" +
                                  "<span class=\"k-state-default\"><h4>#: data.IconName #</h4></span>").Value("<span class=\"selected-value\" style=\"background-image: url(" + Url.Content("/Content/images/DepartmentIcons/") + "#:data.IconName#.jpg" + ");\" ></span>" + "<span>#:data.IconName#</span>"))*@
-                                 .Template("<img class=\"k-state-default\" src=" + Url.Content("/Content/images/DepartmentIcons/" + "#: data.IconName#.png") + " width=50 height=50/>" + "<span> #: data.IconName# <span/>"))
+                                 .Template("<img class=\"k-state-default\" src=" + Url.Content("/Content/images/DepartmentIcons/" + "#: data.IconName#.png") + " width=50 height=50 alt='Department-icon'/>" + "<span> #: data.IconName# <span/>"))
                                  @*.ValueTemplate("<span class=\"selected-value\" style=\"background-image: url(" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg" + ");\" ></span>" + "<span>#:data.ContactName#</span>"))*@
 
                                         @Html.ValidationMessageFor(m => m.HomePageIcon)
@@ -128,7 +128,7 @@
                                                                                            }).Title("Action").HtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit)
                                                                                              .HeaderHtmlAttributes(WebHelper.ActionCenterColumnStyleWithCanEdit);
 
-                                                                                           columns.Bound(d => d.ImageName).ClientTemplate("<img src='" + Url.Content("/Uploads/Department/") + "#=ImageName#' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
+                                                                                           columns.Bound(d => d.ImageName).ClientTemplate("<img src='" + Url.Content("/Uploads/Department/") + "#=ImageName#' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' alt='Department-icon'/>"); ;
                                                                                            //columns.Bound(d => d.ImageName).ClientTemplate("<img src='"+ Url.Content("#=ImageName #") + "' alt='#=ImageName #' Title='#=ImageName #' height='70' width='70' />"); ;
                                                                                        })
 

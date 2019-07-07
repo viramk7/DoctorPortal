@@ -10,7 +10,7 @@
         @Html.LabelFor(m => m.ApproveDate)
     </div>
     <div class="k-edit-field">
-        @(Html.Kendo().DateTimePickerFor(m => m.ApproveDate).Min(DateTime.Now.Date).Value(DateTime.Now.Date)
+        @(Html.Kendo().DateTimePickerFor(m => m.ApproveDate).Min(DateTime.Now.Date)
             .Format(WebHelper.DateTimeFormat).HtmlAttributes(new { @tabindex = 1 }))
         @Html.ValidationMessageFor(m => m.ApproveDate)
     </div>
