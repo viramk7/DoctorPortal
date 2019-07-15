@@ -22,13 +22,24 @@
                                     @*<li><a href="@Url.Action("Index","Doctor")">Meet Our Doctors</a></li>*@
                                     <li><a href="@Url.Action("Index","FAQ")">FAQ’s</a></li>
                                     @*<li><a href="@Url.Action("Index","Testimonial")">Testimonials</a></li>*@
-                                    <li><a href="project.html">Our Gallery</a></li>
-                                    <li><a href="project-single.html">Gallery Single</a></li>
+                                  
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="@Url.Action("Index","Department")">Departments</a>
+                                <a href="@Url.Action("anesthesia","Department")">Departments</a>
                                 <ul>
+                                    <li>
+                                        <a href="@Url.Action("anesthesia","Department")">Anesthesia</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("medicine","Department")">Medicine</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("orthopaedic","Department")">Orthopaedic</a>
+                                    </li>
+                                </ul>
+
+                                @*<ul>
                                     @if (ProjectSession.Hospital.Departmentlist.Any())
                                     {
                                         var departments = ProjectSession.Hospital.Departmentlist.OrderBy(o => o.DepartmentName);
@@ -37,29 +48,13 @@
                                             <li><a href="@Url.Action("Index","Department",new { id = department.DepartmentId})">@department.DepartmentName</a></li>
                                         }
                                     }
-                                    @*<li><a href="cardiac-clinic.html">Cardiac Clinic</a></li>
-                <li><a href="pulmonology.html">Pulmonology</a></li>
-                <li><a href="gynecology.html">Gynecology</a></li>
-                <li><a href="neurology.html">Neurology</a></li>
-                <li><a href="urology.html">Urology</a></li>
-                <li><a href="gastrology.html">Gastrology</a></li>
-                <li><a href="pediatrician.html">Pediatrician</a></li>
-                <li><a href="laborotory.html">Laborotory</a></li>*@
-                                </ul>
+                                 
+                                </ul>*@
                             </li>
                             <li><a href="@Url.Action("Index","Doctor")">Doctors</a></li>
 
                             <li><a href="@Url.Action("Index","Testimonial")">Testimonials</a></li>
-                            @*<li class="dropdown">
-                                <a href="shop.html">Shop</a>
-                                <ul>
-                                    <li><a href="shop.html">Shop Products</a></li>
-                                    <li><a href="shop-single.html">Products Single</a></li>
-                                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="account.html">My Account</a></li>
-                                </ul>
-                            </li>*@
+                            
                             <li><a href="@Url.Action("Index","ContactUs")">Contact Us</a></li>
                         </ul>
                     </div>

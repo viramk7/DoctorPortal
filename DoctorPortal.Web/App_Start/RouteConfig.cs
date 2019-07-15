@@ -55,8 +55,8 @@ namespace DoctorPortal.Web
             );
 
             routes.MapRoute(
-                name: "testimonials",
-                url: "testimonials",
+                name: "client-testimonials",
+                url: "client-testimonials",
                 defaults: new { controller = "Testimonial", action = "Index" }
             );
 
@@ -67,10 +67,27 @@ namespace DoctorPortal.Web
             );
 
             routes.MapRoute(
-                name: "sport-injuries",
-                url: "sport-injuries",
+                name: "sport-injury-centre",
+                url: "sport-injury-centre",
                 defaults: new { controller = "SportInjuries", action = "Index" }
             );
+
+            routes.MapRoute(
+               name: "anesthetist-doctor",
+               url: "anesthetist-doctor",
+               defaults: new { controller = "Department", action = "anesthesia" }
+           );
+
+            routes.MapRoute(
+               name: "medicine-department-in-hospital",
+               url: "medicine-department-in-hospital",
+               defaults: new { controller = "Department", action = "medicine" }
+           );
+            routes.MapRoute(
+               name: "Orthopaedic-hospital",
+               url: "Orthopaedic-hospital",
+               defaults: new { controller = "Department", action = "orthopaedic" }
+           );
 
             routes.MapRoute(
                 name: "Default",

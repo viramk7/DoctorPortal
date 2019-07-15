@@ -807,9 +807,9 @@ select:focus {
     font-family: 'Poppins', sans-serif;
     transition: all 500ms ease;
 }
-.mainmenu-area .consultation-button a:hover{
-    background: #222222;
-    color: #fff;
+.mainmenu-area .consultation-button a:hover {
+    background: #ffffff;
+    color: #000;
 }
 
 
@@ -5763,5 +5763,6 @@ input#datepicker {
 }
 
 
-
-
+.instagram {
+    background-color: #bc2a8d;
+}

@@ -1,230 +1,4 @@
-﻿@*@using DoctorPortal.Web.Areas.Admin.Models
-    @model DoctorPortal.Web.Models.DepartmentViewModel
-    @{
-        ViewBag.Title = "Index";
-    }
-    <style>
-        .img-holder {
-            height: 111px !important;
-            width: 160px !important;
-        }
-    </style>
-
-    <section class="breadcrumb-area" style="background-image: url(images/resources/breadcrumb-bg.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumbs">
-                        <h1>@Model.DepartmentName</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="breadcrumb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="left pull-left">
-                            <ul>
-                                <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li><a href="@Url.Action("Index","Home",new { id = Model.DepartmentId})">Department</a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">@Model.DepartmentName</li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="departments-single-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 pull-right">
-                    <div class="tab-box">
-                        <div class="tab-content">
-                            @if (Model.imageslist.Any())
-                            {
-                                int j = 1;
-                                foreach (var image in Model.imageslist)
-                                {
-                                    <div class="tab-pane @(j == 2 ? "active" : "")" id="ds@(j)">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="img-box">
-                                                    <img src="@Url.Content("/Uploads/Department/" + image.ImageName)" alt="Awesome Image">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    j++;
-                                }
-                            }
-                            else
-                            {
-                                <div class="tab-pane active" id="default">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="img-box">
-                                                <img src="@Url.Content("/Content/images/department/tab-content-1.jpg")" alt="Awesome Image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <ul class="nav nav-tabs tab-menu">
-                            @if (Model.imageslist.Any())
-                            {
-                                int i = 1;
-                                foreach (var image in Model.imageslist)
-                                {
-                                    <li @(i == 2 ? "class=active" : "")>
-                                        <a href="#ds@(i)" data-toggle="tab">
-                                            <div class="img-holder">
-                                                <img src="@Url.Content("/Uploads/Department/" + image.ImageName)" alt="Awesome Image">
-                                                <div class="overlay-style-one">
-                                                    <div class="box">
-                                                        <div class="content">
-                                                            <div class="iocn-holder">
-                                                                <span class="flaticon-plus-symbol"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                <li class="active">
-                                    <a href="#default" data-toggle="tab">
-                                        <div class="img-holder">
-                                            <img src="@Url.Content("/Content/images/department/tab-content-1.jpg")" alt="Awesome Image">
-                                            <div class="overlay-style-one">
-                                                <div class="box">
-                                                    <div class="content">
-                                                        <div class="iocn-holder">
-                                                            <span class="flaticon-plus-symbol"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div class="text-box">
-                        <p>@Model.Description</p>
-                    </div>
-
-
-                    <section class="facilities-appointment-area">
-                                    <div class="facilities-content-box">
-
-                                        @{
-                                            Html.RenderAction("GetServicesPartialView", "Services");
-                                        }
-                        </div>
-                        </section>
-
-                                </div>
-
-                                <div class="col-lg-3 col-md-4 col-sm-7 col-xs-12 pull-left">
-                                    <div class="departments-sidebar">
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Departments</h3>
-                                            </div>
-                                            <ul class="all-departments">
-                                                @if (ProjectSession.Hospital.Departmentlist.Any())
-                                                {
-                                                    var departments = ProjectSession.Hospital.Departmentlist.OrderBy(o => o.DepartmentName);
-                                                    foreach (var department in departments)
-                                                    {
-                                                        <li @(Model.DepartmentId == department.DepartmentId ? "class=active" : "")>
-                                                            <a href="@Url.Action("Index","Department",new { id = department.DepartmentId })">@department.DepartmentName</a>
-                                                        </li>
-                                                    }
-                                                }
-
-                                            </ul>
-                                        </div>
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Opening Hours</h3>
-                                            </div>
-                                            <ul class="opening-time">
-                                                <li>@ProjectSession.Hospital.WorkingDays: <span>@ProjectSession.Hospital.WorkingHours</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Quick Contact</h3>
-                                            </div>
-                                            <div class="contact-us">
-                                                <ul class="contact-info">
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-pin"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.AddressLine1<br>@ProjectSession.Hospital.AddressLine2</h5>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-technology"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.Email</h5>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-technology-1"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.ContactNo</h5>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </section>
-                    <section class="slogan-area">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="title pull-left">
-                                        <h2>If you are a patient seeking quality healthcare at affordable prices!.</h2>
-                                    </div>
-                                    <div class="button pull-right">
-                                        <a class="thm-btn bgclr-1" href="#">Make an Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>*@
-
-
-
-<style>
+﻿<style>
     .img-holder {
         height: 111px !important;
         width: 160px !important;
@@ -236,7 +10,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumbs">
-                    <h1>Orthopedic</h1>
+                    <h1>Anaesthesia</h1>
                 </div>
             </div>
         </div>
@@ -249,9 +23,9 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                            <li><a href="@Url.Action("orthopaedic","Department")">Department</a></li>
+                            <li><a href="@Url.Action("anesthesia","Department")">Department</a></li>
                             <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                            <li class="active">orthopaedic</li>
+                            <li class="active">Anaesthesia</li>
                         </ul>
                     </div>
 
@@ -267,40 +41,56 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 pull-right">
-
+                <h1>Anaesthetist doctor</h1><br />
                 <div class="text-box">
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Anant Hospital gives far-reaching and worlds best orthopedic services, which is one of the best orthopedic hospitals in Ahmedabad. This department offers specific consideration in the field of complex injury, poly-injury, and related sub-specialties.
+                        <b>Anaesthetist doctor</b> are pro specialists who are responsible for giving anaesthesia to patients for and methods. What're more anaesthetist doctor have a scope of training which reaches out past anaesthesia for a medical procedure to incorporate torment the executives and escalated care.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Orthopedic hospital department at our emergency clinics conveys customized care using the most recent research and proof-based drug. The office gives the executives identified with disarranges of bone, joint, and an assortment of musculoskeletal issue. We are providing services, and we take care of joint, knee, hip and shoulder substitution, joint inflammation, and custom embed medical procedures. We treat sports-related wounds, which can be incredibly excruciating and awful. Our games medication group works with specialists to put sportspersons on a fast way to recuperation. Arthroscopy, knee, shoulder and lower leg arthroscopy, repetitive shoulder separation, rotator sleeve fix, subacromial decompression, Msaicrominal, and articular ligament implantation are a portion of different systems done routinely.
+                        anaesthetist doctor structure the biggest claim to fame gathering of specialists in NHS clinics. They are specialists who have picked in the wake of fitting the bill to attempt postgraduate pro preparing of in any event seven years in anaesthesia, escalated care medication and agony the board.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        We are prepared to analyze and treat hand and upper appendage medical procedure, which incorporates the board of hand cracks, delicate tissues of hand, malunited breaks, diseases of hand and upper appendage pulverize, hand wounds, ligament, nerve fix, recreation, injury of grip and high attachment, intrinsic disfigurement, rheumatoid hand, delicate tissue affections, elbow, outspread head, and joint substitution.
+                        Most advisor anaesthetist doctor have created subspecialist interests in a specific region of religious practice, or torment the board or primary consideration. In the Trust, there are likewise various anaesthetist doctor in preparing who are administered by experts. The models for developing in the UK are high and demanding.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Our orthopedic hospital is always prepared at the top focuses around the world, carry with them the most recent and best strategies and work in our offices that have the latest bleeding edge innovation as far as types of gear, operating rooms, recuperation zones and progressed Physical treatment offices.
-                    </p>
-                    <p>
-                        <i class="fa fa-hand-o-right"></i>
-                        We have committed and very much outfitted Orthopedic medical procedure buildings with laminar stream and different present-day gear like picture intensifier, working magnifying instrument, PC route framework, excellent arthroscopy framework, and so on.
-                    </p>
-                    <p>
-                        <i class="fa fa-hand-o-right"></i>
-                        We Anant Hospital who are orthopedic hospital providing the best services like knee replacement surgery, hip replacement surgery, injury and fracture, and many more.
+                        During a medical procedure, you will be given some, which are medicines given to ease pain and sensation during surgery. Before the surgery, your meeting with the doctor anaesthesiologist or attendant anaesthetist doctor. The anaesthesiologist will survey your ailment and history to design the proper soporific for the medical procedure.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        We welcome you to investigate us and acclimate yourself with the different approaches to treat bone and joints issues just as the current offices accessible at Aditya Orthopaedic Hospital to handle such a problem. We have likewise devoted an area to refresh you with the most recent contextual analyses, patients ‘success stories just as specialized progressions in an orthopedic medical procedure.
+                        <b>Types of Anaesthesia</b>
+                        There are different types of anaesthesia. The type of anaesthesia you get will rely upon the kind of medical procedure and your medical condition. Sedatives and analgesics (to facilitate the pain) may likewise be utilized as a significant aspect of the anaesthesia procedure. The various sorts of anaesthesia incorporate the accompanying:<br />
+                        •  <b>Local Anaesthesia</b><br />
+                        Nearby anaesthesia is a soporific operator given to incidentally stop the feeling of pain in a specific region of the body. You stay cognizant during a nearby analgesic. For the minor medical procedure, a nearby sedative can be given through infusion to the site or permitted to retain into the skin. Be that as it may, when a vast region should be desensitized, or if a neighbourhood analgesic infusion won't infiltrate profound enough, specialists may utilize different types of anaesthesia.<br />
+                        •    <b>Regional Anaesthesia</b><br />
+                        Regional anaesthesia is being used to numb just the bit of the body that will experience the medical procedure. Usually, an infusion of local soporific is given in the zone of nerves that provide feeling to that piece of the body. There are a few types of territorial analgesics:<br />
+
+                        1.    Spinal Anaesthetic<br />
+                        Spinal analgesia is utilized for the lower stomach, pelvic, rectal, or lower furthest point surgery. This kind of sedative includes infusing an individual portion of the analgesic prescription into the zone that encompasses the spinal string. The infusion is made into the lower back, underneath the finish of the spinal line, and causes deadness in the lower body. This kind of anaesthesia is regularly utilized in orthopaedic systems of the lower limits.<br />
+                        2.    Epidural Anaesthetic<br />
+                        The epidural analgesia is like a spinal sedative and is generally used for medical procedure of the lower appendages and during work and labour. This type of anaesthesia includes always imbuing a soporific prescription through a flimsy catheter (empty cylinder). The catheter is set into the space that encompasses the spinal rope in the lower back, causing deadness in the lower body. Epidural anaesthesia may likewise be utilized for chest or stomach medical procedure. For this situation, the analgesic drug is infused at a higher area in the back to numb the chest and stomach territories.<br />
+
+                        •    <b>General Anaesthesia</b><br />
+                        General anaesthesia is a soporific used to instigate obviousness during corrective surgery. The prescription is either breathed in through a breathing veil or tube or given through an intravenous (IV) line. A breathing tube might be embedded into the windpipe to keep up legitimate breathing during corrective surgery. When the medical procedure is finished, the anaesthetist doctor stops the, and you are taken to the recuperation space for further observing.<br />
+
+
                     </p>
+                    <p>
+                        <i class="fa fa-hand-o-right"></i>
+                        <b>Anaesthesia Leadership</b><br />
+                        One key to our methodology is setting an Anant Hospital-prepared, neighbourhood anaesthesia pioneer, or Anaesthesia Chair, as the leader of the anaesthesia office. At each accomplice medical clinic, Anant Hospital's nearby clinical perioperative initiative starts and finishes with the Anaesthesia Chair, who ordinarily additionally deals with the OR and perioperative capacities. The Chair of Anaesthesia organizes and gains by adjusting careful nursing, and clinic resources and builds up new assets to make a cycle of positive, self-supporting results. This far-reaching perspective on the whole procedure, from pre-careful testing to patient release, empowers the Chair to give viable operational anaesthesia initiative that gets results – improving financial outcomes and clinical findings.
+                        With Anant Hospital, nearby clinical and operational anaesthesia authority is upheld by a robust national framework. To guarantee consistency with Anant Hospital arrangements and best practices, the Anaesthesia Chair works with Anant Hospital. What's more, Anant Hospital's Anaesthesia Chief Council furnishes each local anaesthesia seat with access to a particular shared system of Anant Hospital clinical pioneers the country over.
+                        Absence of perioperative initiative, increasing expenses, and insufficient throughput makes disappointment in working room suites all through the nation. Anant Hospital adjusts medical clinic anaesthesia or potential benefits to build patient, specialist, and clinical staff fulfilment just as careful throughput. We do this by effectively tending to anaesthesia authority and office the executives, OR effectiveness, and financial responsibility.
+
+                    </p>
+
                 </div>
 
 
@@ -531,13 +321,13 @@
                             <h3>Departments</h3>
                         </div>
                         <ul class="all-departments">
-                            <li>
+                            <li class=active>
                                 <a href="@Url.Action("anesthesia","Department")">Anaesthesia</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("medicine","Department")">Medicine</a>
                             </li>
-                            <li class=active>
+                            <li>
                                 <a href="@Url.Action("orthopaedic","Department")">Orthopaedic</a>
                             </li>
 

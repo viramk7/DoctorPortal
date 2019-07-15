@@ -84,7 +84,7 @@
     </div>
 
     @functions {
-        public int PopupShowDelay => 1000 * (Convert.ToInt32(FormsAuthentication.Timeout.TotalSeconds) - 130);
+        public int PopupShowDelay = 1000 * (Convert.ToInt32(FormsAuthentication.Timeout.TotalSeconds) - 130);
     }
 
     <script type="text/javascript">

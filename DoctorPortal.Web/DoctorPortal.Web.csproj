@@ -331,6 +331,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SeoFriendlyRoute.cs" />
     <Compile Include="ServiceDependencyRegister.cs" />
     <Compile Include="Areas\Admin\Services\Login\ILoginService.cs" />
     <Compile Include="Areas\Admin\Services\Login\LoginService.cs" />
@@ -1002,11 +1003,15 @@
     <Content Include="Views\Errors\General.cshtml" />
     <Content Include="Areas\Admin\Views\Patient\Index.cshtml" />
     <Content Include="Views\SportInjuries\Index.cshtml" />
+    <Content Include="Views\Department\anesthesia.cshtml" />
+    <Content Include="Views\Department\medicine.cshtml" />
+    <Content Include="Views\Department\orthopaedic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\ClearCache\" />
     <Folder Include="Areas\Admin\Views\Icons\" />
     <Folder Include="Content\images\footer\" />
+    <Folder Include="Uploads\Department\" />
     <Folder Include="Uploads\Doctors\" />
     <Folder Include="Uploads\Testimonials\" />
   </ItemGroup>

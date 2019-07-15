@@ -1,230 +1,4 @@
-﻿@*@using DoctorPortal.Web.Areas.Admin.Models
-    @model DoctorPortal.Web.Models.DepartmentViewModel
-    @{
-        ViewBag.Title = "Index";
-    }
-    <style>
-        .img-holder {
-            height: 111px !important;
-            width: 160px !important;
-        }
-    </style>
-
-    <section class="breadcrumb-area" style="background-image: url(images/resources/breadcrumb-bg.jpg);">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumbs">
-                        <h1>@Model.DepartmentName</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="breadcrumb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="left pull-left">
-                            <ul>
-                                <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li><a href="@Url.Action("Index","Home",new { id = Model.DepartmentId})">Department</a></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
-                                <li class="active">@Model.DepartmentName</li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="departments-single-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 pull-right">
-                    <div class="tab-box">
-                        <div class="tab-content">
-                            @if (Model.imageslist.Any())
-                            {
-                                int j = 1;
-                                foreach (var image in Model.imageslist)
-                                {
-                                    <div class="tab-pane @(j == 2 ? "active" : "")" id="ds@(j)">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="img-box">
-                                                    <img src="@Url.Content("/Uploads/Department/" + image.ImageName)" alt="Awesome Image">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    j++;
-                                }
-                            }
-                            else
-                            {
-                                <div class="tab-pane active" id="default">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="img-box">
-                                                <img src="@Url.Content("/Content/images/department/tab-content-1.jpg")" alt="Awesome Image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                        <ul class="nav nav-tabs tab-menu">
-                            @if (Model.imageslist.Any())
-                            {
-                                int i = 1;
-                                foreach (var image in Model.imageslist)
-                                {
-                                    <li @(i == 2 ? "class=active" : "")>
-                                        <a href="#ds@(i)" data-toggle="tab">
-                                            <div class="img-holder">
-                                                <img src="@Url.Content("/Uploads/Department/" + image.ImageName)" alt="Awesome Image">
-                                                <div class="overlay-style-one">
-                                                    <div class="box">
-                                                        <div class="content">
-                                                            <div class="iocn-holder">
-                                                                <span class="flaticon-plus-symbol"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    i++;
-                                }
-                            }
-                            else
-                            {
-                                <li class="active">
-                                    <a href="#default" data-toggle="tab">
-                                        <div class="img-holder">
-                                            <img src="@Url.Content("/Content/images/department/tab-content-1.jpg")" alt="Awesome Image">
-                                            <div class="overlay-style-one">
-                                                <div class="box">
-                                                    <div class="content">
-                                                        <div class="iocn-holder">
-                                                            <span class="flaticon-plus-symbol"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div class="text-box">
-                        <p>@Model.Description</p>
-                    </div>
-
-
-                    <section class="facilities-appointment-area">
-                                    <div class="facilities-content-box">
-
-                                        @{
-                                            Html.RenderAction("GetServicesPartialView", "Services");
-                                        }
-                        </div>
-                        </section>
-
-                                </div>
-
-                                <div class="col-lg-3 col-md-4 col-sm-7 col-xs-12 pull-left">
-                                    <div class="departments-sidebar">
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Departments</h3>
-                                            </div>
-                                            <ul class="all-departments">
-                                                @if (ProjectSession.Hospital.Departmentlist.Any())
-                                                {
-                                                    var departments = ProjectSession.Hospital.Departmentlist.OrderBy(o => o.DepartmentName);
-                                                    foreach (var department in departments)
-                                                    {
-                                                        <li @(Model.DepartmentId == department.DepartmentId ? "class=active" : "")>
-                                                            <a href="@Url.Action("Index","Department",new { id = department.DepartmentId })">@department.DepartmentName</a>
-                                                        </li>
-                                                    }
-                                                }
-
-                                            </ul>
-                                        </div>
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Opening Hours</h3>
-                                            </div>
-                                            <ul class="opening-time">
-                                                <li>@ProjectSession.Hospital.WorkingDays: <span>@ProjectSession.Hospital.WorkingHours</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="single-sidebar">
-                                            <div class="title">
-                                                <h3>Quick Contact</h3>
-                                            </div>
-                                            <div class="contact-us">
-                                                <ul class="contact-info">
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-pin"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.AddressLine1<br>@ProjectSession.Hospital.AddressLine2</h5>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-technology"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.Email</h5>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="icon-holder">
-                                                            <span class="flaticon-technology-1"></span>
-                                                        </div>
-                                                        <div class="text-holder">
-                                                            <h5>@ProjectSession.Hospital.ContactNo</h5>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </section>
-                    <section class="slogan-area">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="title pull-left">
-                                        <h2>If you are a patient seeking quality healthcare at affordable prices!.</h2>
-                                    </div>
-                                    <div class="button pull-right">
-                                        <a class="thm-btn bgclr-1" href="#">Make an Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>*@
-
-
-
-<style>
+﻿<style>
     .img-holder {
         height: 111px !important;
         width: 160px !important;
@@ -267,16 +41,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12 pull-right">
+                <h1>Orthopaedic hospital</h1><br />
 
                 <div class="text-box">
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Anant Hospital gives far-reaching and worlds best orthopedic services, which is one of the best orthopedic hospitals in Ahmedabad. This department offers specific consideration in the field of complex injury, poly-injury, and related sub-specialties.
+                        Anant Hospital gives far-reaching and worlds best orthopaedic services, which is one of the best orthopaedic hospital in Ahmedabad. This department offers specific consideration in the field of complex injury, poly-injury, and related sub-specialties.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Orthopedic hospital department at our emergency clinics conveys customized care using the most recent research and proof-based drug. The office gives the executives identified with disarranges of bone, joint, and an assortment of musculoskeletal issue. We are providing services, and we take care of joint, knee, hip and shoulder substitution, joint inflammation, and custom embed medical procedures. We treat sports-related wounds, which can be incredibly excruciating and awful. Our games medication group works with specialists to put sportspersons on a fast way to recuperation. Arthroscopy, knee, shoulder and lower leg arthroscopy, repetitive shoulder separation, rotator sleeve fix, subacromial decompression, Msaicrominal, and articular ligament implantation are a portion of different systems done routinely.
+                        Orthopaedic hospital department at our emergency clinics conveys customized care using the most recent research and proof-based drug. The office gives the executives identified with disarranges of bone, joint, and an assortment of musculoskeletal issue. We are providing services, and we take care of joint, knee, hip and shoulder substitution, joint inflammation, and custom embed medical procedures. We treat sports-related wounds, which can be incredibly excruciating and awful. Our games medication group works with specialists to put sportspersons on a fast way to recuperation. Arthroscopy, knee, shoulder and lower leg arthroscopy, repetitive shoulder separation, rotator sleeve fix, subacromial decompression, Msaicrominal, and articular ligament implantation are a portion of different systems done routinely.
                     </p>
 
                     <p>
@@ -286,20 +61,20 @@
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        Our orthopedic hospital is always prepared at the top focuses around the world, carry with them the most recent and best strategies and work in our offices that have the latest bleeding edge innovation as far as types of gear, operating rooms, recuperation zones and progressed Physical treatment offices.
+                        Our Orthopaedic hospital is always prepared at the top focuses around the world, carry with them the most recent and best strategies and work in our offices that have the latest bleeding edge innovation as far as types of gear, operating rooms, recuperation zones and progressed Physical treatment offices.
                     </p>
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        We have committed and very much outfitted Orthopedic medical procedure buildings with laminar stream and different present-day gear like picture intensifier, working magnifying instrument, PC route framework, excellent arthroscopy framework, and so on.
+                        We have committed and very much outfitted orthopaedic medical procedure buildings with laminar stream and different present-day gear like picture intensifier, working magnifying instrument, PC route framework, excellent arthroscopy framework, and so on.
                     </p>
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        We Anant Hospital who are orthopedic hospital providing the best services like knee replacement surgery, hip replacement surgery, injury and fracture, and many more.
+                        We Anant Hospital who are Orthopaedic hospital providing the best services like knee replacement surgery, hip replacement surgery, injury and fracture, and many more.
                     </p>
 
                     <p>
                         <i class="fa fa-hand-o-right"></i>
-                        We welcome you to investigate us and acclimate yourself with the different approaches to treat bone and joints issues just as the current offices accessible at Aditya Orthopaedic Hospital to handle such a problem. We have likewise devoted an area to refresh you with the most recent contextual analyses, patients ‘success stories just as specialized progressions in an orthopedic medical procedure.
+                        We welcome you to investigate us and acclimate yourself with the different approaches to treat bone and joints issues just as the current offices accessible at Aditya Orthopaedic Hospital to handle such a problem. We have likewise devoted an area to refresh you with the most recent contextual analyses, patients ‘success stories just as specialized progressions in an orthopaedic medical procedure.
                     </p>
                 </div>
 

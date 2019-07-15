@@ -46,5 +46,22 @@ namespace DoctorPortal.Web.Controllers
             return PartialView("_Departments", departments);
         }
 
+
+        public ActionResult anesthesia()
+        {
+            return View();
+        }
+
+
+        public ActionResult medicine()
+        {
+            return View();
+        }
+
+        public ActionResult orthopaedic()
+        {
+            return View();
+        }
+
     }
 }
