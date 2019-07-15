@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Anant Hospital</title>
+    <title>@ViewBag.Title</title>
     <meta name="description" content="anant hospitals">
     <!-- responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -89,9 +89,7 @@
     <!-- thm custom script -->
     <script src="~/Content/js/custom.js"></script>
 
-
-
-
+    @RenderSection("MetaTags", required: false)
 
 </head>
 <body>
